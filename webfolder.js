@@ -82,11 +82,14 @@ function code() {
 
         var content = $('content').html();
         var title   = $('title').html();
+        var comments   = $('comments').html();
+
+        console.log(comments);
         var converter = new Markdown.Converter();
         content = converter.makeHtml(content);
 
         var template = Handlebars.compile(base);
-        var context = {title: title, content: content}
+        var context = {title: title, content: content, comments: comments}
         var html    = template(context);
 
         // classes on html head or body in base.html are ignored
