@@ -1,44 +1,5 @@
 /*
-Usage
-
-index.html:
-
-    <!DOCTYPE html>
-    <html>
-    <title>Hello World</title>
-    <content>
-
-    # Hello World
-
-    ## Heading 1
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-    et dolore magna aliqua.
-
-    ## Heading 2
-
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    culpa qui officia deserunt mollit anim id est laborum.
-
-    </content>
-    <script src="/webfolder.js"></script>
-    </html>
-
-base.html:
-
-    <html>
-        <head>
-            <title>{{title}}</title>
-        </head>
-        <body>
-            <p> Header to every page </p>
-            {{{content}}}
-            <p> Footer to every page </p>
-        </body>
-    </html>
-
+    See alexandre.ml/projects/webfolder/ for instructions
 */
 
 var scripts = [
