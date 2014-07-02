@@ -1,5 +1,5 @@
 /*
-    See alexandre.ml/projects/webfolder/ for instructions
+    See http://alexandre.ml/projects/webfolder/ for instructions
 */
 
 var scripts = [
