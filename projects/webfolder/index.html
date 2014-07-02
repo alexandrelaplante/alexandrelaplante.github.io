@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<title>webfolder.js</title>
+<option>comments</option>
+<content>
+
+# webfolder.js
+
+## Description
+
+webfolder.js is an easy way to let you host a folder as a website using client side templating. This site, <a href="http://alexandre.ml">alexandre.ml</a>, uses it. It allows you to define a template (named base.html) that all pages will use, and lets you write your individual pages in markdown. Any changes to base.html are reflected in every page of the site. webfolder.js simply gets base.html through ajax and styles the page dynamically on the client side. If you're making any serious website, use a real server side templating engine.
+
+## Usage
+
+Include <a href="/webfolder.js">webfolder.js</a> and a file named 'base.html' at the top level of your site.
+
+Example base.html.
+
+    example1
+
+Example page.html.
+
+    example2
+
+
+<script>
+    $.get('base.html').done(function(data){
+        $('code:eq(0)').text(data);
+    });
+    $.get('page.html').done(function(data){
+        $('code:eq(1)').text(data);
+    });
+</script>
+
+## Notes
+
++ If you include the string "&lt;/content&gt;" in your page's content, webfolder.js will mess up. Say `&lt;/content&gt;` instead.
++ You can add any options in your page like the `<option>comments</option>` in the example.
+
+</content>
+<script src="/webfolder.js"></script>
+</html>
