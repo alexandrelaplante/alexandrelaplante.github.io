@@ -1,0 +1,82 @@
+<html> 
+    <head> 
+        <title>Anacryptogram solver!</title> 
+        <script src="tw-sack.js" type="text/javascript"></script> 
+        <script src="alapl.js" type="text/javascript"></script> 
+        <script src="grabber.js" type="text/javascript"></script> 
+        <script src="magics.js" type="text/javascript"></script> 
+        <style> 
+            .letcount { float:left; clear:both; }
+            .zero { color: #006600; }
+            .neg { color: #FF0000; font-weight:bold; }
+        </style> 
+    </head> 
+    <body> 
+        <div style="float:left;width:700px;"> 
+            <b>Letter pool:</b><br/> 
+            <div id="pool" style="border:2px solid #000066; padding: 5px;word-wrap:break-word;"></div> 
+            Sentence:<br/> <textarea style="width:600px;height:50px;" id="sentence" onkeyup="updatepool(event)"></textarea><br/> 
+            <div id="listopts"> 
+                <div style="clear:both;"> 
+                    <div style="float:right;"> 
+                        <!-- <input type="button" onclick="getWordlist()" value="Load List (possibly slow!)"/> -->
+                        <input type="checkbox" id="suggest" checked="true"/> Suggest words (slower!)
+                        # of suggestions: <input type="text" id="maxwords" style="width:30px;" value="100"/> 
+                    </div> 
+                    <select id="wordlist" onchange="getWordlist();"> 
+                        <option value="joel.txt">Joel's List</option> 
+                        <option value="trex.txt">Words T-rex has said</option>
+                        <option value="verbs.txt">Only verbs</option>
+                        <option value="nouns.txt">Only nouns</option>
+                        <option value="pronouns.txt">Only pronouns</option>
+                        <option value="conjunctives.txt">Only conjunctives</option>
+                        <option value="adverbs.txt">Only adverbs</option>
+                        <option value="definitearticles.txt">Only definite articles</option>
+                        <option value="adjectives.txt">Only adjectives</option>
+                        <option value="freq2.txt">Words that appear at least 2 times in qwantz</option>
+                        <option value="freq3.txt">Words that appear at least 3 times in qwantz</option>
+                        <option value="1letterwords.txt">1 letter words</option>
+                        <option value="2letterwords.txt">2 letter words</option>
+                        <option value="3letterwords.txt">3 letter words</option>
+                        <option value="4letterwords.txt">4 letter words</option>
+                        <option value="5letterwords.txt">5 letter words</option>
+                        <option value="6letterwords.txt">6 letter words</option>
+                        <option value="7letterwords.txt">7 letter words</option>
+                        <option value="8letterwords.txt">8 letter words</option>
+                        <option value="11letterwords.txt">11 letter words</option>
+
+                    </select> 
+                    <span id="status"></span> 
+                </div> 
+                <div style="clear:both;"> 
+                <b>Suggestions:</b> <input type="checkbox" id="doshuffle" onclick="maybeSort(this);"/> Shuffle
+                </div> 
+                <div id="suggestions" style="clear:both;border:2px solid #9900FF;"> 
+                </div> 
+            </div> 
+            <span style="float:right;"><input type="checkbox" id="dopredict" onclick="toggleList(this);" checked="true">Show wordlist options</span><span id="result"></span><br/> 
+            <b>Bad words:</b> 
+            <div id="badwords" style="clear:both;border:2px solid #FF0000;"> 
+            </div> 
+            <b>Extra letters:</b> <div id="missedpool" style="border:2px solid #FF0000; padding: 5px;word-wrap:break-word;"></div> 
+            This is a mod of <a href= "http://www.afifthofnothing.com/anacryptogram.html"> Joel's page </a> 
+<br /><br />TODO: Can't think of anything! Please give me suggestions! <br /><br />
+            Image url: <input type="text" id="picsrc" value="http://www.qwantz.com/comics/comic2-1689.png" onkeyup="getimage()"/> 
+            Anacryptogram: <input type="text" id="anacryptogram" value="12t10o8e7a6l6n6u5i5s5d5h5y3I3r3fbbwwkcmvg:,!!" onkeyup="genletters()"/><br/> 
+            <img style="float:left;width:588px;height:400px;" id="thepic" src=""/><br/> 
+        </div> 
+        <div style="float:left; padding:0px 10px;width:250px;border:2px solid #006600;"> 
+            <b>Hints checklist:</b><br/> 
+            <span id="hints"></span><br/> 
+            <b>Letters left:</b><br/> 
+            <span id="list"></span><br/> 
+        </div> 
+        <br/>
+
+        <script type="text/javascript"> 
+            getimage();
+            genletters();
+            getWordlist();
+        </script> 
+    </body> 
+</html> 

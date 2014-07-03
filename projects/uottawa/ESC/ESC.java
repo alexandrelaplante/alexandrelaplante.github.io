@@ -1,0 +1,491 @@
+//sudo nice --19 java -Xmx800m ESC 99980000000000 99990000000000 10000 200000000 2
+//(high priority)(extra memory) (between this) (and this) (using this many S's) (using a groupSize of this) (this many threads)
+//java -Xmx800m ESC 949999000000000000 950000000000000000 5000 1000000000 2 1000
+
+import java.util.HashSet;
+import java.util.HashMap;
+import java.io.*;
+import java.math.BigInteger;
+
+public class ESC {
+String output = "";
+	static int MAXSfromfile;
+	static int MAXS = 10000;
+
+	static int M = 9240;
+	static int sizeOfm = 1833975;
+	public static long LOOKUPTO = 1000000000L;
+	public static long STARTAT = 1;
+	public static int THREADS = 2;
+	public static int halfway = 40;
+	long numc = 0; //the number of counterexamples
+	long nums = 0; //the number of numbers that had to be proven to be squares
+	long numm = 0; //the number of numbers proven to be ESC by a modular identity.
+
+	public static long groupSize = 1000000000;
+
+	//S[x][y] == true if S_x contains y
+	boolean S[][];
+	int mod[];
+	int order[];
+
+	HashSet<Long> Candidates = new HashSet<Long>();
+	static HashMap<Integer,Integer> mHash = new HashMap<Integer,Integer>();
+	
+	static int skipAmount[] = new int[sizeOfm];
+	
+	static int m[];// = {1, 169, 289, 361, 529, 841,
+	   //961,  1369, 1681, 1849, 2041, 2209,
+	   //2521, 2641, 2689, 2809, 3361, 3481,
+	   //3529, 3721, 4321, 4489, 5041, 5161,
+	   //5329, 5569, 6169, 6241, 7561, 7681,
+	   //7921, 8089, 8761};
+
+	public static void main(String[] args) throws InterruptedException {
+
+		if (args.length > 0){ STARTAT = Long.parseLong(args[0]); }
+		if (args.length > 1){ LOOKUPTO = Long.parseLong(args[1]); }
+		if (args.length > 2){ MAXS = Integer.parseInt(args[2]); }
+		if (args.length > 3){ groupSize = Long.parseLong(args[3]); }
+		if (args.length > 4){ THREADS = Integer.parseInt(args[4]); }
+		if (args.length > 5){ halfway = Integer.parseInt(args[5]); }
+
+		ESC oooo = new ESC();
+		oooo.start();
+
+	}
+	
+	public void start() throws InterruptedException{
+
+
+		try{
+		/* Read in the file of filters,
+		 * you must generate this file first.
+		 */
+		FileReader fr = new FileReader("filters.txt"); 
+		BufferedReader br = new BufferedReader(fr); 
+		String line;
+		int i = 0;
+		boolean firstLine = true;
+		while((line = br.readLine()) != null) {
+			if (firstLine){
+				System.out.println("Loading the S filters... "+line);
+				MAXSfromfile = Integer.parseInt(line.substring(5));
+				S = new boolean[MAXSfromfile][4*MAXSfromfile];
+				firstLine = false;
+			}
+			String[] Js;
+			Js = line.split(" ");
+			for (int j = 1; j<Js.length - 1; j++){
+				
+				S[i][Integer.parseInt(Js[j])] = true;
+			}
+			i++;
+		} 
+		fr.close(); 
+		}catch (IOException e){
+		System.err.println("Error: " + e);
+	}
+		
+		try{
+			/* Read in the file of skipAmount,
+			 * you must generate this file first.
+			 */
+			FileReader fr = new FileReader("out.txt"); 
+			BufferedReader br = new BufferedReader(fr); 
+			String line;
+			int i = 0;
+			boolean firstLine = true;
+			boolean secondLine = false;
+			while((line = br.readLine()) != null) {
+				if (secondLine){
+					System.out.println("Loading the skip amounts... "+line);
+					M = Integer.parseInt(line);
+					m = new int[sizeOfm]; //with S(1) ... S(8)
+					secondLine = false;
+				} else if (firstLine) {firstLine = false; secondLine = true;}
+				else {
+					String[] Js = line.split(", ");
+					for (int j = 0; j<Js.length; j++){
+						if (Js[j].contains(")")){
+							int newm = Integer.parseInt(Js[j].substring(Js[j].length()-1));
+							m[j] = newm;
+							mHash.put(newm, j);
+							System.out.println("m["+(j)+"] = "+m[j]);	
+						} else if (Js[j].contains("]")){
+							int newm = Integer.parseInt(Js[j].substring(0, Js[j].length()-1));
+							m[j] = newm;
+							mHash.put(newm, j);
+							System.out.println("m["+(j)+"] = "+m[j]);
+						}else{
+							int newm = Integer.parseInt(Js[j]);
+							m[j] = newm;
+							mHash.put(newm, j);
+							//System.out.println("m["+(j)+"] = "+m[j]);
+						}
+					}
+					i++;
+				}
+			} 
+			fr.close(); 
+			}catch (IOException e){
+			System.err.println("Error: " + e);
+		}
+
+
+			/*
+			 * Create the skipAmount table
+			 */
+			
+			int i = 0;
+			while(i < sizeOfm){
+				if (i==(sizeOfm-1)){
+					skipAmount[i] = m[sizeOfm-1] - m[0];
+					i++;
+				} else {
+					skipAmount[i] = m[i+1] - m[i];
+					i++;
+				}
+			}
+			
+		/*
+		 * Creating the mod[] table.
+		 * mod = {3,7,11,15,19,...}
+		 *
+		 * This is used instead of calculating 4i-1 every time
+		 * we want to check if a number belongs to a particular S.
+		 */
+		mod = new int[MAXS];
+		mod[1] = 3;
+		i=2;
+		while(i < MAXS){ 
+			mod[i] = mod[i-1] + 4;
+			i++;
+		}
+
+
+		/*
+		 * Creating the order[] table.
+		 * order = {6,10,12,30,24,36,5,8,...}
+		 *
+		 * This is used to let us decide which S's to check first
+		 * We check the most likely S's first, to save time.
+		 */
+		order = new int[MAXS];
+		order[8] = 1;
+		order[9] = 1;
+		order[10] = 1;
+		order[11] = 1;
+		order[12] = 1;
+		order[13] = 1;
+		order[14] = 1;
+		order[15] = 1;
+		order[16] = 1;
+		order[17] = 1;
+		order[18] = 1;
+		order[19] = 1;
+		order[20] = 1;
+		order[21] = 1;
+		order[22] = 1;
+		order[23] = 1; 
+		order[24] = 1;
+		order[25] = 1;
+		order[26] = 1;
+		order[27] = 1;
+		order[28] = 1;
+		order[29] = 2;
+		order[30] = 3;
+		order[31] = 4;
+		order[32] = 5; //WHY does this give stuff?
+		order[33] = 6;
+		order[34] = 7;
+		order[35] = 8;
+		order[36] = 9;
+		order[37] = 10; //start here
+		order[38] = 12;
+		order[39] = 30;
+		order[40] = 24; 
+		order[41] = 36;
+		order[42] = 18;
+		order[43] = 28;
+		order[44] = 60;
+		order[45] = 22;
+		order[46] = 5;
+		order[47] = 42;
+		order[48] = 84;
+		order[49] = 40;
+		order[50] = 75;
+		order[51] = 20;
+		order[52] = 15;
+		order[53] = 62;
+		order[54] = 70;
+		order[55] = 54;
+		order[56] = 52;
+		order[57] = 21;
+		order[58] = 72;
+		order[59] = 48;
+		order[60] = 66;
+		order[61] = 80;
+		order[62] = 39;
+		order[63] = 26;
+		order[64] = 78;
+		order[65] = 46;
+		order[66] = 45;
+		order[67] = 51;
+		order[68] = 23;
+		order[69] = 49;
+		order[70] = 50;
+		order[71] = 33;
+		order[72] = 11;
+		order[73] = 56;
+		order[74] = 35;
+		order[75] = 38;
+		order[76] = 27;
+		order[77] = 65;
+		order[78] = 32;
+		order[79] = 55;
+		order[80] = 74;
+		order[81] = 13;
+		order[82] = 17;
+		order[83] = 25;
+		order[84] = 31;
+		order[85] = 41;
+		order[86] = 43;
+		order[87] = 47;
+		order[88] = 52;
+		order[89] = 57;
+		order[90] = 59;
+		order[91] = 63;
+		order[92] = 64;
+		order[93] = 67;
+		order[94] = 68;
+		order[95] = 71;
+		order[96] = 73;
+		order[97] = 76;
+		order[98] = 77;
+		order[99] = 79;
+		i=100;
+		while(i < MAXS){
+			order[i] = order[i-1] + 1;
+			i++;
+		}
+
+		long startTime = System.currentTimeMillis();
+
+		threadMessage("Starting");
+
+		Thread t[] = new Thread[THREADS];
+		int j = 0;
+		while (j < THREADS) {
+			t[j] = new Thread(new CounterExampleFinder(j));
+			t[j].start();
+			j += 1;
+		}
+		j = 0;
+		while (j < THREADS) {
+			t[j].join();
+			j += 1;
+		}
+
+		threadMessage("There are "+numc+ " candidates between "+STARTAT+" and "+LOOKUPTO+ ".");
+		threadMessage(nums+ " were proven to be perfect squares.");
+		threadMessage(numm+ " were proven by a modular identity S<"+MAXS+".");
+		threadMessage("Running time: "+ (System.currentTimeMillis() - startTime)+" ms.");
+		threadMessage("The candidates are: "+ Candidates);
+
+	//	try{
+	//		// Create file 
+	//		FileWriter fstream = new FileWriter("data.csv");
+	//		BufferedWriter out = new BufferedWriter(fstream);
+	//		out.write(output);
+	//		//Close the output stream
+	//		out.close();
+	//		}catch (Exception e){//Catch exception if any
+	//		System.err.println("Error: " + e.getMessage());
+	//	}
+		
+	}
+
+
+	private class CounterExampleFinder implements Runnable {
+
+		int threadNumber;
+
+		CounterExampleFinder(int tN){
+			threadNumber = tN;
+		}
+
+
+		public void run() {
+
+			long numGroups = (LOOKUPTO - STARTAT)/groupSize;
+			long fromGroup = (threadNumber)*(numGroups)/THREADS;
+			long toGroup = (threadNumber + 1)*(numGroups)/THREADS;
+
+			for (long g = fromGroup; g < toGroup; g++){
+
+				int skip[] = {0};
+				long start = modMoreThan( STARTAT + g*(LOOKUPTO - STARTAT)/numGroups, skip);
+				long end = STARTAT + (g+1)*(LOOKUPTO - STARTAT)/numGroups;
+
+
+				int baseMod[] = new int[MAXS];
+				int j=1;
+				while(j < MAXS){ //generate the modOffset
+					baseMod[j] = (int)(start % mod[j]);
+					j++;
+				}
+				searchGroup(end - start, baseMod, start, skip);
+			}
+
+		}
+
+	}
+
+	public void searchGroup(long end, int baseMod[], long groupStart, int[] skip){
+
+		long realEnd = end + groupStart;
+		//threadMessage("I will be searching between "+groupStart+" and "+realEnd+".");
+
+		int offset = 0; //n=0
+		int[] threadCounting = {0,0};
+		int skipIndex = skip[0];
+
+		/* FOR EVERY n */
+		while (offset < end) {
+
+			isCounterExample(offset, groupStart, baseMod, threadCounting);
+			
+			//Skipping to the next number to be considered,
+			//only have to consider certain numbers mod M=lcm(3,7,13,17,9240,...)
+			offset += skipAmount[skipIndex];
+			skipIndex = (skipIndex+1) % sizeOfm;
+
+		} //End While
+
+		
+			numm += threadCounting[0];
+			nums += threadCounting[1];
+
+	}
+	
+	public void isCounterExample(int offset, long groupStart, int[] baseMod, int[] threadCounting){
+		
+		/*
+		 * We perform 2 tests, is n a perfect square? and is n covered by an S?
+		 * We check a certain number of S's, then we ask ourselves if it's square,
+		 * then we check the rest of the S's.
+		 * In practice, checking for square last is almost identical to checking
+		 * part-way through. Checking first is time consuming.
+		 * By checking a constant amount part-way through, we can be sure that we're
+		 * not slowing down the program by choosing a higher MAXS.
+		 */
+		
+		//get rid of this
+		//long realNN = offset + groupStart;
+		//threadMessage("realN: "+realNN);
+		
+		//TEST NUMBER 2: IS IT COVERED BY A MODULAR IDENTITY?
+		int j = 37;
+		for (j = 37 ; j < halfway; j++){
+			
+			
+			//BigInteger B = BigInteger.valueOf(offset % mod[order[j]]);
+			//B.add(baseMod[order[j]]);
+			//B.mod(BigInteger.valueOf(mod[order[j]]));
+			
+			//If I change baseMod to being long, it takes twice as much time (because of the conversion to int)
+			//If I change it to BigInteger, it might be possible to save time.
+			
+			int B = ((offset % mod[order[j]]) + baseMod[order[j]]) % (mod[order[j]]);
+			//int value = (int)B;
+			
+			//((offset % mod[order[j]]) + baseMod[order[j]]) % (mod[order[j]])
+			if (S[order[j]][B]) {
+				//output += realNN+","+j+"\n";
+				threadCounting[0] += 1; return; //n is ESC
+			}
+		}
+		
+		//TEST NUMBER 1: IS IT A PERFECT SQUARE?
+		long realN = offset + groupStart;
+		long b = (long)Math.sqrt(realN);
+		if (realN == b*b){ threadCounting[1] += 1; return; } //n is ESC
+		//String threadOutput = "";
+		if (!mHash.containsKey((int)(realN%M))) {threadMessage(realN +" does not belong");}
+		
+		//TEST NUMBER 2: IS IT COVERED BY A MODULAR IDENTITY?
+		for (j = halfway ; j < MAXS; j++){
+			
+			int B = ((offset % mod[order[j]]) + baseMod[order[j]]) % (mod[order[j]]);
+
+			if (S[order[j]][B]) {
+				//output += realNN+","+j+"\n";
+				threadCounting[0] += 1; return; //n is ESC
+			}
+		}
+		//threadCounting[0] += 1; return;
+		
+		//output += threadOutput;
+		//threadnumm++;
+
+		
+		threadMessage(realN + " is a candidate");
+		Candidates.add(realN);
+		numc += 1;
+		
+
+		
+	}
+
+
+
+	static long modMoreThan(long A, int[] skip){
+	/*take a number A, return the first number
+	 * bigger or equal to A that needs to be considered.
+	 * skip is passed as an array in order to pass it byref.
+	 */
+		int i = 0;
+		while (i < M){ //This guarentees we find one suitable number
+			//for (int j = 0; j<sizeOfm; j++){
+			int AM = (int)(A%M);
+			if (mHash.containsKey(AM)){ // IF A%M belongs to m
+				skip[0] = mHash.get(AM);
+				//System.out.println(A +" % "+ M +" = " + AM);
+				return A;
+			}
+			//}
+			A++;
+			i++;
+		}
+	return 0;
+	}
+
+
+	static void squareNumbersBetween(long a, long b, boolean[] squares, long offset){
+	/* 
+	 * UNUSED. returns a list of all the perfect square numbers
+	 * between a and b. Seems to me like this should be faster,
+	 * but it's much much slower...
+	 */
+
+		int s = (int)Math.ceil(Math.sqrt(a));
+		int end = (int)Math.floor(Math.sqrt(b));
+		//threadMessage("looking for squares between"+s+"^2 and "+end+"^2.");
+		while (s <= end){
+			//threadMessage("squares["+ (Math.pow(s,2) - offset) + "] = true");
+			//squares.add((int)(Math.pow(s,2) - offset));
+			squares[(int)(Math.pow(s,2) - offset)] = true;
+			s++;
+		}
+	}
+	
+
+
+	//Display a message, preceded by the name of the current thread
+	static void threadMessage(String message) {
+		String threadName = Thread.currentThread().getName();
+		System.out.format("%s: %s%n", threadName, message);
+	}
+
+}
