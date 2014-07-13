@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<title>Writing</title>
+<option>comments</option>
+<content>
+
+# How to Download all mp3s (or anything else) From a Web Page
+
+If you are downloading all the mp3s on a page, copy the code below. If you want to download all of something else, the regex with your own.
+
+Open your browser's interactive console, in Chrome just press `ctrl+shift+J`. Paste the code into the console and hit Enter. Your browser should now be downloading the files. In Chrome you have to accept "Allow multiple downloads" when prompted.
+
+This method uses pure javascript and doesn't require any add-ons to your browser!
+
+    regex = /.mp3$/;
+
+    function SaveToDisk(fileURL, fileName) {
+        var save = document.createElement('a');
+        save.href = fileURL;
+        save.target = '_blank';
+        save.download = fileName || 'unknown';
+
+        var event = document.createEvent('Event');
+        event.initEvent('click', true, true);
+        save.dispatchEvent(event);
+        (window.URL || window.webkitURL).revokeObjectURL(save.href);
+    }
+    var list = document.getElementsByTagName("a");
+    var already = {};
+    for (i in list){
+        href = list[i].href;
+        if (href && href.match(regex) ){
+            if (!already[href]){
+                console.log( href.split('/').reverse()[0] );
+                SaveToDisk(href, href.split('/').reverse()[0]);
+                already[href] = true;
+            }
+        }
+    }
+
+You can test it on this page by attempting to download the following mp3 files. These files don't exist so if your browser attempts to download them and fails, then the code is working!
+
++ <a href="1.mp3">1.mp3</a>
++ <a href="2.mp3">2.mp3</a>
++ <a href="3.mp3">3.mp3</a>
+
+
+</content>
+<script src="/webfolder.js"></script>
+</html>
