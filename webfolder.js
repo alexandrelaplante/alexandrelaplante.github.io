@@ -67,18 +67,33 @@ function display(base, root){
 
     // Speed things up by ajax getting all subsequent pages
     $('a').click(function(e){
-        event.preventDefault();
-        var url = this.href;
-        $.get(url).done(function(data, textStatus, jqXHR){
-            if (jqXHR.getResponseHeader("TM-finalURL")){
-                url = jqXHR.getResponseHeader("TM-finalURL");
-            }
-            root = $("<html></html>").append(data);
-            window.history.pushState(null, root.find('title'), url);
-            display(base, root);
-        })
+        var url = $(this).attr('href');
 
-        return false; //for good measure
+        function ext(filename){
+            var a = filename.split(".");
+            if( a.length === 1 || ( a[0] === "" && a.length === 2 ) ) {
+                return "";
+            }
+            return a.pop().toLowerCase();
+        }
+
+        if ((url.substring(0,4) == "http") || (ext(url) && !(ext(url) in ["htm", "html"])) ){
+            // We are treating this as a regular link
+            return true;
+        } else {
+            // We ajaxify this link for speed
+            e.preventDefault();
+            $.get(url).done(function(data, textStatus, jqXHR){
+                if (jqXHR.getResponseHeader("TM-finalURL")){
+                    url = jqXHR.getResponseHeader("TM-finalURL");
+                }
+                root = $("<html></html>").append(data);
+                window.history.pushState(null, root.find('title'), url);
+                display(base, root);
+            })
+            return false;
+        }
+
     });
 }
 
