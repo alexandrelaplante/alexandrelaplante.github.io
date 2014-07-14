@@ -43,7 +43,15 @@ function code() {
 
         var converter = new Markdown.Converter();
         var title   = $('title').html();
-        var content = converter.makeHtml($('content').html() );
+        var content = converter.makeHtml( $('content').html() );
+
+        content = $("<div></div>").append(content);
+        content.find('pre > code').each(function(){
+            // Inside a <pre><code> we don't want to replace these with entities!
+            $(this).text( $(this).text().replace(/&amp;/g, '&').replace(/&gt;/g, '>').replace(/&lt;/g, '<') );
+        });
+        content = content.html();
+
         var context = {title: title, content: content};
 
         $('option').each(function() {
