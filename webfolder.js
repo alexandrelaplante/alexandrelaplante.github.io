@@ -27,7 +27,7 @@ function loadScript(url, callback)
 
 function load_recursive(index){
     if (index >= scripts.length){
-        code();
+        start();
     } else {
         loadScript(scripts[index], function(){
             load_recursive(index+1);
@@ -36,36 +36,55 @@ function load_recursive(index){
 }
 load_recursive(0);
 
+function display(base, root){
 
-function code() {
+    var converter = new Markdown.Converter();
+    var title   = root.find('title').html();
+    var content = converter.makeHtml( root.find('content').html() );
+
+    content = $("<div></div>").append(content);
+    content.find('pre > code').each(function(){
+        // Inside a <pre><code> we don't want to replace these with entities!
+        $(this).text( $(this).text().replace(/&amp;/g, '&').replace(/&gt;/g, '>').replace(/&lt;/g, '<') );
+    });
+    content = content.html();
+
+    var context = {title: title, content: content};
+
+    root.find('option').each(function() {
+      context[$(this).html()] = 'true';
+    });
+
+    var template = Handlebars.compile(base);
+    var html     = template(context);
+
+    // classes on html head or body in base.html are ignored
+    var body = html.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0];
+    var head = html.split("<head")[1].split(">").slice(1).join(">").split("</head>")[0];
+
+    $('head').html(head);
+    $('body').html(body);
+
+    // Speed things up by ajax getting all subsequent pages
+    $('a').click(function(e){
+        event.preventDefault();
+        var url = this.href;
+        $.get(url).done(function(data, textStatus, jqXHR){
+            if (jqXHR.getResponseHeader("TM-finalURL")){
+                url = jqXHR.getResponseHeader("TM-finalURL");
+            }
+            root = $("<html></html>").append(data);
+            window.history.pushState(null, root.find('title'), url);
+            display(base, root);
+        })
+
+        return false; //for good measure
+    });
+}
+
+function start() {
 
     $.get('/base.html').done(function(base){
-
-        var converter = new Markdown.Converter();
-        var title   = $('title').html();
-        var content = converter.makeHtml( $('content').html() );
-
-        content = $("<div></div>").append(content);
-        content.find('pre > code').each(function(){
-            // Inside a <pre><code> we don't want to replace these with entities!
-            $(this).text( $(this).text().replace(/&amp;/g, '&').replace(/&gt;/g, '>').replace(/&lt;/g, '<') );
-        });
-        content = content.html();
-
-        var context = {title: title, content: content};
-
-        $('option').each(function() {
-          context[$(this).html()] = 'true';
-        });
-
-        var template = Handlebars.compile(base);
-        var html     = template(context);
-
-        // classes on html head or body in base.html are ignored
-        var body = html.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0];
-        var head = html.split("<head")[1].split(">").slice(1).join(">").split("</head>")[0];
-
-        $('head').html(head);
-        $('body').html(body);
+        display(base, $('html') );
     });
 }
