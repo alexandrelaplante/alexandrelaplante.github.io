@@ -8,3 +8,7 @@ h1{
 .container{
     max-width: 800px;
 }
+
+.navbar{
+    margin-bottom: 0;
+}
