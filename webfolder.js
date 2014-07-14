@@ -88,12 +88,34 @@ function display(base, root){
                     url = jqXHR.getResponseHeader("TM-finalURL");
                 }
                 root = $("<html></html>").append(data);
-                window.history.pushState(null, root.find('title'), url);
+                not_webfolder = true;
+                root.find('script').each(function(){
+                    if (this.src.indexOf("webfolder.js") > -1){
+                        not_webfolder = false;
+                    }
+                });
+                if (not_webfolder){
+                    //just follow the link, this page doesn't use webfolder.js
+                    window.location.href = url;
+                    return;
+                }
+                state = {base: base, data: data};
+                window.history.pushState(state, root.find('title'), url);
                 display(base, root);
-            })
+            });
             return false;
         }
+        return true; // if we get here for some reason there's a problem, just follow the link
 
+    });
+
+    // handle the back and forward buttons
+    $(window).bind('popstate', function(event) {
+        // if the event has our history data on it, load the page fragment with AJAX
+        var state = event.originalEvent.state;
+        if (state) {
+            display(state.base, $("<html></html>").append(state.data));
+        }
     });
 }
 
