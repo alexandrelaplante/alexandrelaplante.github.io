@@ -63,7 +63,9 @@ function display(base, root){
     var body = html.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0];
     var head = html.split("<head")[1].split(">").slice(1).join(">").split("</head>")[0];
 
+    $.ajaxSetup({cache: true});
     $('head').html(head);
+    $.ajaxSetup({cache: true});
     $('body').html(body);
 
     // Speed things up by ajax getting all subsequent pages
@@ -128,11 +130,6 @@ function start() {
             if (state) {
                 display(state.base, $("<html></html>").append(state.data));
             }
-        });
-
-        $.ajaxSetup({
-            // Enable caching of AJAX responses
-            cache: true
         });
     });
 
