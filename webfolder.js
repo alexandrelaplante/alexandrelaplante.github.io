@@ -36,11 +36,12 @@ function load_recursive(index){
 }
 load_recursive(0);
 
+
+
 function display(base, root){
 
-    var converter = new Markdown.Converter();
     var title   = root.find('title').html();
-    var content = converter.makeHtml( root.find('content').html() );
+    var content = $.converter.makeHtml( root.find('content').html() );
 
     content = $("<div></div>").append(content);
     content.find('pre > code').each(function(){
@@ -109,19 +110,25 @@ function display(base, root){
 
     });
 
-    // handle the back and forward buttons
-    $(window).bind('popstate', function(event) {
-        // if the event has our history data on it, load the page fragment with AJAX
-        var state = event.originalEvent.state;
-        if (state) {
-            display(state.base, $("<html></html>").append(state.data));
-        }
-    });
 }
 
 function start() {
 
     $.get('/base.html').done(function(base){
+        $.converter = new Markdown.Converter();
+
+        state = {base: base, data: $('html').html()};
+        window.history.replaceState(state , $('html').find('title').html());
         display(base, $('html') );
+
+        // handle the back and forward buttons
+        $(window).bind('popstate', function(event) {
+            // if the event has our history data on it, load the page fragment with AJAX
+            var state = event.originalEvent.state;
+            if (state) {
+                display(state.base, $("<html></html>").append(state.data));
+            }
+        });
     });
+
 }
