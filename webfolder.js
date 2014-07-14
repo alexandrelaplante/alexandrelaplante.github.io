@@ -129,6 +129,11 @@ function start() {
                 display(state.base, $("<html></html>").append(state.data));
             }
         });
+
+        $.ajaxSetup({
+            // Enable caching of AJAX responses
+            cache: true
+        });
     });
 
 }
