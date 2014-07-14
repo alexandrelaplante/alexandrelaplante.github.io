@@ -12,3 +12,15 @@ h1{
 .navbar{
     margin-bottom: 0;
 }
+
+h1, h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-top: 30px;
+}
+h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+p, li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.2em;
+}
