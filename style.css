@@ -17,6 +17,10 @@ h1 {
     margin-bottom: 0;
 }
 
+.navbar-brand{
+    font-size: 22px;
+}
+
 h1, h2 {
     font-family: 'Source Sans Pro', sans-serif;
     margin-top: 30px;
