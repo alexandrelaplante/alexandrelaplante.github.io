@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<title>Arguement Website</title>
+<option>comments</option>
+<content>
+
+# An Argument Website
+
+I have an idea for a website/game based on quickly finding people to argue with. Other websites of this type exist, but they mostly suck (<a href="http://arg.umentum.com/">http://arg.umentum.com/</a>) or are focused on the spectatorship of long and well thought out debates (<a href="http://www.debate.org/">http://www.debate.org/</a>).
+
+I want a site where participation is easy and doesn't require a big commitment of time or effort. Ideally you could just drop-in and have a quick argument whenever you felt like it.
+
+To encourage short discussions over long debates, I propose having the debaters decide on a time limit and character limit for their responses. The debate would then be very much like a game, a race against the clock to understand and refute your opponent's arguments.
+
+This debate site could help people practice arguing for or against their favorite propositions, and help connect people together who just want to practice their debating, reading-comprehension, or even typing skills.
+
+My ulterior motive behind this idea is that if such a site existed, I would encourage people to argue **against** their favorite ideologies. This is the best way I can think of to really understand the opposing viewpoint, and one of the only ways I know of to actually change your mind.
+
+As an example, see if you can argue why this website is a bad idea in the remaining time!
+
+<hr />
+
+<div id="DateCountdown" data-timer="300" style="width: 800px;"></div>
+
+<textarea id="target-editor-twitter"></textarea>
+
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-markdown.min.css">
+<link href="css/TimeCircles.css" rel="stylesheet">
+<script type="text/javascript" src="js/TimeCircles.js"></script>
+<script src="js/markdown.js"></script>
+<script src="js/to-markdown.js"></script>
+<script src="js/bootstrap-markdown.js"></script>
+<script src="js/jquery.hotkeys.js"></script>
+
+<script>
+
+$("#DateCountdown").TimeCircles({
+    "animation": "smooth",
+    "bg_width": 1.2,
+    "fg_width": 0.1,
+    "circle_bg_color": "#60686F",
+    "total_duration": 300,
+    "time": {
+        "Days": {
+            "text": "Days",
+            "color": "#FFCC66",
+            "show": false
+        },
+        "Hours": {
+            "text": "Hours",
+            "color": "#BBFFBB",
+            "show": false
+        },
+        "Minutes": {
+            "text": "Minutes",
+            "color": "#99CCFF",
+            "show": true
+        },
+        "Seconds": {
+            "text": "Seconds",
+            "color": "#FF9999",
+            "show": true
+        }
+    }
+});
+
+$('#target-editor-twitter').markdown({
+        hiddenButtons:'cmdPreview',
+        height: 300,
+        footer:'<div id="twitter-footer" class="" style="display:none;"></div><button class="btn btn-primary">Post Your Response</button> Doesn&apos;t actually post anything, just an example.<small id="twitter-counter" class="text-success pull-right">1000 character left</small>',
+        onChange:function(e){
+            var content = e.parseContent(),
+                content_length = (content.match(/\n/g)||[]).length + content.length
+
+            if (content == '') {
+                $('#twitter-footer').hide()
+            } else {
+                $('#twitter-footer').show().html(content)
+            }
+
+            if (content_length > 1000) {
+                $('#twitter-counter').removeClass('text-success').addClass('text-danger').html(content_length-1000+' character surplus.')
+            } else {
+                $('#twitter-counter').removeClass('text-danger').addClass('text-success').html(1000-content_length+' character left.')
+            }
+        }
+    })
+</script>
+
+
+
+</content>
+<script src="/webfolder.js"></script>
+</html>
