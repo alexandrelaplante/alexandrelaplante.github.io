@@ -87,6 +87,7 @@ function display(base, root){
             // We ajaxify this link for speed
             e.preventDefault();
             $.get(url).done(function(data, textStatus, jqXHR){
+                // In Chrome this lets me handle redirects properly, not in Firefox though
                 if (jqXHR.getResponseHeader("TM-finalURL")){
                     url = jqXHR.getResponseHeader("TM-finalURL");
                 }
