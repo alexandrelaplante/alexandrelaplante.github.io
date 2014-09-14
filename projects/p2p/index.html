@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<title>WebRTC Websockets Chat</title>
+<content>
+
+<h1>WebRTC Websockets Chat</h1>
+
+<p>Remember that this site is hosted on GitHub, and there is no server side code.</p>
+
+<div id="text"></div>
+
+<script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+
+<input type="text" id="name" value="" default="screen name">
+<input type="text" id="message">
+<input type="button" id="send" value="Send">
+
+<script>
+
+$(function() {
+
+
+    items = ["Joe", "Jim", "John", "James", "User", "Don", "Dave", "Kim"];
+    // random name
+    $('#name').val( items[Math.floor(Math.random()*items.length)] );
+
+    function send_all(message){
+        var keys = Object.keys(peer.connections);
+
+        for (var i=1;i<=10;i++){
+            if (!peer.connections['id'+i] || !peer.connections['id'+i][0].open){
+                // we don't already have an open connection to this id
+                var conn = window.peer.connect('id'+i);
+                conn.on('open', function(){
+                    var online = $('#name').val()  + " is online";
+                    conn.send(online);
+                });
+            }
+        }
+
+        for (var i = 0; i < keys.length; i++) {
+            var conns = peer.connections[keys[i]];
+            conns[0].send(message); //send to the first connection
+        }
+
+    }
+
+    function setup(id){
+
+        window.peer = new Peer(id , {key: 'v7os4md93262mx6r'});
+        console.log(peer.id);
+
+        // RECEIVE
+        window.peer.on('connection', function(conn) {
+          conn.on('data', function(data){
+            console.log(data);
+            append(data);
+          });
+        });
+
+        window.peer.on('error', function(err) {
+            if (err.type == "unavailable-id"){
+                console.log(err);
+                count++;
+                window.peer.destroy();
+                setup('id'+count);
+            } else if (err.type == "peer-unavailable"){
+                // oh well
+            } else {
+                console.log(err);
+            }
+        });
+
+        var message = $('#name').val()  + " is online";
+        send_all(message);
+    }
+
+    function append(txt){
+        $('#text').append('<br/>'+txt);
+    }
+
+    
+    var count = 1;
+    setup('id'+count);
+    
+
+    $('#send').click(function(){
+        var message = $('#name').val()  +": "+ $('#message').val();
+        $('#message').val('');
+        append(message);
+        send_all(message);
+    });
+
+    document.getElementById('message').onkeypress = function(e){
+        if (!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == '13'){
+            // Enter pressed
+            var message = $('#name').val()  +": "+ $('#message').val();
+            $('#message').val('');
+            send_all(message);
+            append(message);
+            return false;
+        }
+    }
+
+});
+</script>
+
+</content>
+<script src="/webfolder.js"></script>
+</html>
