@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skein rootNode="node-0x7f77a0011350" xmlns="http://www.logicalshift.org.uk/IF/Skein">
+  <generator>GNOME Inform 7</generator>
+  <activeNode nodeId="node-0x7f77a0011350"/>
+  <item nodeId="node-0x7f77a0011350">
+    <command xml:space="preserve">- start -</command>
+    <result xml:space="preserve">
+
+
+
+test
+An Interactive Fiction by &quot;Alexandre Laplante&quot; Include Exit Lister by Andre Kosmos
+Release 1 / Serial number 141014 / Inform 7 build 6G60 (I6/v6.32 lib 6/12N) SD
+
+hello 9:00 am 
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f77a0011610"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f77a0011610">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">hello
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f77a0011770"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f77a0011770">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">hello
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f77a00118d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f77a00118d0">
+    <command xml:space="preserve">look</command>
+    <result xml:space="preserve">hello
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f77a0011a30"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f77a0011a30">
+    <command xml:space="preserve">loooook</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+</Skein>

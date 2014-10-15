@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BoardHack</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="devices.min.css" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+</head>
+<body>
+
+<div class="marvel-device nexus5">
+    <div class="top-bar"></div>
+    <div class="sleep"></div>
+    <div class="volume"></div>
+    <div class="camera"></div>
+    <div class="screen">
+        <!-- Content goes here -->
+        <div class="main"></div>
+        <div class="choices"></div>
+    </div>
+</div>
+
+<input type="number" value="1" class="number">
+<input type="button" value="New Card" class="new_card">
+<input type="button" value="Delete Card" class="delete_card">
+            
+
+          
+          
+ 
+<style>
+.marvel-device{
+  float:left;
+}
+.screen{
+  background-color:white;
+  background: url("scroll.jpg");
+  background-size: 100% 100%;
+  color:black !important;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.screen item{
+  color: green;
+  cursor:pointer;
+  font-weight: bold;
+}
+.card {
+  width: 133px;
+  height: 200px;
+  background: url("back.png");
+  background-size: 100% 100%;
+  float:left;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  line-height: 1.2em;
+}
+.card .fg {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display:block;
+}
+.card .name {
+  font-size: 1.1em;
+  /*font-weight: bold;*/
+  text-align: center;
+  padding: 3px 20px 3px 20px;
+}
+.card .desc {
+  font-size: 0.8em;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 14px;
+  line-height:1.2em;
+}
+.card .corner1 {
+  position: absolute;
+  left:0;
+  top:0;
+  height:30px;
+}
+.card .corner4 {
+  position: absolute;
+  right:0;
+  bottom:0;
+  height:30px;
+}
+span.n, span.t {
+  font-weight: bold;
+  color: red;
+}
+</style>
+
+<script>
+$(function() {
+  /* APP STUFF */
+  var scenario = {
+    state: {
+      red_potion: 'Health',
+      room: 'Intro1',
+    },
+    rooms: {
+      'Intro1': {
+        every_time: {
+          text: "<b>Fighter</b><br>Stats:10 HP, 1 STR, 0 INT.<br>Inventory: +0 <item>Short Sword</item><br><br><b>Mage</b><br>Stats: 5 HP, 0 STR, 1 INT.<br>Inventory: <item>+2</item> <item>Pink Spellbook</item> of <item>Fire</item>.",
+          choices: [{text:'Done setting up!', go:"Intro2"}],
+        },
+      },
+      'Intro2': {
+        every_time: {
+          text: "It is written in the Book of Ishtar:<br><br>After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla...<br><br>Who reads the stories anyway? Go get the <b>Amulet of Yendor</b> and come back out alive!",
+          choices: [{text:'OK', go:"Room1"}],
+        },
+      },
+      'Room1': {
+        every_time: {
+          text: "You find yourself in a maze of twisty passages, all alike.",
+          choices: [{text:'Go East', go:"East"},
+                    {text:'Go West', go:"West"}],
+        },
+      },
+      'East': {
+        first_time: {
+          monster: "Lizard"
+        },
+        every_time: {
+          text: "You area East.",
+          choices: [{text:'Go West', go:"Room1"}],
+        },
+      },
+      'West': {
+        every_time: {
+          text: "You area West.",
+          choices: [{text:'Go East', go:"Room1"}],
+        },
+      },
+    },
+    monsters: {
+      'Lizard': {
+        name: "Lizard",
+        file: "LizardRed.PNG",
+        type: "Monsters",
+        desc: "A weak looking lizard.",
+        stats: {
+          HP:4,
+        },
+        choices: [
+          {
+            text: 'Damage',
+            do: function(){ console.log(this); },
+          }
+        ],
+      },
+    },
+  };
+  function Monster(name, file, type, desc, stats){
+    /*OO?*/
+  }
+  function add_card_app(name, file, desc){
+    $(".main").append(
+      '<div class="card" style="position:relative; margin-left:auto; margin-right:auto; float:none;">'+
+        '<div class="name">'+name+'</div>'+
+        '<img class="corner1" src="'+file+'">'+
+        '<img class="corner4" src="'+file+'">'+
+        '<img class="fg" src="'+file+'" width="100%">'+
+        '<div class="desc">'+desc+'</div>'+
+      '</div>'
+    );
+  }
+  function set_choices(choices){
+    for (i in choices){
+      var choice = choices[i];
+      var button = $("<button>"+choice.text+"</button>");
+      if (choice.go) {
+        button.data('go', choice.go);
+        button.click(function(){
+          set_room( $(this).data('go') );
+        });
+      }
+      if (choice.do){
+        button.click( choice.do );
+      }
+      $('.choices').append( button );
+    }
+  }
+  function set_room(name){
+    /* Takes a string of the room name and sets the App there. */
+    scenario.state.room = name;
+    var room = scenario.rooms[name]; // get room from its name
+    $('.main').html('');
+    $('.choices').html('');
+    if (room.first_time){
+      $('.main').append( 'FIGHT: '+room.first_time.monster )
+      var mon = scenario.monsters[room.first_time.monster];
+      add_card_app(mon.name, mon.type+"/"+mon.file, mon.desc);
+      set_choices(mon.choices);
+    }
+    if (room.every_time){
+      $('.main').append( room.every_time.text );
+    }
+    $('item').click(function(){
+      var name = $(this).html();
+      for (i in items){
+        var item = items[i];
+        if (item.name == name){
+          add_card(item.name, item.type+"/"+item.file, item.desc);
+        }
+      }
+    });
+    set_choices( room.every_time.choices );
+  }
+  set_room(scenario.state.room);
+
+
+  /* CARD STUFF */
+  function get_num(){
+    var number = $('.number').val();
+    var pad = "0000";
+    return (pad+number).slice(-pad.length);
+  }
+  function add_card(name, file, desc){
+    $("body").append(
+      '<div class="card draggable">'+
+        '<div class="name">'+name+'</div>'+
+        '<img class="corner1" src="'+file+'">'+
+        '<img class="corner4" src="'+file+'">'+
+        '<img class="fg" src="'+file+'" width="100%">'+
+        '<div class="desc">'+desc+'</div>'+
+      '</div>'
+    );
+    $(".draggable").draggable();
+  }
+  var items = [
+    {
+      file: 'GlyphGreen.PNG',
+      name: '+1',
+      type: "Items",
+      desc: 'A +1 modifier',
+    },
+    {
+      file: 'GlyphYellow.PNG',
+      name: '+2',
+      type: "Items",
+      desc: 'A +2 modifier',
+    },
+    {
+      file: 'GlyphRed.PNG',
+      name: '+3',
+      type: "Items",
+      desc: 'A +3 modifier',
+    },
+    {
+      file: 'PotionTallYellow2.PNG',
+      name: 'Yellow Potion',
+      type: "Items",
+      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+    },
+    {
+      file: 'PotionRed.PNG',
+      name: 'Red Potion',
+      type: "Items",
+      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+    },
+    {
+      file: 'PotionLargeGreen.PNG',
+      name: 'Green Potion',
+      type: "Items",
+      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+    },
+    {
+      file: 'PotionAquamarine.PNG',
+      name: 'Blue Potion',
+      type: "Items",
+      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+    },
+    {
+      file: 'Sword01.PNG',
+      name: 'Short Sword',
+      type: "Items",
+      desc: '<b>Attack</b>: Deals 1+<span class="n">n</span> Damage to <span class="t">target</span> Being.',
+    },
+    {
+      file: 'Sword20.PNG',
+      name: 'Long Sword',
+      type: "Items",
+      desc: '<b>Attack</b>: Deals 2+<span class="n">n</span> Damage to <span class="t">target</span> Being.',
+    },
+    {
+      file: 'PinkBook.png',
+      name: 'Pink Spellbook',
+      type: "Books",
+      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+    },
+    {
+      file: 'GrayBook.png',
+      name: 'Gray Spellbook',
+      type: "Books",
+      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+    },
+    {
+      file: 'TealBook.png',
+      name: 'Teal Spellbook',
+      type: "Books",
+      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+    },
+    {
+      file: 'GreenBook.png',
+      name: 'Green Spellbook',
+      type: "Books",
+      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+    },
+    {
+      file: 'cold.png',
+      name: 'Cold',
+      type: "Effects",
+      desc: 'Deals 1+<span class="n">n</span> Cold damage to <span class="t">target</span>',
+    },
+    {
+      file: 'fire.png',
+      name: 'Fire',
+      type: "Effects",
+      desc: 'Deals 1+<span class="n">n</span> Fire damage to <span class="t">target</span>',
+    },
+    {
+      file: 'health.png',
+      name: 'Health',
+      type: "Effects",
+      desc: 'Heals 1+<span class="n">n</span> to <span class="t">target</span> Being.',
+    },
+    {
+      file: 'identify.png',
+      name: 'identify',
+      type: "Effects",
+      desc: 'Identifies <span class="t">target</span>',
+    },
+    {
+      file: 'levitate.png',
+      name: 'Levitation',
+      type: "Effects",
+      desc: '<span class="t">target</span> Being gets +2 evasion?',
+    },
+    {
+      file: 'life.png',
+      name: 'Life Saving',
+      type: "Effects",
+      desc: 'Restores Life to 1+<span class="n">n</span> HP instead of dying. Discard when this happens.',
+    },
+    {
+      file: 'sleep.png',
+      name: 'Sleep',
+      type: "Effects",
+      desc: '<span class="t">target</span> cannot act until awoken.',
+    },
+    {
+      file: 'speed.png',
+      name: 'Speed',
+      type: "Effects",
+      desc: 'Add <span class="n">n</span> to the Speed of <span class="t">target</span> Being. If <span class="t">target</span> is not a Being, do nothing.',
+    },
+    {
+      file: 'strength.png',
+      name: 'Strength',
+      type: "Effects",
+      desc: 'Add <span class="n">n</span> to the Strength of <span class="t">target</span> Being. If <span class="t">target</span> is not a Being, do nothing.',
+    },
+    {
+      file: 'enchant.png',
+      name: 'Enchant',
+      type: "Effects",
+      desc: 'Add a +<span class="n">n</span> modifier to <span class="t">target</span> item. If <span class="t">target</span> is not an item, do nothing.',
+    },
+  ];
+  $(".new_card").click(function(){
+    add_card('No Name', "Items/num/"+get_num()+".png", "No Description");
+  });
+  $(".delete_card").click(function(){
+    $('.card').last().remove();
+  });
+  $(".number").change(function(){
+    $('.card').last().find('.fg').attr('src', "Items/num/"+get_num()+".png");
+  });
+
+  for (i in items){
+    var item = items[i];
+    add_card(item.name, item.type+"/"+item.file, item.desc);
+  }
+});
+</script>
+</body>
+</html>
