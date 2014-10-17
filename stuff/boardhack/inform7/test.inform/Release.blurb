@@ -1,0 +1,55 @@
+! Blurb file created by Inform build 6G60
+
+status "/usr/share/gnome-inform7/Extensions/Reserved/CblorbModel.html" "/home/alex/Dropbox/boardhack/inform7/test.inform/Build/StatusCblorb.html"
+
+
+! Identification
+
+project folder "/home/alex/Dropbox/boardhack/inform7/test.inform"
+release to "/home/alex/Dropbox/boardhack/inform7/test Materials/Release"
+
+! Blorb instructions
+
+storyfile leafname "test.zblorb"
+storyfile "/home/alex/Dropbox/boardhack/inform7/test.inform/Build/output.z8" include
+ifiction "/home/alex/Dropbox/boardhack/inform7/test.inform/Metadata.iFiction" include
+cover "/usr/share/gnome-inform7/Extensions/Reserved/DefaultCover.jpg"
+picture 1 "/usr/share/gnome-inform7/Extensions/Reserved/DefaultCover.jpg"
+release file "/usr/share/gnome-inform7/Extensions/Reserved/Cover.jpg"
+release file "/usr/share/gnome-inform7/Extensions/Reserved/Small Cover.jpg"
+
+! Placeholder variables
+
+placeholder [IFID] = "AB5A89EA-5388-11E4-B522-C860005DEFBB"
+placeholder [RELEASE] = "1"
+placeholder [YEAR] = "2014"
+placeholder [TITLE] = "test"
+placeholder [AUTHOR] = "Alexandre Laplante"
+placeholder [BLURB] = "A work of interactive fiction."
+
+! Other material to release
+
+
+! Website instructions
+
+placeholder [ENCODEDSTORYFILE] = "test.zblorb.js"
+template path "/home/alex/Dropbox/boardhack/inform7/test Materials/Templates"
+template path "/home/alex/Inform/Templates"
+template path "/usr/share/gnome-inform7/Extensions/Reserved/Templates"
+interpreter "Parchment" "z"
+base64 "/home/alex/Dropbox/boardhack/inform7/test.inform/Build/output.z8" to "/home/alex/Dropbox/boardhack/inform7/test Materials/Release/interpreter/test.zblorb.js"
+
+! Website instructions
+
+template path "/home/alex/Dropbox/boardhack/inform7/test Materials/Templates"
+template path "/home/alex/Inform/Templates"
+template path "/usr/share/gnome-inform7/Extensions/Reserved/Templates"
+css
+website "Standard"
+status instruction ||&nbsp;<a href="source:story.ni#line5"><img border=0 src=inform:/Reveal.png></a>||
+status alternative ||Using 'Release along with cover art', to provide something more distinctive than the default artwork above&nbsp;<a href=inform:/doc391.html><img border=0 src=inform:/help.png></a>||
+status alternative ||Using 'Release along with the "Such-and-Such" file called "whatever.pdf"', perhaps to add a manual, or a welcoming note&nbsp;<a href=inform:/doc389.html><img border=0 src=inform:/help.png></a>||
+status alternative ||Using 'Release along with the source text'&nbsp;<a href=inform:/doc399.html><img border=0 src=inform:/help.png></a>||
+status alternative ||Using 'Release along with a solution'&nbsp;<a href=inform:/doc398.html><img border=0 src=inform:/help.png></a>||
+status alternative ||Using 'Release along with the library card'&nbsp;<a href=inform:/doc399.html><img border=0 src=inform:/help.png></a>||
+status alternative ||Using 'Release along with the introductory booklet'&nbsp;<a href=inform:/doc392.html><img border=0 src=inform:/help.png></a>||

@@ -7,8 +7,24 @@
   <link rel="stylesheet" href="devices.min.css" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+<!--
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+-->
+  <script src="inform7/test%20Materials/Release/interpreter/jquery.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <script src="inform7/test%20Materials/Release/interpreter/parchment.min.js"></script>
+  <!--
+  <link rel="stylesheet" type="text/css" href="inform7/test%20Materials/Release/interpreter/parchment.css">
+  -->
+  <script>
+  parchment_options = {
+  default_story: [ "inform7/test%20Materials/Release/test.zblorb", "inform7/test%20Materials/Release/interpreter/test.zblorb.js" ],
+  lib_path: 'inform7/test%20Materials/Release/interpreter/',
+  lock_story: 1,
+  page_title: 0
+  };
+  </script>
 </head>
 <body>
 
@@ -19,8 +35,12 @@
     <div class="camera"></div>
     <div class="screen">
         <!-- Content goes here -->
+        <!--
         <div class="main"></div>
         <div class="choices"></div>
+        -->
+        <div id="parchment"></div>
+        <div class="commands"></div>
     </div>
 </div>
 
@@ -33,10 +53,36 @@
           
  
 <style>
+/* parchment stuff */
+#top-window{
+  display:none;
+}
+.z-bold{
+  font-weight: bold;
+}
+#content {
+  padding:0 !important;
+}
+#content > br:first-child{
+  display:none;
+}
+.LineInput{
+  position:absolute;
+  bottom:0;
+}
+/* end of parchment stuff */
+
+.commands{ 
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
 .marvel-device{
   float:left;
 }
 .screen{
+  overflow: scroll;
   background-color:white;
   background: url("scroll.jpg");
   background-size: 100% 100%;
@@ -98,6 +144,139 @@ span.n, span.t {
 
 <script>
 $(function() {
+
+  /* PARCHMENT STUFF */
+  var origAppend = $.fn.append;
+  var origAppendTo = $.fn.appendTo;
+  window.metaongoing = "";
+
+  function is_string(s){
+    return (typeof arguments[0] == 'string' || arguments[0] instanceof String);
+  }
+
+  $.fn.append = function () {
+    if (this.selector == "#content" && is_string(arguments[0])){
+      arguments[0] = arguments[0].replace(new RegExp('<span class="z-breaking-whitespace"> </span>', 'g'), ' ');
+      var metastart = arguments[0].match(/{{{.*$/);
+      var metaend = arguments[0].match(/^.*}}}/);
+      var meta = arguments[0].match(/{{{.*}}}/);
+      if (meta){
+        use_meta(meta[0]);
+        arguments[0] = arguments[0].replace(/{{{.*}}}/, '');
+      } else if (metastart) {
+        metaongoing = metastart[0];
+        arguments[0] = arguments[0].replace(/{{{.*$/, '');
+      } else if (metaongoing && metaend) {
+        meta = metaongoing + metaend[0];
+        arguments[0] = arguments[0].replace(/^.*}}}/, '');
+        metaongoing = '';
+        use_meta(meta);
+      } else if (metaongoing) {
+        metaongoing += arguments[0];
+        arguments[0] = '';
+      }
+      /* highlight the items */
+      arguments[0] = arguments[0].replace(/{/g, '<item>');
+      arguments[0] = arguments[0].replace(/}/g, '</item>');
+
+      console.log(arguments[0]);
+    }
+    /* Do the appending */
+    var returnValue = origAppend.apply(this, arguments).trigger("append", this, arguments);
+    /* After appending anything*/
+    if (this.selector == "#content" && (typeof arguments[0] == 'string' || arguments[0] instanceof String)){
+      $('item').unbind().click(function(){
+        var name = $(this).html();
+        for (i in items){
+          var item = items[i];
+          if (item.name == name){
+            add_card(item.name, item.type+"/"+item.file, item.desc);
+          }
+        }
+      });
+    }
+    if (arguments[0] && arguments[0][0] && arguments[0][0].outerHTML && arguments[0][0].outerHTML.indexOf('CharInput') >= 0){
+      if ($('input.CharInput').length){
+        $('input.CharInput').hide();
+        $('.commands form').hide();
+        console.log('hiding the form');
+        var button = $('<button>Continue</button>');
+        button.click(function(){
+          $('.commands form').show();
+          $('input.CharInput').focus();
+          jQuery.event.trigger({ type : 'keypress', which : 'c'.charCodeAt(0) });
+          console.log('showing the form');
+          button.remove();
+        });
+        $('.commands').append(button);
+      }
+    
+    }
+    return returnValue;
+  };
+  $.fn.appendTo = function () {
+    console.log(this);
+    if (this[0].className == "finished-input"){
+      $('#content').html('');
+    }
+    return origAppendTo.apply(this, arguments).trigger("appendTo", this, arguments);
+  };
+
+  window.action = "";
+  function use_meta(meta){
+    meta = meta.replace(/<.*>/, '');
+    meta = meta.replace('{{{', '{');
+    meta = meta.replace('}}}', '}');
+    meta = meta.replace('&nbsp;', ' ');
+    console.log(meta);
+    meta = JSON.parse(meta);
+    for (var key in meta) {
+      meta[key] = meta[key].split(/, | and /);
+    }
+    $('.commands').html('');
+    $('.commands').append('<form></form>');
+
+    $('.commands form').append("<b>"+meta.room+"</b>");
+    $('.commands form').append("<br>");
+
+    for (i in meta.actions){
+      var button = $("<input type='radio' name='action'>");
+      button.attr('value', meta.actions[i]);
+      button.attr('id', meta.actions[i]);
+      $('.commands form').append(button);
+      $('.commands form').append("<label for='"+meta.actions[i]+"'>"+meta.actions[i]+"</label>");
+    }
+    $('.commands form').append("<br>");
+    for (i in meta.directions){
+      var button = $("<input type='button'>");
+      button.attr('value', meta.directions[i]);
+      $('.commands form').append(button);
+    }
+    $('.commands form').append("<br>");
+    for (i in meta.things){
+      var button = $("<input type='button'>");
+      button.attr('value', meta.things[i]);
+      $('.commands form').append(button);
+    }
+    action = '';
+    $(".commands input[name=action]").click(function() {
+      action = $(this).val();
+    });
+    $('.commands input[type=button]').click(function(){
+      target = $(this).val();
+      if (action == 'damage'){
+        var amount = prompt("How much?");
+        $('.LineInput input').val(action +' '+target+' by '+amount);
+        $('.LineInput').submit();
+      } else {
+        $('.LineInput input').val(action +' '+target);
+        $('.LineInput').submit();
+      }
+    });
+
+    console.log(meta);
+  }
+
   /* APP STUFF */
   var scenario = {
     state: {

@@ -5,7 +5,7 @@
     <key>0</key><dict>
         <key>Filename</key><string>/home/alex/Dropbox/boardhack/inform7/test.inform/Source/story.ni</string>
         <key>Line</key><integer>1</integer>
-        <key>Title</key><string>"test" by "Alexandre Laplante" Include Exit Lister by Andre Kosmos</string>
+        <key>Title</key><string>"test" by "Alexandre Laplante"</string>
         <key>Level</key><integer>0</integer>
         <key>Indentation</key><integer>0</integer>
     </dict>
@@ -864,6 +864,55 @@
         <key>Indentation</key><integer>2</integer>
     </dict>
     <key>123</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/basic screen effects.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>Version 7 of Basic Screen Effects by Emily Short begins here</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>124</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/basic screen effects.i7x</string>
+        <key>Line</key><integer>9</integer>
+        <key>Title</key><string>Section 1 - Spacing and Pausing</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>125</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/basic screen effects.i7x</string>
+        <key>Line</key><integer>176</integer>
+        <key>Title</key><string>Section 2 (for Z-machine only)</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>126</key><dict>
+        <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>Version 5 of Extended Banner by Stephen Granade begins here</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>127</key><dict>
+        <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
+        <key>Line</key><integer>5</integer>
+        <key>Title</key><string>Section 1G (for Glulx only)</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>128</key><dict>
+        <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
+        <key>Line</key><integer>15</integer>
+        <key>Title</key><string>Section 1Z (for Z-machine only)</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>129</key><dict>
+        <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
+        <key>Line</key><integer>25</integer>
+        <key>Title</key><string>Section 2</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>130</key><dict>
         <key>Line</key><integer>1</integer>
         <key>Title</key><string>scene understood is a scene which varies</string>
         <key>Level</key><integer>0</integer>

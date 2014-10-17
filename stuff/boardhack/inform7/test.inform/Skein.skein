@@ -1,31 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Skein rootNode="node-0x7f77a0011350" xmlns="http://www.logicalshift.org.uk/IF/Skein">
+<Skein rootNode="node-0x149d1e0" xmlns="http://www.logicalshift.org.uk/IF/Skein">
   <generator>GNOME Inform 7</generator>
-  <activeNode nodeId="node-0x7f77a0011350"/>
-  <item nodeId="node-0x7f77a0011350">
+  <activeNode nodeId="node-0x17c8e00"/>
+  <item nodeId="node-0x149d1e0">
     <command xml:space="preserve">- start -</command>
     <result xml:space="preserve">
 
 
 
-test
-An Interactive Fiction by &quot;Alexandre Laplante&quot; Include Exit Lister by Andre Kosmos
-Release 1 / Serial number 141014 / Inform 7 build 6G60 (I6/v6.32 lib 6/12N) SD
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+ Fighter 
+ Stats: 10 HP, 1 STR, 0 INT. 
+ Inventory: +0 {Short Sword}. 
 
-hello 9:00 am 
-&gt;</result>
+ Mage 
+ Stats: 5 HP, 0 STR, 1 INT. 
+ Inventory: {+2} {Pink Spellbook} of {Fire}.
+</result>
     <commentary xml:space="preserve"></commentary>
     <played>YES</played>
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
     <children>
-      <child nodeId="node-0x7f77a0011610"/>
+      <child nodeId="node-0x149d340"/>
+      <child nodeId="node-0x1707860"/>
+      <child nodeId="node-0x172e060"/>
+      <child nodeId="node-0x172e8a0"/>
+      <child nodeId="node-0x175a620"/>
+      <child nodeId="node-0x175a780"/>
+      <child nodeId="node-0x175a8e0"/>
+      <child nodeId="node-0x1773730"/>
+      <child nodeId="node-0x1773890"/>
+      <child nodeId="node-0x1773b50"/>
+      <child nodeId="node-0x17a2700"/>
+      <child nodeId="node-0x17c8e00"/>
+      <child nodeId="node-0x17ef9d0"/>
+      <child nodeId="node-0x17efdf0"/>
+      <child nodeId="node-0x1809440"/>
+      <child nodeId="node-0x18099c0"/>
+      <child nodeId="node-0x1830030"/>
+      <child nodeId="node-0x1830b30"/>
+      <child nodeId="node-0x1830df0"/>
+      <child nodeId="node-0x185fc80"/>
+      <child nodeId="node-0x1885020"/>
+      <child nodeId="node-0x1885180"/>
+      <child nodeId="node-0x1885b20"/>
+      <child nodeId="node-0x18a02e0"/>
+      <child nodeId="node-0x18a0440"/>
+      <child nodeId="node-0x18a09c0"/>
+      <child nodeId="node-0x18a0b20"/>
+      <child nodeId="node-0x18c69b0"/>
+      <child nodeId="node-0x18ec2e0"/>
+      <child nodeId="node-0x1911010"/>
+      <child nodeId="node-0x19112d0"/>
+      <child nodeId="node-0x1911590"/>
+      <child nodeId="node-0x192b360"/>
+      <child nodeId="node-0x192b4c0"/>
+      <child nodeId="node-0x192b780"/>
     </children>
   </item>
-  <item nodeId="node-0x7f77a0011610">
+  <item nodeId="node-0x149d340">
     <command xml:space="preserve">l</command>
-    <result xml:space="preserve">hello
+    <result xml:space="preserve">It is written in the Book of Ishtar: 
+
+ After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
+
+ Who reads the stories anyway? Go get the Amulet of Yendor and come back out alive!
+
+test
+A BoardHack dungeon by Alexandre Laplante
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x149d4a0"/>
+      <child nodeId="node-0x16798b0"/>
+      <child nodeId="node-0x1679e30"/>
+      <child nodeId="node-0x169f340"/>
+      <child nodeId="node-0x169f4a0"/>
+      <child nodeId="node-0x169fa20"/>
+      <child nodeId="node-0x169fb80"/>
+      <child nodeId="node-0x169fce0"/>
+      <child nodeId="node-0x169fe40"/>
+      <child nodeId="node-0x16c7320"/>
+      <child nodeId="node-0x16c7cc0"/>
+      <child nodeId="node-0x16e1b10"/>
+      <child nodeId="node-0x1707440"/>
+      <child nodeId="node-0x7f946c00f8a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x149d4a0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east and west&quot;, &quot;actions&quot;: &quot;go, take, identify, examine, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
 &gt;</result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
@@ -33,23 +113,11 @@ hello 9:00 am
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
     <children>
-      <child nodeId="node-0x7f77a0011770"/>
+      <child nodeId="node-0x149d600"/>
+      <child nodeId="node-0x149d8c0"/>
     </children>
   </item>
-  <item nodeId="node-0x7f77a0011770">
-    <command xml:space="preserve">l</command>
-    <result xml:space="preserve">hello
-&gt;</result>
-    <commentary xml:space="preserve"></commentary>
-    <played>NO</played>
-    <changed>YES</changed>
-    <temporary score="0">YES</temporary>
-    <annotation xml:space="preserve"></annotation>
-    <children>
-      <child nodeId="node-0x7f77a00118d0"/>
-    </children>
-  </item>
-  <item nodeId="node-0x7f77a00118d0">
+  <item nodeId="node-0x149d600">
     <command xml:space="preserve">look</command>
     <result xml:space="preserve">hello
 &gt;</result>
@@ -59,13 +127,3625 @@ hello 9:00 am
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
     <children>
-      <child nodeId="node-0x7f77a0011a30"/>
+      <child nodeId="node-0x149d760"/>
     </children>
   </item>
-  <item nodeId="node-0x7f77a0011a30">
+  <item nodeId="node-0x149d760">
     <command xml:space="preserve">loooook</command>
     <result xml:space="preserve">That&apos;s not a verb I recognise.
 
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x149d8c0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x149da20"/>
+      <child nodeId="node-0x1650710"/>
+      <child nodeId="node-0x1650df0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x149da20">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">You can&apos;t go that way.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x149db80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x149db80">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x149dce0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x149dce0">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">You can&apos;t go that way.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x149de40"/>
+    </children>
+  </item>
+  <item nodeId="node-0x149de40">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650030"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650030">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650190"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650190">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16502f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16502f0">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650450"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650450">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16505b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16505b0">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">What do you want to examine?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1650710">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650870"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650870">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16509d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16509d0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650b30"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650b30">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1650c90"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1650c90">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1650df0">
+    <command xml:space="preserve">i</command>
+    <result xml:space="preserve">You are carrying nothing.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679070"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679070">
+    <command xml:space="preserve">id</command>
+    <result xml:space="preserve">What do you want to id?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16791d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16791d0">
+    <command xml:space="preserve">id Entrance</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679330"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679330">
+    <command xml:space="preserve">id location</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679490"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679490">
+    <command xml:space="preserve">id .</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16795f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16795f0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking lizard. 5/5 HP 0 STR 0 INT.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679750"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679750">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking lizard. 5/5 HP 0 STR 0 INT.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x16798b0">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Intro2
+You can go north to Intro from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679a10"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679a10">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Intro
+You can go south to Intro2 from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679b70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679b70">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Intro
+You can go south to Intro2 from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1679cd0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1679cd0">
+    <command xml:space="preserve">x monster</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1679e30">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">(the monster)
+Universe #1
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x169f080"/>
+    </children>
+  </item>
+  <item nodeId="node-0x169f080">
+    <command xml:space="preserve">x world</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x169f1e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x169f1e0">
+    <command xml:space="preserve">x the world</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169f340">
+    <command xml:space="preserve">x floor</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169f4a0">
+    <command xml:space="preserve">x monster</command>
+    <result xml:space="preserve">A giant scadbeast
+
+{{{things: &quot;yourself, monster and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x169f600"/>
+      <child nodeId="node-0x169f8c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x169f600">
+    <command xml:space="preserve">x yourself</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{things: &quot;yourself, monster and floor&quot;}}}
+{{{directions: &quot;north, northeast, northwest, south, southeast, southwest, east, west, up, down, inside and outside&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x169f760"/>
+    </children>
+  </item>
+  <item nodeId="node-0x169f760">
+    <command xml:space="preserve">x n</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, monster and floor&quot;}}}
+{{{directions: &quot;north, northeast, northwest, south, southeast, southwest, east, west, up, down, inside and outside&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169f8c0">
+    <command xml:space="preserve">talk to monster</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169fa20">
+    <command xml:space="preserve">identify</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169fb80">
+    <command xml:space="preserve">x self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{things: &quot;yourself, monster and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169fce0">
+    <command xml:space="preserve">x lizard</command>
+    <result xml:space="preserve">You see nothing special about the Lizard.
+
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x169fe40">
+    <command xml:space="preserve">take north</command>
+    <result xml:space="preserve">You must name something more substantial.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7060"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7060">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c71c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c71c0">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x16c7320">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7480"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7480">
+    <command xml:space="preserve">2</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c75e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c75e0">
+    <command xml:space="preserve">3</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7740"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7740">
+    <command xml:space="preserve">4</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c78a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c78a0">
+    <command xml:space="preserve">5</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7a00"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7a00">
+    <command xml:space="preserve">6</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7b60"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7b60">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+This is the only real room in the world. welcome.
+
+You can see a lizard and a wizard here.
+
+{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x16c7cc0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16c7e20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16c7e20">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. You can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1010"/>
+      <child nodeId="node-0x16e1590"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1010">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">you choose 1
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1170"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1170">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e12d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e12d0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1430"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1430">
+    <command xml:space="preserve">2</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x16e1590">
+    <command xml:space="preserve">4</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e16f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e16f0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. You can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1850"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1850">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e19b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e19b0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x16e1b10">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking lizard. 5/5 HP 0 STR 0 INT.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1c70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1c70">
+    <command xml:space="preserve">id wizard</command>
+    <result xml:space="preserve">A powerful looking wizard. 10/10 HP 0 STR 0 INT.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x16e1dd0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x16e1dd0">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707020"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707020">
+    <command xml:space="preserve">id big door</command>
+    <result xml:space="preserve">There is no way out of here.
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707180">
+    <command xml:space="preserve">id door</command>
+    <result xml:space="preserve">There is no way out of here.
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17072e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17072e0">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1707440">
+    <command xml:space="preserve">x w</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{ things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17075a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17075a0">
+    <command xml:space="preserve">x wi</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707700">
+    <command xml:space="preserve">x wiz</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f946c00f8a0">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f946c00f480"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f946c00f480">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1707860">
+    <command xml:space="preserve">y</command>
+    <result xml:space="preserve">
+(exits listing is on)
+test
+An Interactive Fiction by Alexandre Laplante
+Release 1 / Serial number 141015 / Inform 7 build 6G60 (I6/v6.32 lib 6/12N) SD
+
+hello 9:00 am true
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17079c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17079c0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">hello 9:00 am true
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707b20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707b20">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Intro2
+You can go north from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707c80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707c80">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Intro
+You can go south to Intro2 from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1707de0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1707de0">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Intro2
+You can go north to Intro from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x172e060">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Intro2
+You can go north to Intro from here.
+
+{{{yourself and monster}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172e1c0"/>
+      <child nodeId="node-0x172e5e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172e1c0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Intro
+You can go south to Intro2 from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172e320"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172e320">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172e480"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172e480">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Intro
+You can go south to Intro2 from here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x172e5e0">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172e740"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172e740">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Intro
+This is the only real room in the world.
+
+Whoa a monster!
+
+You can go south to Intro2 from here.
+
+{{{yourself and monster}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x172e8a0">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">(the Lizard)
+A weak looking Lizard. 5
+
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172ea00"/>
+      <child nodeId="node-0x172ee20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172ea00">
+    <command xml:space="preserve">t</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172eb60"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172eb60">
+    <command xml:space="preserve">take</command>
+    <result xml:space="preserve">(the monster)
+Taken.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x172ecc0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x172ecc0">
+    <command xml:space="preserve">drop</command>
+    <result xml:space="preserve">(the monster)
+Dropped.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x172ee20">
+    <command xml:space="preserve">i</command>
+    <result xml:space="preserve">You are carrying nothing.
+
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175a0a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175a0a0">
+    <command xml:space="preserve">id</command>
+    <result xml:space="preserve">(the Lizard)
+You can see everything interesting about the Lizard already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175a200"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175a200">
+    <command xml:space="preserve">take yourself</command>
+    <result xml:space="preserve">You are always self-possessed.
+
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175a360"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175a360">
+    <command xml:space="preserve">identify yourself</command>
+    <result xml:space="preserve">You can see everything interesting about yourself already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175a4c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175a4c0">
+    <command xml:space="preserve">identify thief</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x175a620">
+    <command xml:space="preserve">x floor</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x175a780">
+    <command xml:space="preserve">z</command>
+    <result xml:space="preserve">Time passes.
+
+{{{yourself, monster and floor}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x175a8e0">
+    <command xml:space="preserve">x lizard</command>
+    <result xml:space="preserve">A weak looking lizard.
+
+{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175aa40"/>
+      <child nodeId="node-0x175ad00"/>
+      <child nodeId="node-0x1773050"/>
+      <child nodeId="node-0x1773470"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175aa40">
+    <command xml:space="preserve">take lizard</command>
+    <result xml:space="preserve">I don&apos;t suppose the Lizard would care for that.
+
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175aba0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175aba0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">You can see everything interesting about the Lizard already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x175ad00">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x175ae60"/>
+    </children>
+  </item>
+  <item nodeId="node-0x175ae60">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">You can see everything interesting about yourself already.
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1773050">
+    <command xml:space="preserve">x self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17731b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17731b0">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">As good-looking as ever.
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1773310"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1773310">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1773470">
+    <command xml:space="preserve">x wizard</command>
+    <result xml:space="preserve">A powerful looking wizard.
+
+{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17735d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17735d0">
+    <command xml:space="preserve">damage wizard by 4</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1773730">
+    <command xml:space="preserve">identify lizard</command>
+    <result xml:space="preserve">
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1773890">
+    <command xml:space="preserve">identidy lizard</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17739f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17739f0">
+    <command xml:space="preserve">identify lizard</command>
+    <result xml:space="preserve">You can see everything interesting about the Lizard already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1773b50">
+    <command xml:space="preserve">id</command>
+    <result xml:space="preserve">(the lizard)
+A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1773cb0"/>
+      <child nodeId="node-0x17a2020"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1773cb0">
+    <command xml:space="preserve">id floor</command>
+    <result xml:space="preserve">You can see everything interesting about the floor already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1773e10"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1773e10">
+    <command xml:space="preserve">id myself</command>
+    <result xml:space="preserve">You can see everything interesting about yourself already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17a2020">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">(the lizard)
+A weak looking Lizard.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a2180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a2180">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a22e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a22e0">
+    <command xml:space="preserve">l north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a2440"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a2440">
+    <command xml:space="preserve">l lizard</command>
+    <result xml:space="preserve">A weak looking Lizard.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a25a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a25a0">
+    <command xml:space="preserve">x north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17a2700">
+    <command xml:space="preserve">x self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a2860"/>
+      <child nodeId="node-0x17a2de0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a2860">
+    <command xml:space="preserve">x you</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a29c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a29c0">
+    <command xml:space="preserve">x thief</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a2b20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a2b20">
+    <command xml:space="preserve">id thief</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17a2c80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17a2c80">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">You can see everything interesting about yourself already.
+{{{things: &quot;yourself, Lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17a2de0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8040"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8040">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c81a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c81a0">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8300"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8300">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8460"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8460">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c85c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c85c0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8720"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8720">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">You can&apos;t go that way.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8880"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8880">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c89e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c89e0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8b40"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8b40">
+    <command xml:space="preserve">go south</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17c8ca0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17c8ca0">
+    <command xml:space="preserve">go north</command>
+    <result xml:space="preserve">&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17c8e00">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">It is written in the Book of Ishtar: 
+
+ After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
+
+ Who reads the stories anyway? Go get the Amulet of Yendor and come back out alive!
+
+test
+A BoardHack dungeon by Alexandre Laplante
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef030"/>
+      <child nodeId="node-0x17ef5b0"/>
+      <child nodeId="node-0x7f946c00f320"/>
+      <child nodeId="node-0x7f946c00f740"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef030">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef190"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef190">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Room2
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef2f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef2f0">
+    <command xml:space="preserve">take lizard</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef450"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef450">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+This is the only real room in the world. welcome.
+
+You can see a lizard here.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17ef5b0">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef710"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef710">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+There is a merchant here who is offering you a choice of items. You can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17ef870"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17ef870">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">you choose 1
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f946c00f320">
+    <command xml:space="preserve">yes</command>
+    <result xml:space="preserve">It is written in the Book of Ishtar: 
+
+ After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
+
+ Who reads the stories anyway? Go get the Amulet of Yendor and come back out alive!
+
+test
+A BoardHack dungeon by Alexandre Laplante
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f946c00f740">
+    <command xml:space="preserve">hello</command>
+    <result xml:space="preserve">I didn&apos;t understand that number.
+
+Continue</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17ef9d0">
+    <command xml:space="preserve">take lizard</command>
+    <result xml:space="preserve">Taken.
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17efb30"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17efb30">
+    <command xml:space="preserve">dorp lizard</command>
+    <result xml:space="preserve">That&apos;s not a verb I recognise.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x17efc90"/>
+    </children>
+  </item>
+  <item nodeId="node-0x17efc90">
+    <command xml:space="preserve">drop lizard</command>
+    <result xml:space="preserve">Dropped.
+
+{{{things: &quot;Lizard, yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x17efdf0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1809020"/>
+      <child nodeId="node-0x1809180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1809020">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1809180">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18092e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18092e0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 4/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1809440">
+    <command xml:space="preserve">go north</command>
+    <result xml:space="preserve">
+Room2
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18095a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18095a0">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+This is the only real room in the world. welcome.
+
+You can see a lizard here.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1809700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1809700">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Room2
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1809860"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1809860">
+    <command xml:space="preserve">x lizard</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18099c0">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1809b20"/>
+      <child nodeId="node-0x1809de0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1809b20">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1809c80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1809c80">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1809de0">
+    <command xml:space="preserve">x north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1830030">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1830190"/>
+      <child nodeId="node-0x1830450"/>
+      <child nodeId="node-0x1830870"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1830190">
+    <command xml:space="preserve">x north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18302f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18302f0">
+    <command xml:space="preserve">id thief</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1830450">
+    <command xml:space="preserve">id</command>
+    <result xml:space="preserve">What do you want to id?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18305b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18305b0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INTA weak looking Lizard.
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1830710"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1830710">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INTA weak looking Lizard.
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1830870">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18309d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18309d0">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1830b30">
+    <command xml:space="preserve">x north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1830c90"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1830c90">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">
+*** Run-time problem P10: Since the north is not allowed the property &quot;description&quot;, it is against the rules to try to use it.
+
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1830df0">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">I didn&apos;t understand that sentence.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f020"/>
+      <child nodeId="node-0x185f9c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f020">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f180">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f2e0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f2e0">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f440"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f440">
+    <command xml:space="preserve">damage lizard</command>
+    <result xml:space="preserve">You killed the lizard!
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f5a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f5a0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+This is the only real room in the world. welcome.
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f700">
+    <command xml:space="preserve">x lizard</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185f860"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185f860">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+This is the only real room in the world. welcome.
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x185f9c0">
+    <command xml:space="preserve">damage lizard by 6</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185fb20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185fb20">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x185fc80">
+    <command xml:space="preserve">damage lizard by 6</command>
+    <result xml:space="preserve">You killed the lizard!
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x185fde0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x185fde0">
+    <command xml:space="preserve">id lizard</command>
+    <result xml:space="preserve">A weak looking Lizard. 5/5 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1885020">
+    <command xml:space="preserve">damage lizard by 5</command>
+    <result xml:space="preserve">You killed the lizard!
+
+{{{things: &quot;yourself and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1885180">
+    <command xml:space="preserve">x target</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18852e0"/>
+      <child nodeId="node-0x18855a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18852e0">
+    <command xml:space="preserve">x</command>
+    <result xml:space="preserve">(the lizard)
+A weak looking Lizard.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1885440"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1885440">
+    <command xml:space="preserve">d</command>
+    <result xml:space="preserve">You can&apos;t go that way.
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18855a0">
+    <command xml:space="preserve">x self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1885700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1885700">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1885860"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1885860">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18859c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18859c0">
+    <command xml:space="preserve">id around</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1885b20">
+    <command xml:space="preserve">d</command>
+    <result xml:space="preserve">I didn&apos;t understand that sentence.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1885c80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1885c80">
+    <command xml:space="preserve">d north by 4</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1885de0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1885de0">
+    <command xml:space="preserve">damage self</command>
+    <result xml:space="preserve">I didn&apos;t understand that sentence.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0020"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0020">
+    <command xml:space="preserve">damage self by 1</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0180">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">As good-looking as ever.
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18a02e0">
+    <command xml:space="preserve">id floor</command>
+    <result xml:space="preserve">The floor is melting...
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18a0440">
+    <command xml:space="preserve">damage wizard by 3</command>
+    <result xml:space="preserve">The wizard is angered by your unprovoked attack!
+
+{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a05a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a05a0">
+    <command xml:space="preserve">damage wizard by 3</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0700">
+    <command xml:space="preserve">damage wizard by 3</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0860"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0860">
+    <command xml:space="preserve">damage wizard by 3</command>
+    <result xml:space="preserve">You killed the wizard!
+
+{{{things: &quot;yourself, lizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18a09c0">
+    <command xml:space="preserve">id wizard</command>
+    <result xml:space="preserve">A powerful looking wizard. 10/10 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard, wizard and floor&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18a0b20">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0c80"/>
+      <child nodeId="node-0x18c6170"/>
+      <child nodeId="node-0x18c6430"/>
+      <child nodeId="node-0x18c6850"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0c80">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">The mage now has a red potion.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18a0de0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18a0de0">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+The mage now has a red potion.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c6010"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c6010">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+The mage now has a red potion.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18c6170">
+    <command xml:space="preserve">x merchant</command>
+    <result xml:space="preserve">You don&apos;t want to mess with this guy.
+
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c62d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c62d0">
+    <command xml:space="preserve">id merchant</command>
+    <result xml:space="preserve">You don&apos;t want to mess with this guy. 10/10 HP 0 STR 0 INT
+{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18c6430">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;2&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c6590"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c6590">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c66f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c66f0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">{{{ room: &quot;Shop&quot;, things: &quot;yourself and merchant&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;2&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18c6850">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?yourself
+
+You can see a merchant here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18c69b0">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c6b10"/>
+      <child nodeId="node-0x18c6c70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c6b10">
+    <command xml:space="preserve">2</command>
+    <result xml:space="preserve">{{{things: &quot;yourself, lizard, wizard, floor and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18c6c70">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18c6dd0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18c6dd0">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">The mage now has a red potion.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec020"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec020">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+The mage now has a red potion.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec180"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec180">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x18ec2e0">
+    <command xml:space="preserve">3</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec440"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec440">
+    <command xml:space="preserve">2</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec5a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec5a0">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec700"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec700">
+    <command xml:space="preserve">1</command>
+    <result xml:space="preserve">That wasn&apos;t one of the choices.
+
+{{{things: &quot;yourself, lizard, wizard and big door&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec860"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec860">
+    <command xml:space="preserve">m</command>
+    <result xml:space="preserve">I didn&apos;t understand that number.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ec9c0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ec9c0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">{{{things: &quot;yourself and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ecb20"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ecb20">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+{{{things: &quot;yourself and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;2&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ecc80"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ecc80">
+    <command xml:space="preserve">2</command>
+    <result xml:space="preserve">The mage now has a yellow potion.
+
+{{{things: &quot;yourself and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x18ecde0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x18ecde0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+
+You can see a merchant here.
+
+{{{things: &quot;yourself and merchant&quot;}}}
+{{{directions: &quot;north, south, east and west&quot;}}}
+{{{actions: &quot;go, take, identify, examine, damage&quot;}}}
+{{{choices: &quot;0&quot;}}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1911010">
+    <command xml:space="preserve">damage lizard by 1`</command>
+    <result xml:space="preserve">I didn&apos;t understand that number.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911170"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911170">
+    <command xml:space="preserve">damage lizard by 1</command>
+    <result xml:space="preserve">The lizard takes 1 damage.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x19112d0">
+    <command xml:space="preserve">damage door by 1</command>
+    <result xml:space="preserve">The attack has no effect on the big door.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911430"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911430">
+    <command xml:space="preserve">damage lizard by 1</command>
+    <result xml:space="preserve">The lizard takes 1 damage.
+
+{{{ room: &quot;Entrance&quot;, things: &quot;yourself, lizard, wizard and big door&quot;, directions: &quot;north, south, east and west&quot;, actions: &quot;go, take, identify, examine, damage&quot;, choices: &quot;0&quot;, }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1911590">
+    <command xml:space="preserve">x room</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x19116f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x19116f0">
+    <command xml:space="preserve">x here</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911850"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911850">
+    <command xml:space="preserve">look here</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x19119b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x19119b0">
+    <command xml:space="preserve">look</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east and west&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911b10"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911b10">
+    <command xml:space="preserve">x the room</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911c70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911c70">
+    <command xml:space="preserve">x Entrance</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1911dd0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1911dd0">
+    <command xml:space="preserve">x Shop</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x192b0a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x192b0a0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east and west&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x192b200"/>
+    </children>
+  </item>
+  <item nodeId="node-0x192b200">
+    <command xml:space="preserve">l self</command>
+    <result xml:space="preserve">As good-looking as ever.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east and west&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x192b360">
+    <command xml:space="preserve">look location</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x192b4c0">
+    <command xml:space="preserve">go here</command>
+    <result xml:space="preserve">You can&apos;t see any such thing.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x192b620"/>
+    </children>
+  </item>
+  <item nodeId="node-0x192b620">
+    <command xml:space="preserve">here</command>
+    <result xml:space="preserve">I didn&apos;t understand that number.
+
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x192b780">
+    <command xml:space="preserve">look around</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x192b8e0"/>
+      <child nodeId="node-0x192ba40"/>
+      <child nodeId="node-0x192bba0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x192b8e0">
+    <command xml:space="preserve">id self</command>
+    <result xml:space="preserve">As good-looking as ever.
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x192ba40">
+    <command xml:space="preserve">id around</command>
+    <result xml:space="preserve">Entrance
+As you enter the dungeon, the doorway behind disappears.
+
+You can see a lizard and a wizard here.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and Around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
+&gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x192bba0">
+    <command xml:space="preserve">go around</command>
+    <result xml:space="preserve">You can&apos;t go that way.
+
+{{{ &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself, lizard, wizard and big door&quot;, &quot;directions&quot;: &quot;north, south, east, west and around&quot;, &quot;actions&quot;: &quot;look, go, take, identify, damage&quot;, &quot;choices&quot;: &quot;0&quot; }}}
 &gt;</result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
