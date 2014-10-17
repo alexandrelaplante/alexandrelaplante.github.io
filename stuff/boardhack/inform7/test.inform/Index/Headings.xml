@@ -885,34 +885,69 @@
         <key>Indentation</key><integer>1</integer>
     </dict>
     <key>126</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/plurality.i7x</string>
+        <key>Line</key><integer>1</integer>
+        <key>Title</key><string>Version 9 of Plurality by Emily Short begins here</string>
+        <key>Level</key><integer>0</integer>
+        <key>Indentation</key><integer>0</integer>
+    </dict>
+    <key>127</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/plurality.i7x</string>
+        <key>Line</key><integer>7</integer>
+        <key>Title</key><string>Section 1 - Tracking Last Item</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>128</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/plurality.i7x</string>
+        <key>Line</key><integer>32</integer>
+        <key>Title</key><string>Section 2 - Verbs</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>129</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/plurality.i7x</string>
+        <key>Line</key><integer>120</integer>
+        <key>Title</key><string>Section 3 - Pronouns</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>130</key><dict>
+        <key>Filename</key><string>/usr/share/gnome-inform7/Extensions/emily short/plurality.i7x</string>
+        <key>Line</key><integer>502</integer>
+        <key>Title</key><string>Section 4 - Enumeration</string>
+        <key>Level</key><integer>5</integer>
+        <key>Indentation</key><integer>1</integer>
+    </dict>
+    <key>131</key><dict>
         <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
         <key>Line</key><integer>1</integer>
         <key>Title</key><string>Version 5 of Extended Banner by Stephen Granade begins here</string>
         <key>Level</key><integer>0</integer>
         <key>Indentation</key><integer>0</integer>
     </dict>
-    <key>127</key><dict>
+    <key>132</key><dict>
         <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
         <key>Line</key><integer>5</integer>
         <key>Title</key><string>Section 1G (for Glulx only)</string>
         <key>Level</key><integer>5</integer>
         <key>Indentation</key><integer>1</integer>
     </dict>
-    <key>128</key><dict>
+    <key>133</key><dict>
         <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
         <key>Line</key><integer>15</integer>
         <key>Title</key><string>Section 1Z (for Z-machine only)</string>
         <key>Level</key><integer>5</integer>
         <key>Indentation</key><integer>1</integer>
     </dict>
-    <key>129</key><dict>
+    <key>134</key><dict>
         <key>Filename</key><string>/home/alex/Inform/Extensions/stephen granade/extended banner.i7x</string>
         <key>Line</key><integer>25</integer>
         <key>Title</key><string>Section 2</string>
         <key>Level</key><integer>5</integer>
         <key>Indentation</key><integer>1</integer>
     </dict>
-    <key>130</key><dict>
+    <key>135</key><dict>
         <key>Line</key><integer>1</integer>
         <key>Title</key><string>scene understood is a scene which varies</string>
         <key>Level</key><integer>0</integer>

@@ -72,17 +72,33 @@
 }
 /* end of parchment stuff */
 
+.inline-img{
+  height: 2em;
+  vertical-align: middle;
+}
+#content .highlight{
+  /*
+  */
+  background-color: rgba(236, 64, 64, 0.23);
+  border: 1px solid black;
+  border-radius: 0.5em;
+  padding: 5px;
+  font-weight:bold;
+}
 .commands{ 
   position: absolute;
   bottom: 20px;
   width: 100%;
+}
+.commands .directions, .commands .things, .commands .around{
+  display:none;
 }
 
 .marvel-device{
   float:left;
 }
 .screen{
-  overflow: scroll;
+  overflow: hidden;
   background-color:white;
   background: url("scroll.jpg");
   background-size: 100% 100%;
@@ -176,10 +192,9 @@ $(function() {
         arguments[0] = '';
       }
       /* highlight the items */
+      arguments[0] = arguments[0].replace(/{!}/g, '<img src="Effects/health.png" class="inline-img">');
       arguments[0] = arguments[0].replace(/{/g, '<item>');
       arguments[0] = arguments[0].replace(/}/g, '</item>');
-
-      console.log(arguments[0]);
     }
     /* Do the appending */
     var returnValue = origAppend.apply(this, arguments).trigger("append", this, arguments);
@@ -194,18 +209,17 @@ $(function() {
           }
         }
       });
+      $('.inline-img').parent().addClass('highlight');
     }
     if (arguments[0] && arguments[0][0] && arguments[0][0].outerHTML && arguments[0][0].outerHTML.indexOf('CharInput') >= 0){
       if ($('input.CharInput').length){
         $('input.CharInput').hide();
         $('.commands form').hide();
-        console.log('hiding the form');
         var button = $('<button>Continue</button>');
         button.click(function(){
           $('.commands form').show();
           $('input.CharInput').focus();
           jQuery.event.trigger({ type : 'keypress', which : 'c'.charCodeAt(0) });
-          console.log('showing the form');
           button.remove();
         });
         $('.commands').append(button);
@@ -215,7 +229,6 @@ $(function() {
     return returnValue;
   };
   $.fn.appendTo = function () {
-    console.log(this);
     if (this[0].className == "finished-input"){
       $('#content').html('');
     }
@@ -224,13 +237,18 @@ $(function() {
 
   window.action = "";
   function use_meta(meta){
-    meta = meta.replace(/<.*>/, '');
-    meta = meta.replace('{{{', '{');
-    meta = meta.replace('}}}', '}');
-    meta = meta.replace('&nbsp;', ' ');
+    console.log(meta);
+    meta = meta.replace( /<\/?span[^>]*>/g,"");
+    meta = meta.replace( /{{{/g, '{');
+    meta = meta.replace( /}}}/g, '}');
+    meta = meta.replace(new RegExp('&nbsp;', 'g'), ' ');
     console.log(meta);
     meta = JSON.parse(meta);
     for (var key in meta) {
+      // These categories are not string lists.
+      if (key == "images") {continue;}
+      if (key == "choices") {continue;}
+      // Split the list into an array.
       meta[key] = meta[key].split(/, | and /);
     }
     $('.commands').html('');
@@ -238,6 +256,32 @@ $(function() {
 
     $('.commands form').append("<b>"+meta.room+"</b>");
     $('.commands form').append("<br>");
+
+    console.log(meta);
+
+    for (i in meta.images){
+      var name = meta.images[i].name;
+      var desc = meta.images[i].desc;
+      var file = "Monsters/"+meta.images[i].file+".PNG";
+      $("#content").append(
+      '<div class="card" style="position:relative; display:inline-block; margin-left:auto; margin-right:auto; float:none; margin:5px">'+
+        '<div class="name">'+name+'</div>'+
+        '<img class="corner1" src="'+file+'">'+
+        '<img class="corner4" src="'+file+'">'+
+        '<img class="fg" src="'+file+'" width="100%">'+
+        '<div class="desc">'+desc+'</div>'+
+      '</div>'
+      );
+    }
+
+    $('.commands form').append("<span class='choices'></span>");
+    for (i in meta.choices){
+      var button = $("<input type='button'>");
+      button.data('choice', meta.choices[i].name);
+      button.attr('value', meta.choices[i].desc);
+      $('.commands .choices').append(button);
+      $('.commands .choices').append("<br>");
+    }
 
     for (i in meta.actions){
       var button = $("<input type='radio' name='action'>");
@@ -247,24 +291,47 @@ $(function() {
       $('.commands form').append("<label for='"+meta.actions[i]+"'>"+meta.actions[i]+"</label>");
     }
     $('.commands form').append("<br>");
+    $('.commands form').append("<span class='directions'></span>");
     for (i in meta.directions){
       var button = $("<input type='button'>");
       button.attr('value', meta.directions[i]);
-      $('.commands form').append(button);
+      $('.commands .directions').append(button);
     }
-    $('.commands form').append("<br>");
+
+    $('.commands form').append("<span class='around'></span>");
+    var button = $("<input type='button'>");
+    button.attr('value', 'around');
+    $('.commands .around').append(button);
+
+    $('.commands form').append("<span class='things'></span>");
     for (i in meta.things){
       var button = $("<input type='button'>");
       button.attr('value', meta.things[i]);
-      $('.commands form').append(button);
+      $('.commands .things').append(button);
     }
     action = '';
     $(".commands input[name=action]").click(function() {
       action = $(this).val();
+      if (action == "go"){
+        $('.commands .directions').show();
+        $('.commands .things').hide();
+        $('.commands .around').hide();
+      } else if (action == "look" || action == "identify" || action == "damage"){
+        $('.commands .directions').hide();
+        $('.commands .things').show();
+        $('.commands .around').show();
+      } else {
+        $('.commands .directions').hide();
+        $('.commands .things').hide();
+        $('.commands .around').hide();
+      }
     });
     $('.commands input[type=button]').click(function(){
       target = $(this).val();
-      if (action == 'damage'){
+      if ($(this).data('choice')){
+        $('.LineInput input').val('choose '+$(this).data('choice'));
+        $('.LineInput').submit();
+      } else if (action == 'damage'){
         var amount = prompt("How much?");
         $('.LineInput input').val(action +' '+target+' by '+amount);
         $('.LineInput').submit();
@@ -473,25 +540,25 @@ $(function() {
       file: 'PinkBook.png',
       name: 'Pink Spellbook',
       type: "Books",
-      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+      desc: '<b>Cast</b>: Roll a d6. If it\'s more than 6-(INT+<span class="n">n</span>) you successfully cast this spell.',
     },
     {
       file: 'GrayBook.png',
       name: 'Gray Spellbook',
       type: "Books",
-      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+      desc: '<b>Cast</b>: Roll a d6. If it\'s more than 6-(INT+<span class="n">n</span>) you successfully cast this spell.',
     },
     {
       file: 'TealBook.png',
       name: 'Teal Spellbook',
       type: "Books",
-      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+      desc: '<b>Cast</b>: Roll a d6. If it\'s more than 6-(INT+<span class="n">n</span>) you successfully cast this spell.',
     },
     {
       file: 'GreenBook.png',
       name: 'Green Spellbook',
       type: "Books",
-      desc: '<b>Cast</b>: you have an (INT+<span class="n">n</span>)/4 chance of successfully casting this spell.',
+      desc: '<b>Cast</b>: Roll a d6. If it\'s more than 6-(INT+<span class="n">n</span>) you successfully cast this spell.',
     },
     {
       file: 'cold.png',
