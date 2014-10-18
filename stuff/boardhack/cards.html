@@ -110,6 +110,16 @@
   cursor:pointer;
   font-weight: bold;
 }
+.indicator {
+  width: 133px;
+  height: 80px;
+  background: url("back.png");
+  background-size: 100% 100%;
+  float:left;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  line-height: 1.2em;
+}
 .card {
   width: 133px;
   height: 200px;
@@ -126,13 +136,13 @@
   margin-right: auto;
   display:block;
 }
-.card .name {
+.card .name, .indicator .name {
   font-size: 1.1em;
   /*font-weight: bold;*/
   text-align: center;
   padding: 3px 20px 3px 20px;
 }
-.card .desc {
+.card .desc, .indicator .desc {
   font-size: 0.8em;
   margin-left: 5px;
   margin-right: 5px;
@@ -486,37 +496,37 @@ $(function() {
       file: 'GlyphGreen.PNG',
       name: '+1',
       type: "Items",
-      desc: 'A +1 modifier',
+      desc: 'A +1 enchantment',
     },
     {
       file: 'GlyphYellow.PNG',
       name: '+2',
       type: "Items",
-      desc: 'A +2 modifier',
+      desc: 'A +2 enchantment',
     },
     {
       file: 'GlyphRed.PNG',
       name: '+3',
       type: "Items",
-      desc: 'A +3 modifier',
+      desc: 'A +3 enchantment',
     },
     {
       file: 'PotionTallYellow2.PNG',
       name: 'Yellow Potion',
       type: "Items",
-      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+      desc: 'Grants 1 XP to <span class="t">target</span>.<br>Discard after use.',
     },
     {
       file: 'PotionRed.PNG',
       name: 'Red Potion',
       type: "Items",
-      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+      desc: 'Heals 1 HP of <span class="t">target</span>.<br>Discard after use.',
     },
     {
       file: 'PotionLargeGreen.PNG',
       name: 'Green Potion',
       type: "Items",
-      desc: '<b>Quaff</b>: <span class="t">target</span> Yourself<br><b>Throw</b>:<span class="t">target</span> Being<br><b>Dip</b>:<span class="t">target</span> Item<br>Discard after use.',
+      desc: 'Deals 1 HP of damage to <span class="t">target</span>.<br>Discard after use.',
     },
     {
       file: 'PotionAquamarine.PNG',
@@ -528,13 +538,13 @@ $(function() {
       file: 'Sword01.PNG',
       name: 'Short Sword',
       type: "Items",
-      desc: '<b>Attack</b>: Deals 1+<span class="n">n</span> Damage to <span class="t">target</span> Being.',
+      desc: '<b>Attack</b>: Deals STR Damage to <span class="t">target</span>.',
     },
     {
       file: 'Sword20.PNG',
       name: 'Long Sword',
       type: "Items",
-      desc: '<b>Attack</b>: Deals 2+<span class="n">n</span> Damage to <span class="t">target</span> Being.',
+      desc: '<b>Attack</b>: Deals STR+1 Damage to <span class="t">target</span>.',
     },
     {
       file: 'PinkBook.png',
@@ -580,7 +590,7 @@ $(function() {
     },
     {
       file: 'identify.png',
-      name: 'identify',
+      name: 'Identification',
       type: "Effects",
       desc: 'Identifies <span class="t">target</span>',
     },
@@ -612,13 +622,37 @@ $(function() {
       file: 'strength.png',
       name: 'Strength',
       type: "Effects",
-      desc: 'Add <span class="n">n</span> to the Strength of <span class="t">target</span> Being. If <span class="t">target</span> is not a Being, do nothing.',
+      desc: 'Grants the wielder 1 extra point of STR.',
+    },
+    {
+      file: 'intelligence.png',
+      name: 'intelligence',
+      type: "Effects",
+      desc: 'Grants the wielder 1 extra point of INT.',
     },
     {
       file: 'enchant.png',
-      name: 'Enchant',
+      name: 'Enchantment',
       type: "Effects",
-      desc: 'Add a +<span class="n">n</span> modifier to <span class="t">target</span> item. If <span class="t">target</span> is not an item, do nothing.',
+      desc: 'Add a +<span class="n">n</span> enchantment to <span class="t">target</span> item. If <span class="t">target</span> is not an item, do nothing.',
+    },
+    {
+      file: 'improve.png',
+      name: 'Improvement',
+      type: "Effects",
+      desc: 'When this item is healed m health, add a +m enchantment to it. This effect only lets the item get up to +3 total enchantment.',
+    },
+    {
+      file: 'confuse.png',
+      name: 'Mystery',
+      type: "Effects",
+      desc: 'When this item is used or identified, replace this with the effect specified by the app.',
+    },
+    {
+      file: 'attack.png',
+      name: 'Attack',
+      type: "Effects",
+      desc: 'Deals <span class="n">n</span> damage to <span class="t">target</span>.',
     },
   ];
   $(".new_card").click(function(){
@@ -635,6 +669,15 @@ $(function() {
     var item = items[i];
     add_card(item.name, item.type+"/"+item.file, item.desc);
   }
+  for (i=1; i<=6; i++){
+    $("body").append(
+      '<div class="indicator draggable">'+
+        '<div class="name">'+i+'</div>'+
+        '<div class="desc">Use this card when you roll a '+i+'.</div>'+
+      '</div>'
+    );
+  }
+  $(".draggable").draggable();
 });
 </script>
 </body>

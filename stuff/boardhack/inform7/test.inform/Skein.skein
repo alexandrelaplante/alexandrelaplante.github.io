@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Skein rootNode="node-0x18d5160" xmlns="http://www.logicalshift.org.uk/IF/Skein">
   <generator>GNOME Inform 7</generator>
-  <activeNode nodeId="node-0x1f442c0"/>
+  <activeNode nodeId="node-0x7f648c46f8d0"/>
   <item nodeId="node-0x18d5160">
     <command xml:space="preserve">- start -</command>
     <result xml:space="preserve">
@@ -10,7 +10,7 @@
 
  Fighter 
  Stats: 10 HP, 1 STR, 0 INT. 
- Inventory: +0 {Short Sword}. 
+ Inventory: {Short Sword} of {Attack}. 
 
  Mage 
  Stats: 5 HP, 0 STR, 1 INT. 
@@ -2270,6 +2270,8 @@ As you enter the dungeon, the doorway shuts and is sealed tight by a magical for
       <child nodeId="node-0x1d75e20"/>
       <child nodeId="node-0x1d9c060"/>
       <child nodeId="node-0x1d9c740"/>
+      <child nodeId="node-0x7f648c1fe850"/>
+      <child nodeId="node-0x7f648c46f350"/>
     </children>
   </item>
   <item nodeId="node-0x1cb6180">
@@ -2852,9 +2854,9 @@ The Mage picks up {Yellow Potion}.
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">
 Shop
-This is the shop. To the south is the entrance to the dungeon. There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?
+This is the shop. To the south is the entrance to the dungeon.
 
-You can see a merchant here.
+There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?
 
 {{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
 </result>
@@ -2870,6 +2872,8 @@ You can see a merchant here.
       <child nodeId="node-0x1d4e890"/>
       <child nodeId="node-0x1d4e9f0"/>
       <child nodeId="node-0x1f442c0"/>
+      <child nodeId="node-0x1f446e0"/>
+      <child nodeId="node-0x7f648c46f770"/>
     </children>
   </item>
   <item nodeId="node-0x1d34740">
@@ -2888,15 +2892,17 @@ You can see a merchant here.
     <command xml:space="preserve">choose c2</command>
     <result xml:space="preserve">The mage gets the {Yellow Potion}.
 
-{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant and Red Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
 </result>
     <commentary xml:space="preserve"></commentary>
-    <played>NO</played>
+    <played>YES</played>
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
     <children>
       <child nodeId="node-0x1d34a00"/>
+      <child nodeId="node-0x7f648c1fedd0"/>
+      <child nodeId="node-0x7f648c46fa30"/>
     </children>
   </item>
   <item nodeId="node-0x1d34a00">
@@ -3046,6 +3052,90 @@ You can see a merchant here.
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
   </item>
+  <item nodeId="node-0x7f648c1fedd0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+This is the shop. To the south is the entrance to the dungeon.
+
+The merchant is pleased with your choice.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c46f090"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c46f090">
+    <command xml:space="preserve">damage merchant by 10</command>
+    <result xml:space="preserve">The merchant takes 10 damage.
+The merchant is enraged by your unprovoked attack!
+The merchant has been slain!
+The merchant dropped Red Potion.
+The Mage picks up {Red Potion}.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c46f1f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c46f1f0">
+    <command xml:space="preserve">l</command>
+    <result xml:space="preserve">Shop
+This is the shop. To the south is the entrance to the dungeon.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f648c46fa30">
+    <command xml:space="preserve">damage merchant by 5</command>
+    <result xml:space="preserve">The merchant takes 5 damage.
+The merchant is enraged by your unprovoked attack!
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+{!} The merchant hits the Fighter for 2 points of damage!
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c46f8d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c46f8d0">
+    <command xml:space="preserve">damage merchant by 5</command>
+    <result xml:space="preserve">The merchant takes 5 damage.
+The merchant has been slain!
+The merchant dropped Red Potion.
+The Mage picks up {Red Potion}.
+Well, that was one way of getting the other potion!
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>YES</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
   <item nodeId="node-0x1d4e730">
     <command xml:space="preserve">x merchant</command>
     <result xml:space="preserve">You don&apos;t want to mess with this guy.
@@ -3075,8 +3165,11 @@ You can see a merchant here.
     <result xml:space="preserve">The merchant takes 10 damage.
 The merchant is enraged by your unprovoked attack!
 The merchant has been slain!
-The merchant dropped Red Potion and Yellow PotionThe merchant dropped {Red Potion}The merchant dropped {Yellow Potion}
-{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+The merchant dropped Red Potion and Yellow Potion.
+The Mage picks up {Red Potion}.
+The Mage picks up {Yellow Potion}.
+he dead
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
 </result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
@@ -3094,7 +3187,68 @@ The merchant is enraged by your unprovoked attack!
 
 </result>
     <commentary xml:space="preserve"></commentary>
-    <played>YES</played>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1f446e0">
+    <command xml:space="preserve">d merchany by 100</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f44580"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f44580">
+    <command xml:space="preserve">damage merchany by 100</command>
+    <result xml:space="preserve">That noun did not make sense in this context.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f44420"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f44420">
+    <command xml:space="preserve">damage merchant by 100</command>
+    <result xml:space="preserve">The merchant takes 100 damage.
+The merchant is enraged by your unprovoked attack!
+The merchant has been slain!
+The merchant dropped Red Potion and Yellow Potion.
+The Mage picks up {Red Potion}.
+The Mage picks up {Yellow Potion}.
+he dead
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f648c46f770">
+    <command xml:space="preserve">damage merchant by 1</command>
+    <result xml:space="preserve">The merchant takes 1 damage.
+The merchant is enraged by your unprovoked attack!
+
+LOL
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+{!} The merchant hits the Mage for 2 points of damage!
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <annotation xml:space="preserve"></annotation>
@@ -3439,6 +3593,66 @@ You can see a merchant here.
     <command xml:space="preserve">choose c2</command>
     <result xml:space="preserve">you get the {Yellow Potion}
 {{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself and merchant&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f648c1fe850">
+    <command xml:space="preserve">g w</command>
+    <result xml:space="preserve">You can hardly repeat that.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe6f0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe6f0">
+    <command xml:space="preserve">w</command>
+    <result xml:space="preserve">
+Chest room
+The treasure chest calls to you. To the west is the entrance of this dungeon.
+
+A weak looking lizard.
+
+You can also see a wizard here.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;lizard&quot;, &quot;file&quot;: &quot;LizardRed&quot;, &quot;desc&quot;: &quot;&quot; },{ &quot;name&quot;: &quot;wizard&quot;, &quot;file&quot;: &quot;HumanMage2&quot;, &quot;desc&quot;: &quot;A powerful looking wizard.&quot; } ], &quot;room&quot;: &quot;Chest room&quot;, &quot;things&quot;: &quot;yourself, lizard and wizard&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;east&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+{!} The lizard hits the Fighter for 1 point of damage!
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f648c46f350">
+    <command xml:space="preserve">id north</command>
+    <result xml:space="preserve">You see nothing unexpected in that direction.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself and doorway&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;north and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c46f4b0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c46f4b0">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">I beg your pardon?
+
 </result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
@@ -4278,12 +4492,13 @@ A weak looking Lizard.
   <item nodeId="node-0x1e50de0">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">
-Shop
-There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the red potion or the yellow potion?
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself and doorway&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;north and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+It is written in the Book of Ishtar: 
 
-You can see a merchant here.
+ After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
 
-&gt;</result>
+ Who reads the stories anyway? Go get the Amulet of Yendor and come back out alive!
+</result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
     <changed>YES</changed>
@@ -4294,6 +4509,7 @@ You can see a merchant here.
       <child nodeId="node-0x1e6a430"/>
       <child nodeId="node-0x1e6a6f0"/>
       <child nodeId="node-0x1e6ab10"/>
+      <child nodeId="node-0x7f648c1fe9b0"/>
     </children>
   </item>
   <item nodeId="node-0x1e6a010">
@@ -4422,6 +4638,77 @@ There is a merchant here who is offering you a choice of items. Your party can o
 You can see a merchant here.
 
 &gt;</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x7f648c1fe9b0">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+
+Entrance
+As you enter the dungeon, the doorway shuts and is sealed tight by a magical force. To the west is the chest room. To the north there is a shop.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe590"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe590">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+This is the shop. To the south is the entrance to the dungeon. There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?
+
+You can see a merchant here.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1feb10"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1feb10">
+    <command xml:space="preserve">s</command>
+    <result xml:space="preserve">
+Entrance
+As you enter the dungeon, the doorway shuts and is sealed tight by a magical force. To the west is the chest room. To the north there is a shop.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself and doorway&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;north and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fec70"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fec70">
+    <command xml:space="preserve">w</command>
+    <result xml:space="preserve">
+Chest room
+The treasure chest calls to you. To the west is the entrance of this dungeon.
+
+You can see a lizard and a wizard here.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;lizard&quot;, &quot;file&quot;: &quot;LizardRed&quot;, &quot;desc&quot;: &quot;A weak looking lizard.&quot; },{ &quot;name&quot;: &quot;wizard&quot;, &quot;file&quot;: &quot;HumanMage2&quot;, &quot;desc&quot;: &quot;A powerful looking wizard.&quot; } ], &quot;room&quot;: &quot;Chest room&quot;, &quot;things&quot;: &quot;yourself, lizard and wizard&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;east&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+{!} The lizard hits the Mage for 1 point of damage!
+
+</result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>
     <changed>YES</changed>
@@ -4953,7 +5240,9 @@ You can see a lizard and a wizard here.
   </item>
   <item nodeId="node-0x1f090a0">
     <command xml:space="preserve"> </command>
-    <result xml:space="preserve">It is written in the Book of Ishtar: 
+    <result xml:space="preserve">
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself and doorway&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;north and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+It is written in the Book of Ishtar: 
 
  After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
 
@@ -4983,6 +5272,7 @@ As you enter the dungeon, the doorway shuts and is sealed tight by a magical for
     <annotation xml:space="preserve"></annotation>
     <children>
       <child nodeId="node-0x1f09360"/>
+      <child nodeId="node-0x1f44840"/>
     </children>
   </item>
   <item nodeId="node-0x1f09360">
@@ -5030,6 +5320,167 @@ The treasure chest calls to you. To the west is the entrance of this dungeon.
 You can see a lizard and a wizard here.
 
 {{{&quot;images&quot;: [{ &quot;name&quot;: &quot;lizard&quot;, &quot;file&quot;: &quot;LizardRed&quot;, &quot;desc&quot;: &quot;A weak looking lizard.&quot; },{ &quot;name&quot;: &quot;wizard&quot;, &quot;file&quot;: &quot;HumanMage2&quot;, &quot;desc&quot;: &quot;A powerful looking wizard.&quot; } ], &quot;room&quot;: &quot;Chest room&quot;, &quot;things&quot;: &quot;yourself, lizard and wizard&quot;, &quot;party&quot;: &quot;fighter and mage&quot;, &quot;directions&quot;: &quot;north, south, east and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: &quot;2&quot; }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+  </item>
+  <item nodeId="node-0x1f44840">
+    <command xml:space="preserve">go north</command>
+    <result xml:space="preserve">
+Shop
+This is the shop. To the south is the entrance to the dungeon. There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?
+
+You can see a merchant here.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f449a0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f449a0">
+    <command xml:space="preserve">damage merchant by 100</command>
+    <result xml:space="preserve">The merchant takes 100 damage.
+The merchant is enraged by your unprovoked attack!
+The merchant has been slain!
+The merchant dropped Red Potion and Yellow Potion.
+The Mage picks up {Red Potion}.
+The Fighter picks up {Yellow Potion}.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f44b00"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f44b00">
+    <command xml:space="preserve">restart</command>
+    <result xml:space="preserve">Are you sure you want to restart? </result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f44c60"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f44c60">
+    <command xml:space="preserve">yes</command>
+    <result xml:space="preserve">
+
+
+
+ Fighter 
+ Stats: 10 HP, 1 STR, 0 INT. 
+ Inventory: {Short Sword} of {Attack}. 
+
+ Mage 
+ Stats: 5 HP, 0 STR, 1 INT. 
+ Inventory: {+2} {Pink Spellbook} of {Fire}. 
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x1f44dc0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x1f44dc0">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Entrance&quot;, &quot;things&quot;: &quot;yourself and doorway&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;north and west&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+It is written in the Book of Ishtar: 
+
+ After the Creation, the cruel god Moloch rebelled against the authority of Marduk the Creator. Bla bla bla... 
+
+ Who reads the stories anyway? Go get the Amulet of Yendor and come back out alive!
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe010"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe010">
+    <command xml:space="preserve"></command>
+    <result xml:space="preserve">
+
+Entrance
+As you enter the dungeon, the doorway shuts and is sealed tight by a magical force. To the west is the chest room. To the north there is a shop.
+
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe170"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe170">
+    <command xml:space="preserve">n</command>
+    <result xml:space="preserve">
+Shop
+This is the shop. To the south is the entrance to the dungeon. There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?
+
+You can see a merchant here.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ { &quot;name&quot;: &quot;c1&quot;, &quot;desc&quot;: &quot;Take the Red Potion&quot; },{ &quot;name&quot;: &quot;c2&quot;, &quot;desc&quot;: &quot;Take the Yellow Potion&quot; }] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe2d0"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe2d0">
+    <command xml:space="preserve">choose c1</command>
+    <result xml:space="preserve">The mage gets the {Red Potion}.
+
+{{{&quot;images&quot;: [{ &quot;name&quot;: &quot;merchant&quot;, &quot;file&quot;: &quot;HumanThief2&quot;, &quot;desc&quot;: &quot;You don&apos;t want to mess with this guy.&quot; } ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, merchant, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
+</result>
+    <commentary xml:space="preserve"></commentary>
+    <played>NO</played>
+    <changed>YES</changed>
+    <temporary score="0">YES</temporary>
+    <annotation xml:space="preserve"></annotation>
+    <children>
+      <child nodeId="node-0x7f648c1fe430"/>
+    </children>
+  </item>
+  <item nodeId="node-0x7f648c1fe430">
+    <command xml:space="preserve">damage merchant by 100</command>
+    <result xml:space="preserve">The merchant takes 100 damage.
+The merchant is enraged by your unprovoked attack!
+The merchant has been slain!
+The merchant dropped Yellow Potion.
+The Fighter picks up {Yellow Potion}.
+
+{{{&quot;images&quot;: [ ], &quot;room&quot;: &quot;Shop&quot;, &quot;things&quot;: &quot;yourself, Red Potion and Yellow Potion&quot;, &quot;party&quot;: &quot;Fighter and Mage&quot;, &quot;directions&quot;: &quot;south&quot;, &quot;actions&quot;: &quot;look, go, identify, damage&quot;, &quot;choices&quot;: [ ] }}}
 </result>
     <commentary xml:space="preserve"></commentary>
     <played>NO</played>

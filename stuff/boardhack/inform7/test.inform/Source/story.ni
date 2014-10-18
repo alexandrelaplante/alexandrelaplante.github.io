@@ -95,8 +95,7 @@ When play begins (this is the display party rule):
 Instead of examining yourself: consider the display party rule;
 
 [Identification]
-Understand "identify [any thing]" as identifying.
-Understand "identify [direction]" as identifying.
+Understand "identify [something]" as identifying.
 Understand the command "id" as "identify".
 Identifying is an action applying to one visible thing.
 Carry out identifying an object (called the target):
@@ -117,7 +116,7 @@ Carry out choosing a choice (called the answer):
 	
 
 [Damaging]
-Understand "damage [any thing] by [number]" as damaging.
+Understand "damage [something] by [number]" as damaging.
 Understand the command "d" as "damage".
 Damaging is an action applying to one visible thing and one number.
 Carry out damaging an object (called the target):
@@ -127,15 +126,20 @@ Carry out damaging an object (called the target):
 			Now the target is hostile;
 			Say "[The target] is enraged by your unprovoked attack!";
 		decrease the HP of the target by the number understood; 
-		if target is dead:
-			Say "[The target] has been slain!";
-			Say "[The target] dropped [list of things carried by the target].";
-			Repeat with item running through things carried by the target:
-				Say "[The random party member] picks up {[item]}.";
-				Now the player carries the item;
-			Remove the target from play;
+		if the target is dead:
+			carry out the killing activity with the target;
 	otherwise:
 		say "The attack has no effect on [the target].";
+
+[Killing]
+Killing something is an activity on beings.
+Rule for killing a being (called the target):
+	Say "[The target] has been slain!";
+	Say "[The target] dropped [list of things carried by the target].";
+	Repeat with item running through things carried by the target:
+		Say "[The random party member] picks up {[item]}.";
+		Now the player carries the item;
+	Remove the target from play;
 
 [Monsters attacking]
 Every turn (this is the attacking rule):
@@ -163,26 +167,27 @@ When play begins:
 
 The Fighter is a party member.
 The HP of the fighter is 10.
-The STR of the fighter is 1.
-The INT of the fighter is 0.
-The INV of the fighter is "+0 {Short Sword}"
+STR is 1.
+INT is 0.
+INV is "{Short Sword} of {Attack}"
 
 The Mage is a party member.
 The HP of the mage is 5.
-The STR of the mage is 0.
-The INT of the mage is 1.
-The INV of the mage is "{+2} {Pink Spellbook} of {Fire}".
+STR is 0.
+INT is 1.
+INV is "{+2} {Pink Spellbook} of {Fire}".
 
 
 Entrance is a room. "As you enter the dungeon, the doorway shuts and is sealed tight by a magical force. To the west is the chest room. To the north there is a shop.".
 The doorway is scenery in Entrance. the description of the doorway is "There is no way out of here."
 
 Chest room is west of Entrance. "The treasure chest calls to you. To the west is the entrance of this dungeon."
-A lizard is here. The lizard is a Being. The HP of the lizard is 5. The description of the lizard is "A weak looking lizard." The image of the lizard is "LizardRed".
+A lizard is here. The description of the lizard is "A weak looking lizard." The lizard is a Being. The HP of the lizard is 5. The image of the lizard is "LizardRed".
 A wizard is here. The wizard is a friendly Being. The HP of the wizard is 10. The description of the wizard is "A powerful looking wizard." The image of the wizard is "HumanMage2". The INT of the wizard is 1.
 
-Shop is north of Entrance. "This is the shop. To the south is the entrance to the dungeon. There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?".
-A merchant is here. The merchant is a friendly Being. The HP of the merchant is 10. The description of the merchant is "You don't want to mess with this guy." The image of the merchant is "HumanThief2". The STR of the merchant is 2.
+Shop is north of Entrance. "This is the shop. To the south is the entrance to the dungeon.".
+A merchant is here. "There is a merchant here who is offering you a choice of items. Your party can only afford one. Will you buy the Red Potion or the Yellow Potion?"
+The merchant is a friendly Being. The HP of the merchant is 10. The description of the merchant is "You don't want to mess with this guy." The image of the merchant is "HumanThief2". The STR of the merchant is 2.
 The merchant carries a Red Potion. The merchant carries a Yellow Potion.
 A choice called c1 is here. "Take the Red Potion".
 A choice called c2 is here. "Take the Yellow Potion".
@@ -194,4 +199,9 @@ Before choosing c2:
 	Now the player carries the Yellow Potion;
 After choosing in Shop:
 	remove c1 from play; remove c2 from play;
-	now the description of Shop is "This is the shop. To the south is the entrance to the dungeon. The merchant is pleased with your choice."
+	now the initial appearance of the merchant is "The merchant is pleased with your choice."
+
+After damaging the merchant:
+	remove c1 from play; remove c2 from play;
+After killing the merchant:
+	say "Well, that was one way of getting the other potion!"
