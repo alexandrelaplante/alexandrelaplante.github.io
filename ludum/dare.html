@@ -57,18 +57,54 @@
 
             window.center = new THREE.Vector3( 0, -1, 0 );
 
+            textures = [];
+            for (i=0; i<=9; i++){
+                //create image
+                var bitmap = document.createElement('canvas');
+                var g = bitmap.getContext('2d');
+                bitmap.width = 100;
+                bitmap.height = 100;
+                g.font = 'Bold 100px Arial';
+
+                g.fillStyle = 'white';
+                g.fillText(i, 22, 80);
+                g.strokeStyle = 'black';
+                g.strokeText(i, 22, 80);
+
+                // canvas contents will be used for a texture
+                var texture = new THREE.Texture(bitmap) 
+                texture.needsUpdate = true;
+                textures.push(texture);                
+            }
+
+            var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
+            var card_mat = new THREE.MeshBasicMaterial({
+                    color: 0x111111,
+                    //map: THREE.ImageUtils.loadTexture('pokemon.jpg'),
+            });
             function new_card(x,y, facing){
-                var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
-                var card_mat = new THREE.MeshBasicMaterial({
-                                color: 0xffffff,
-                                map: THREE.ImageUtils.loadTexture('pokemon.jpg')
-                        });
                 var card = new THREE.Mesh( card_geo, card_mat );
                 card.x = x;
                 card.y = y;
                 card.facing = 3.14*facing;
                 card.position.set(card.x,card.y,0.1);
                 card.rotation.set(0,0,card.facing);
+                scene.add(card);
+
+                var num_geo = new THREE.BoxGeometry( 0.2, 0.2, 0 );
+                var num_mat = new THREE.MeshBasicMaterial({
+                        color: 0xffffff,
+                        transparent: true,
+                        map: textures[Math.round(9*Math.random())],
+                });
+                card.num = new THREE.Mesh( num_geo, num_mat );
+                scene.add(card.num);
+
+                card.num.update = function(){
+                    var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
+                    card.num.position.copy(card.position).add(above);
+                    card.num.rotation.copy(camera.rotation);
+                }
 
                 card.moveTo = function(position,rotation){
                     card.tpos = {x:card.position.x, y:card.position.y, z:card.position.z,
@@ -101,20 +137,22 @@
                     card.showcased = false;
                     card.moveTo(new THREE.Vector3(card.x,card.y,0.1), new THREE.Vector3(0,0,card.facing));
                 };
-                scene.add(card);
+
                 return card;
             }
 
             var cards = [
                 new_card(-1.6,-4, false),
                 new_card(-0.8,-4, false),
-                new_card(0,   -4,  false),
-                new_card(0.8, -4,  false),
+                new_card(0,   -4, false),
+                new_card(0.8, -4, false),
                 new_card(1.6, -4, false),
-                new_card(3,    0,   0.5),
-                new_card(-1,   4,  true),
-                new_card(0,    4,   true),
-                new_card(1,    4,   true),
+                new_card(3.2,    0,   -0.5),
+                new_card(-1.6, 4, false),
+                new_card(-0.8, 4, false),
+                new_card(0,    4, false),
+                new_card(0.8,  4, false),
+                new_card(1.6,  4, false),
             ];
 
             camera.position.set(0,-10,6);
@@ -227,6 +265,9 @@
 
 
             var render = function () {
+                for (i in cards){
+                    cards[i].num.update();
+                }
                 TWEEN.update();
                 requestAnimationFrame( render );
                 renderer.render(scene, camera);
