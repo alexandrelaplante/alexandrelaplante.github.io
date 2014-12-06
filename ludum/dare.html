@@ -11,7 +11,7 @@
         <script src="tween.min.js"></script>
         <script>
             var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+            var camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0.1, 1000 );
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
@@ -22,22 +22,19 @@
             scene.add( table );
 
             function new_card(x,y, facing){
+                facing  *= 3.14;
                 var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
                 var card_mat = new THREE.MeshBasicMaterial({
                                 color: 0xffffff,
                                 map: THREE.ImageUtils.loadTexture('pokemon.jpg')
                         });
                 var card = new THREE.Mesh( card_geo, card_mat );
-                card.position.set(x,y,1);
-                if (facing){
-                    facing = 0;
-                } else {
-                    facing = 3.14;
-                }
+                card.position.set(x,y,0.1);
                 card.rotation.set(0,0,facing);
-                card.tpos = {x:x, y:y, z:1, rx:0, ry:0, rz:facing};
 
                 card.moveTo = function(position,rotation){
+                    card.tpos = {x:card.position.x, y:card.position.y, z:card.position.z,
+                                 rx:card.rotation.x, ry:card.rotation.y, rz:card.rotation.z};
                     card.targ = {x:position.x, y:position.y, z:position.z,
                                 rx:rotation.x, ry:rotation.y, rz:rotation.z};
                     card.tween = new TWEEN.Tween(card.tpos).to(card.targ,300);
@@ -49,54 +46,98 @@
                     card.tween.start();
                 }
 
-                card.clicked = function(){
-                    if (card.showcase){
-                        card.showcase = false;
-                        card.moveTo(new THREE.Vector3(x,y,1), new THREE.Vector3(0,0,facing));
+                card.showcase = function(){
+                    if (card.showcased){
+                        card.showcased = false;
+                        card.moveTo(new THREE.Vector3(x,y,0.1), new THREE.Vector3(0,0,facing));
                     } else {
                         // move to the showcase position
-                        card.showcase = true;
+                        card.showcased = true;
                         // The new position will be right in front of the camera
-                        var new_pos = camera.position.clone().negate().normalize().add(camera.position);
+                        var new_pos = camera.position.clone().negate().normalize().multiplyScalar(75/camera.fov).add(camera.position);
                         card.moveTo(new_pos, camera.rotation);
                     }
                     
+                };
+                card.return = function(){
+                    card.showcased = false;
+                    card.moveTo(new THREE.Vector3(x,y,0.1), new THREE.Vector3(0,0,facing));
                 };
                 return card;
             }
 
             var cards = [
-                            new_card(-1,-3, true),
-                            new_card(0,-3, true),
-                            new_card(1,-3, true),
-                            new_card(0,0, false),
+                            new_card(-1,-3, false),
+                            new_card(0,-3,  false),
+                            new_card(1,-3,  false),
+                            new_card(0,0,   0.5),
+                            new_card(-1,3,  true),
+                            new_card(0,3,   true),
+                            new_card(1,3,   true),
                         ];
 
             for (i in cards){
                 scene.add( cards[i] );
             }
 
-            camera.position.set(0,-5,5);
+            camera.position.set(0,-10,6);
             camera.lookAt( new THREE.Vector3( 0, 0, 0 ));
 
             var raycaster = new THREE.Raycaster();
 
             document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+            document.addEventListener( 'mouseup',   onDocumentMouseUp, false );
+            document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+            document.addEventListener( 'touchstart', onDocumentMouseDown, false );
+            document.addEventListener( 'touchend',   onDocumentMouseUp, false );
+            document.addEventListener( 'touchmove', onDocumentMouseMove, false );
 
             function onDocumentMouseDown( event ) {
+                event.preventDefault();
+                window.card = intersection(event, cards).object;
+            }
 
+            function onDocumentMouseMove( event ) {
                 event.preventDefault();
 
-                var vector = new THREE.Vector3();
-                vector.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
-                vector.unproject( camera );
+                if (window.card){
+                    new_pos = intersection(event, [table]).point;
+                    window.card.position.set( new_pos.x, new_pos.y, new_pos.z+0.1 );
+                    window.moved = true;
+                }
+                
+            }
+
+            function onDocumentMouseUp( event ) {
+                event.preventDefault();
+                var card = intersection(event, cards).object;
+                if (!window.moved && card && window.card == card){
+                    card.showcase();
+                } else if (window.moved) {
+                    card.return();
+                }
+                window.card = undefined;
+                window.moved = false;
+            }
+
+            function intersection(event, thing){
+                // if it's a touch event, check event.changedTouches[0].clientX
+                if (event.changedTouches){ 
+                    event.clientX = event.changedTouches[0].clientX;
+                    event.clientY = event.changedTouches[0].clientY;
+                }
+
+                var mouse = new THREE.Vector2();
+                mouse.x =  (event.clientX / window.innerWidth)*2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight)*2 + 1;
+                var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 ).unproject( camera );
 
                 raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
 
-                var intersects = raycaster.intersectObjects( cards );
+                var intersects = raycaster.intersectObjects( thing );
 
                 if ( intersects.length > 0 ) {
-                    intersects[ 0 ].object.clicked();
+                    return intersects[ 0 ];
                 }
             }
 
