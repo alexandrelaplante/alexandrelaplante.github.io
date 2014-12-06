@@ -13,6 +13,11 @@
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0.1, 1000 );
             var renderer = new THREE.WebGLRenderer();
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.fov = 30;
+            if (camera.aspect < 1){ camera.fov = 30/camera.aspect; }
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
             renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( renderer.domElement );
 
@@ -29,10 +34,10 @@
             var space_h = 1.3;
             var space_w = 1.01;
 
-            function new_space(x,y, color){
+            function new_space(x,y){
                 var space_geo = new THREE.BoxGeometry( 1.01, 1.3, 0 );
                 var space_mat = new THREE.MeshBasicMaterial(
-                    { color: color, opacity:0.15, transparent:true }
+                    { color: 0xaaaaaa, opacity:0.15, transparent:true }
                     );
                 var space = new THREE.Mesh( space_geo, space_mat );
                 space.position.set(x,y,0.05);
@@ -40,20 +45,13 @@
                 return space;
             }
 
-            function componentToHex(c) {
-                var hex = c.toString(16);
-                return hex.length == 1 ? "0" + hex : hex;
-            }
-
-            function rgbToHex(r, g, b) {
-                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-            }
-
             var spaces = [];
             for (i=-2; i<=2; i++){
                 for (j=-2; j<=2; j++){
                     var shade = Math.abs((i+j)%2);
-                    spaces.push( new_space(i*space_w,j*space_h, rgbToHex(55+20*shade,25+25*shade,200) ));
+                    space = new_space(i*space_w,j*space_h );
+                    space.material.color = {r:0.2+0.1*shade,g:0.1+0.1*shade,b:0.8};
+                    spaces.push(space);
                 }   
             }
 
@@ -135,11 +133,11 @@
             window.addEventListener( 'resize', onWindowResize, false );
 
             function onWindowResize() {
-
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
+                camera.fov = 30;
+                if (camera.aspect < 1){ camera.fov = 30/camera.aspect; }
                 renderer.setSize( window.innerWidth, window.innerHeight );
-
             }
 
             function MouseWheelHandler( event ) {
