@@ -26,19 +26,51 @@
             card_plane.position.z = 0.1;
             card_plane.visible=false;
             scene.add( card_plane );
+            var space_h = 1.3;
+            var space_w = 1.01;
+
+            function new_space(x,y, color){
+                var space_geo = new THREE.BoxGeometry( 1.01, 1.3, 0 );
+                var space_mat = new THREE.MeshBasicMaterial(
+                    { color: color, opacity:0.15, transparent:true }
+                    );
+                var space = new THREE.Mesh( space_geo, space_mat );
+                space.position.set(x,y,0.05);
+                scene.add(space);
+                return space;
+            }
+
+            function componentToHex(c) {
+                var hex = c.toString(16);
+                return hex.length == 1 ? "0" + hex : hex;
+            }
+
+            function rgbToHex(r, g, b) {
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            }
+
+            var spaces = [];
+            for (i=-2; i<=2; i++){
+                for (j=-2; j<=2; j++){
+                    var shade = Math.abs((i+j)%2);
+                    spaces.push( new_space(i*space_w,j*space_h, rgbToHex(55+20*shade,25+25*shade,200) ));
+                }   
+            }
 
             window.center = new THREE.Vector3( 0, -1, 0 );
 
             function new_card(x,y, facing){
-                facing  *= 3.14;
                 var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
                 var card_mat = new THREE.MeshBasicMaterial({
                                 color: 0xffffff,
                                 map: THREE.ImageUtils.loadTexture('pokemon.jpg')
                         });
                 var card = new THREE.Mesh( card_geo, card_mat );
-                card.position.set(x,y,0.1);
-                card.rotation.set(0,0,facing);
+                card.x = x;
+                card.y = y;
+                card.facing = 3.14*facing;
+                card.position.set(card.x,card.y,0.1);
+                card.rotation.set(0,0,card.facing);
 
                 card.moveTo = function(position,rotation){
                     card.tpos = {x:card.position.x, y:card.position.y, z:card.position.z,
@@ -57,7 +89,7 @@
                 card.showcase = function(){
                     if (card.showcased){
                         card.showcased = false;
-                        card.moveTo(new THREE.Vector3(x,y,0.1), new THREE.Vector3(0,0,facing));
+                        card.return();
                     } else {
                         // move to the showcase position
                         card.showcased = true;
@@ -69,24 +101,23 @@
                 };
                 card.return = function(){
                     card.showcased = false;
-                    card.moveTo(new THREE.Vector3(x,y,0.1), new THREE.Vector3(0,0,facing));
+                    card.moveTo(new THREE.Vector3(card.x,card.y,0.1), new THREE.Vector3(0,0,card.facing));
                 };
+                scene.add(card);
                 return card;
             }
 
             var cards = [
-                            new_card(-1,-3, false),
-                            new_card(0,-3,  false),
-                            new_card(1,-3,  false),
-                            new_card(0,0,   0.5),
-                            new_card(-1,3,  true),
-                            new_card(0,3,   true),
-                            new_card(1,3,   true),
-                        ];
-
-            for (i in cards){
-                scene.add( cards[i] );
-            }
+                new_card(-1.6,-4, false),
+                new_card(-0.8,-4, false),
+                new_card(0,   -4,  false),
+                new_card(0.8, -4,  false),
+                new_card(1.6, -4, false),
+                new_card(3,    0,   0.5),
+                new_card(-1,   4,  true),
+                new_card(0,    4,   true),
+                new_card(1,    4,   true),
+            ];
 
             camera.position.set(0,-10,6);
             camera.lookAt( window.center );
@@ -132,9 +163,21 @@
 
                 if (window.card){
                     new_pos = intersection(event, [card_plane]).point.sub(window.card.offset);
-                    new_pos.z+=0.01;
+                    new_pos.z+=0.01; // so it's above the other cards while dragging
                     window.card.position.copy( new_pos );
                     window.moved = true;
+
+                    for (i in spaces){
+                        spaces[i].material.opacity = 0.15;
+                    }
+
+                    var inter = intersection(event, spaces);
+                    if (inter){
+                        window.space = inter.object;
+                        window.space.material.opacity = 0.4;
+                    } else {
+                        window.space = undefined;
+                    }
                 }
                 
             }
@@ -147,11 +190,23 @@
                 } else if (window.moved) {
                     card.return();
                 }
+                if (window.space){
+                    card.x = window.space.position.x;
+                    card.y = window.space.position.y;
+                    card.space = window.space;
+                    window.space.card = card;
+                    card.space.material.color = {r:0.3, g:1.0, b:0.3};
+                    card.return();
+                }
+                for (i in spaces){
+                    spaces[i].material.opacity = 0.15;
+                }
+                window.space = undefined;
                 window.card = undefined;
                 window.moved = false;
             }
 
-            function intersection(event, thing){
+            function intersection(event, objects){
                 // if it's a touch event, check event.changedTouches[0].clientX
                 if (event.changedTouches){ 
                     event.clientX = event.changedTouches[0].clientX;
@@ -165,7 +220,7 @@
 
                 raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
 
-                var intersects = raycaster.intersectObjects( thing );
+                var intersects = raycaster.intersectObjects( objects );
 
                 if ( intersects.length > 0 ) {
                     return intersects[ 0 ];
