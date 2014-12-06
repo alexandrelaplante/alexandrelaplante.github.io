@@ -17,9 +17,15 @@
             document.body.appendChild( renderer.domElement );
 
             var table_geo = new THREE.BoxGeometry( 10, 10, 0 );
-            var table_mat = new THREE.MeshBasicMaterial( { color: 0x444444 } );
+            var table_mat = new THREE.MeshBasicMaterial( { color: 0xaaaaaa } );
             var table = new THREE.Mesh( table_geo, table_mat );
             scene.add( table );
+
+            var plane_geo  = new THREE.BoxGeometry( 12, 12, 0.1 );
+            var card_plane = new THREE.Mesh( plane_geo, table_mat );
+            card_plane.visible=false;
+            scene.add( card_plane );
+
 
             function new_card(x,y, facing){
                 facing  *= 3.14;
@@ -97,22 +103,25 @@
 
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
-
                 renderer.setSize( window.innerWidth, window.innerHeight );
 
             }
 
             function onDocumentMouseDown( event ) {
                 event.preventDefault();
-                window.card = intersection(event, cards).object;
+                var inter = intersection(event, cards);
+                if (inter){
+                    window.card = inter.object;
+                    window.card.offset = inter.point.clone().sub( window.card.position );
+                }
             }
 
             function onDocumentMouseMove( event ) {
                 event.preventDefault();
 
                 if (window.card){
-                    new_pos = intersection(event, [table]).point;
-                    window.card.position.set( new_pos.x, new_pos.y, new_pos.z+0.1 );
+                    new_pos = intersection(event, [card_plane]).point.sub(window.card.offset);
+                    window.card.position.set( new_pos.x, new_pos.y, new_pos.z );
                     window.moved = true;
                 }
                 
