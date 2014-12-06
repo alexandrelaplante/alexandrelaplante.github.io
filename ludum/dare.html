@@ -39,7 +39,7 @@
 
                 card.moveTo = function(x,y,z,rx,ry,rz){
                     card.targ = {x:x, y:y, z:z, rx:rx, ry:ry, rz:rz};
-                    card.tween = new TWEEN.Tween(card.tpos).to(card.targ,500);
+                    card.tween = new TWEEN.Tween(card.tpos).to(card.targ,300);
                     card.tween.onUpdate(function(){
                         card.position.set(card.tpos.x, card.tpos.y, card.tpos.z);
                         card.rotation.set(card.tpos.rx, card.tpos.ry, card.tpos.rz);
@@ -55,7 +55,12 @@
                     } else {
                         // move to the showcase position
                         card.showcase = true;
-                        card.moveTo(0, -4, 4, camera.rotation.x, camera.rotation.y, camera.rotation.z);
+                        // The new position will be right in front of the camera
+                        var new_pos = new THREE.Vector3().copy(camera.position).negate().normalize();
+                        card.moveTo(camera.position.x+new_pos.x,
+                            camera.position.y+new_pos.y,
+                            camera.position.z+new_pos.z,
+                            camera.rotation.x, camera.rotation.y, camera.rotation.z);
                     }
                     
                 };
