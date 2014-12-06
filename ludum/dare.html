@@ -57,7 +57,7 @@
 
             window.center = new THREE.Vector3( 0, -1, 0 );
 
-            textures = [];
+            num_mats = [];
             for (i=0; i<=9; i++){
                 //create image
                 var bitmap = document.createElement('canvas');
@@ -74,14 +74,20 @@
                 // canvas contents will be used for a texture
                 var texture = new THREE.Texture(bitmap) 
                 texture.needsUpdate = true;
-                textures.push(texture);                
+                var num_mat = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    map: texture,
+                });
+                num_mats.push(num_mat);
             }
 
             var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
             var card_mat = new THREE.MeshBasicMaterial({
-                    color: 0x111111,
-                    //map: THREE.ImageUtils.loadTexture('pokemon.jpg'),
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture('pokemon2.jpg'),
             });
+            var num_geo = new THREE.BoxGeometry( 0.2, 0.2, 0 );
             function new_card(x,y, facing){
                 var card = new THREE.Mesh( card_geo, card_mat );
                 card.x = x;
@@ -91,19 +97,24 @@
                 card.rotation.set(0,0,card.facing);
                 scene.add(card);
 
-                var num_geo = new THREE.BoxGeometry( 0.2, 0.2, 0 );
-                var num_mat = new THREE.MeshBasicMaterial({
-                        color: 0xffffff,
-                        transparent: true,
-                        map: textures[Math.round(9*Math.random())],
-                });
-                card.num = new THREE.Mesh( num_geo, num_mat );
-                scene.add(card.num);
+                card.num1 = new THREE.Mesh( num_geo, num_mats[Math.round(9*Math.random())] );
+                card.num2 = new THREE.Mesh( num_geo, num_mats[Math.round(9*Math.random())] );
+                scene.add(card.num1);
+                scene.add(card.num2);
 
-                card.num.update = function(){
+                card.num1.update = function(){
                     var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
-                    card.num.position.copy(card.position).add(above);
-                    card.num.rotation.copy(camera.rotation);
+                    card.num1.position.copy(card.position).add(above);
+                    card.num1.position.x -= 0.17;
+                    card.num1.position.y -= 0.4;
+                    card.num1.rotation.copy(camera.rotation);
+                }
+                card.num2.update = function(){
+                    var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
+                    card.num2.position.copy(card.position).add(above);
+                    card.num2.position.x += 0.17;
+                    card.num2.position.y -= 0.4;
+                    card.num2.rotation.copy(camera.rotation);
                 }
 
                 card.moveTo = function(position,rotation){
@@ -148,11 +159,11 @@
                 new_card(0.8, -4, false),
                 new_card(1.6, -4, false),
                 new_card(3.2,    0,   -0.5),
-                new_card(-1.6, 4, false),
-                new_card(-0.8, 4, false),
-                new_card(0,    4, false),
-                new_card(0.8,  4, false),
-                new_card(1.6,  4, false),
+                new_card(-1.6, 4, true),
+                new_card(-0.8, 4, true),
+                new_card(0,    4, true),
+                new_card(0.8,  4, true),
+                new_card(1.6,  4, true),
             ];
 
             camera.position.set(0,-10,6);
@@ -266,7 +277,8 @@
 
             var render = function () {
                 for (i in cards){
-                    cards[i].num.update();
+                    cards[i].num1.update();
+                    cards[i].num2.update();
                 }
                 TWEEN.update();
                 requestAnimationFrame( render );
