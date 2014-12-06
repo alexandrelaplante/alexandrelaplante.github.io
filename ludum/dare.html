@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Ludum Dare 31</title>
+        <style>
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        </style>
+    </head>
+    <body>
+        <script src="three.min.js"></script>
+        <script src="tween.min.js"></script>
+        <script>
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            var table_geo = new THREE.BoxGeometry( 10, 10, 0 );
+            var table_mat = new THREE.MeshBasicMaterial( { color: 0x444444 } );
+            var table = new THREE.Mesh( table_geo, table_mat );
+            scene.add( table );
+
+            function new_card(x,y, facing){
+                var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
+                var card_mat = new THREE.MeshBasicMaterial({
+                                color: 0xffffff,
+                                map: THREE.ImageUtils.loadTexture('pokemon.jpg')
+                        });
+                var card = new THREE.Mesh( card_geo, card_mat );
+                card.position.set(x,y,1);
+                if (facing){
+                    facing = 0;
+                } else {
+                    facing = 3.14;
+                }
+                card.rotation.set(0,0,facing);
+                card.tpos = {x:x, y:y, z:1, rx:0, ry:0, rz:facing};
+
+                card.moveTo = function(x,y,z,rx,ry,rz){
+                    card.targ = {x:x, y:y, z:z, rx:rx, ry:ry, rz:rz};
+                    card.tween = new TWEEN.Tween(card.tpos).to(card.targ,500);
+                    card.tween.onUpdate(function(){
+                        card.position.set(card.tpos.x, card.tpos.y, card.tpos.z);
+                        card.rotation.set(card.tpos.rx, card.tpos.ry, card.tpos.rz);
+                    });
+                    card.tween.easing(TWEEN.Easing.Circular.Out);
+                    card.tween.start();
+                }
+
+                card.clicked = function(){
+                    if (card.showcase){
+                        card.showcase = false;
+                        card.moveTo(x, y, 1, 0, 0, facing);
+                    } else {
+                        // move to the showcase position
+                        card.showcase = true;
+                        card.moveTo(0, -4, 4, camera.rotation.x, camera.rotation.y, camera.rotation.z);
+                    }
+                    
+                };
+                return card;
+            }
+
+            var cards = [
+                            new_card(-1,-3, true),
+                            new_card(0,-3, true),
+                            new_card(1,-3, true),
+                            new_card(0,0, false),
+                        ];
+
+            for (i in cards){
+                scene.add( cards[i] );
+            }
+
+            camera.position.set(0,-5,5);
+            camera.lookAt( new THREE.Vector3( 0, 0, 0 ));
+
+            var raycaster = new THREE.Raycaster();
+
+            document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+            function onDocumentMouseDown( event ) {
+
+                event.preventDefault();
+
+                var vector = new THREE.Vector3();
+                vector.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
+                vector.unproject( camera );
+
+                raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
+
+                var intersects = raycaster.intersectObjects( cards );
+
+                if ( intersects.length > 0 ) {
+                    intersects[ 0 ].object.clicked();
+                }
+            }
+
+
+            var render = function () {
+                TWEEN.update();
+                requestAnimationFrame( render );
+                renderer.render(scene, camera);
+            };
+            render();
+        </script>
+    </body>
+</html>
