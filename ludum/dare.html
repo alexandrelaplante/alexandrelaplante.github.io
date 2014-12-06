@@ -21,11 +21,13 @@
             var table = new THREE.Mesh( table_geo, table_mat );
             scene.add( table );
 
-            var plane_geo  = new THREE.BoxGeometry( 12, 12, 0.1 );
+            var plane_geo  = new THREE.BoxGeometry( 12, 12, 0 );
             var card_plane = new THREE.Mesh( plane_geo, table_mat );
+            card_plane.position.z = 0.1;
             card_plane.visible=false;
             scene.add( card_plane );
 
+            window.center = new THREE.Vector3( 0, -1, 0 );
 
             function new_card(x,y, facing){
                 facing  *= 3.14;
@@ -60,7 +62,7 @@
                         // move to the showcase position
                         card.showcased = true;
                         // The new position will be right in front of the camera
-                        var new_pos = camera.position.clone().negate().normalize().multiplyScalar(75/camera.fov).add(camera.position);
+                        var new_pos = window.center.clone().sub(camera.position).normalize().multiplyScalar(75/camera.fov).add(camera.position);
                         card.moveTo(new_pos, camera.rotation);
                     }
                     
@@ -87,7 +89,7 @@
             }
 
             camera.position.set(0,-10,6);
-            camera.lookAt( new THREE.Vector3( 0, 0, 0 ));
+            camera.lookAt( window.center );
 
             var raycaster = new THREE.Raycaster();
 
@@ -97,6 +99,8 @@
             document.addEventListener( 'touchstart', onDocumentMouseDown, false );
             document.addEventListener( 'touchend',   onDocumentMouseUp, false );
             document.addEventListener( 'touchmove', onDocumentMouseMove, false );
+            document.addEventListener("mousewheel", MouseWheelHandler, false);
+            document.addEventListener("DOMMouseScroll", MouseWheelHandler, false);// Firefox
             window.addEventListener( 'resize', onWindowResize, false );
 
             function onWindowResize() {
@@ -105,6 +109,13 @@
                 camera.updateProjectionMatrix();
                 renderer.setSize( window.innerWidth, window.innerHeight );
 
+            }
+
+            function MouseWheelHandler( event ) {
+                if (event){
+                    camera.position.z = Math.max(0.2, camera.position.z + 0.2*(event.detail || event.wheelDelta));
+                }
+                camera.lookAt( window.center );
             }
 
             function onDocumentMouseDown( event ) {
@@ -121,7 +132,8 @@
 
                 if (window.card){
                     new_pos = intersection(event, [card_plane]).point.sub(window.card.offset);
-                    window.card.position.set( new_pos.x, new_pos.y, new_pos.z );
+                    new_pos.z+=0.01;
+                    window.card.position.copy( new_pos );
                     window.moved = true;
                 }
                 
