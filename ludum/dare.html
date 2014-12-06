@@ -37,8 +37,9 @@
                 card.rotation.set(0,0,facing);
                 card.tpos = {x:x, y:y, z:1, rx:0, ry:0, rz:facing};
 
-                card.moveTo = function(x,y,z,rx,ry,rz){
-                    card.targ = {x:x, y:y, z:z, rx:rx, ry:ry, rz:rz};
+                card.moveTo = function(position,rotation){
+                    card.targ = {x:position.x, y:position.y, z:position.z,
+                                rx:rotation.x, ry:rotation.y, rz:rotation.z};
                     card.tween = new TWEEN.Tween(card.tpos).to(card.targ,300);
                     card.tween.onUpdate(function(){
                         card.position.set(card.tpos.x, card.tpos.y, card.tpos.z);
@@ -51,16 +52,13 @@
                 card.clicked = function(){
                     if (card.showcase){
                         card.showcase = false;
-                        card.moveTo(x, y, 1, 0, 0, facing);
+                        card.moveTo(new THREE.Vector3(x,y,1), new THREE.Vector3(0,0,facing));
                     } else {
                         // move to the showcase position
                         card.showcase = true;
                         // The new position will be right in front of the camera
-                        var new_pos = new THREE.Vector3().copy(camera.position).negate().normalize();
-                        card.moveTo(camera.position.x+new_pos.x,
-                            camera.position.y+new_pos.y,
-                            camera.position.z+new_pos.z,
-                            camera.rotation.x, camera.rotation.y, camera.rotation.z);
+                        var new_pos = camera.position.clone().negate().normalize().add(camera.position);
+                        card.moveTo(new_pos, camera.rotation);
                     }
                     
                 };
