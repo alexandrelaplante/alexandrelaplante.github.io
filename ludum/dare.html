@@ -76,9 +76,16 @@
          document.body.appendChild( renderer.domElement );
 
          var table_geo = new THREE.BoxGeometry( 10, 10, 0 );
-         var table_mat = new THREE.MeshBasicMaterial( { color: 0xaaaaaa } );
+         var table_mat = new THREE.MeshBasicMaterial( { color: 0xbbbbbb } );
          var table = new THREE.Mesh( table_geo, table_mat );
          scene.add( table );
+
+         var loader = new THREE.JSONLoader();
+         loader.load( 'robot.json', function(geometry){
+            var robot = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial( { color: 0xaaaaaa } ) );
+            robot.position.set(0,6,0);
+            scene.add(robot);
+         });
 
          var plane_geo  = new THREE.BoxGeometry( 12, 12, 0 );
          var card_plane = new THREE.Mesh( plane_geo, table_mat );
@@ -199,14 +206,15 @@
             scene.add(card.num1);
             scene.add(card.num2);
 
-            card.num1update = function(){
+            card.update = function(){
+               // update num1
                var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
                card.num1.position.copy(card.position).add(above);
                card.num1.position.x -= 0.17;
                card.num1.position.y -= 0.4;
                card.num1.rotation.copy(camera.rotation);
-            }
-            card.num2update = function(){
+
+               // update num2
                var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
                card.num2.position.copy(card.position).add(above);
                card.num2.position.x += 0.17;
@@ -552,8 +560,7 @@
 
          var render = function () {
             for (i in cards){
-               cards[i].num1update();
-               cards[i].num2update();
+               cards[i].update();
             }
             TWEEN.update();
             requestAnimationFrame( render );
