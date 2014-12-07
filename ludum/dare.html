@@ -473,7 +473,9 @@
          window.kills = {true:0,false:0};
 
          function place(card, space){
-            window.sound.play();
+            if (!window.muted){
+               window.sound.play();
+            }
             card.x = space.position.x;
             card.y = space.position.y;
             card.space = space;
