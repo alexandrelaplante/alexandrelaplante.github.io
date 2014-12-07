@@ -251,6 +251,10 @@
                card.num2.position.x += 0.17;
                card.num2.position.y -= 0.46;
                card.num2.rotation.copy(camera.rotation);
+
+               if (card.art){
+                  card.art.rotation.z += 0.01;
+               }
             }
 
             card.moveTo = function(position,rotation){
