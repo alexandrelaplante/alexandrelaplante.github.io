@@ -14,7 +14,7 @@
          <div id="rules">
             <p>Take turns placing cards on the board. Cards have 2 numbers, attack and health.</p>
             <p>When a card is put into play, it deals its attack to all neighbors, including your own. If the attack would reduce the neighboring card to 0 health, it is instead returned to its owner's hand. The only way to permanently kill a card is to attack it while it has 1 health.</p>
-            <p>The person with the most cards on the board when someone can no longer make a move wins.</p>
+            <p>The person with the most kills when someone can no longer make a move wins.</p>
          </div>
       </div>
 
@@ -210,20 +210,20 @@
          }
 
          var cards = [
-            new_card(-1.6,-4, false, 1,2),
-            new_card(-0.8,-4, false, 2,2),
-            new_card(0,   -4, false, 3,3),
-            new_card(0.8, -4, false, 1,4),
-            new_card(1.6, -4, false, 4,1),
+            new_card(-1.6,-3.5, false, 1,2),
+            new_card(-0.8,-3.5, false, 2,2),
+            new_card(0,   -3.5, false, 3,3),
+            new_card(0.8, -3.5, false, 1,4),
+            new_card(1.6, -3.5, false, 4,1),
 
-            new_card(-1.6, 4,  true, 1,2),
-            new_card(-0.8, 4,  true, 2,2),
-            new_card(0,    4,  true, 3,3),
-            new_card(0.8,  4,  true, 1,4),
-            new_card(1.6,  4,  true, 4,1),
+            new_card(-1.6, 3.5,  true, 1,2),
+            new_card(-0.8, 3.5,  true, 2,2),
+            new_card(0,    3.5,  true, 3,3),
+            new_card(0.8,  3.5,  true, 1,4),
+            new_card(1.6,  3.5,  true, 4,1),
          ];
 
-         camera.position.set(0,-10,6);
+         camera.position.set(0,-9,5);
          camera.lookAt( window.center );
 
          var raycaster = new THREE.Raycaster();
@@ -317,6 +317,8 @@
             window.moved = false;
          }
 
+         window.kills = {true:0,false:0};
+
          function place(card, space){
             card.x = space.position.x;
             card.y = space.position.y;
@@ -333,13 +335,17 @@
                if (ncard){
                   if (ncard.health<=1 && ncard.health-card.attack <= 0){
                      // this card is dead
-                     ncard.x = 3.2;
-                     ncard.y = 0;
+                     ncard.x = Math.pow(-1, ncard.control)*2.9;
+                     ncard.y = -3+1*window.kills[ncard.control];
+                     console.log(window.kills);
+                     console.log(card.control);
+                     console.log(window.kills[ncard.control]);
                      ncard.facing = -0.5*3.14;
                      ncard.space.basecolor = ncard.space.bluecolor;
                      ncard.space.card = undefined;
                      ncard.space = undefined;
                      ncard.dead = true;
+                     window.kills[ncard.control] += 1;
                      ncard.health = 0;
                      ncard.return();
                   } else if (ncard.health > 1 && ncard.health-card.attack > 0) {
@@ -367,20 +373,10 @@
          }
 
          function winner(){
-            var count = 0;
-            for (i in spaces){
-               if (spaces[i].card){
-                  if (spaces[i].card.control){
-                     count++;
-                  } else {
-                     count--;
-                  }
-               }
-            }
             var message = "TIE GAME!";
-            if (count > 0){
+            if (window.kills[true] < window.kills[false]){
                message = 'YOU WIN!';
-            } else if (count < 0){
+            } else if (window.kills[true] > window.kills[false]){
                message = 'YOU LOSE!';
             }
             setTimeout(function(){
@@ -417,13 +413,25 @@
                      space = spaces[i];
                   }
                }
+               // choose a space that damages a card if possible
+               for (i in spaces){
+                  if (! spaces[i].card){
+                     var ns = neighbors_of(spaces[i]);
+                     for (j in ns){
+                        ncard = ns[j].card;
+                        if (ncard && ncard.control && ncard.health - card.attack > 0){
+                           space = spaces[i];
+                        }
+                     }
+                  }
+               }
                // choose a space that kills a card if possible
                for (i in spaces){
                   if (! spaces[i].card){
                      var ns = neighbors_of(spaces[i]);
                      for (j in ns){
                         ncard = ns[j].card;
-                        if (ncard && ncard.control && ncard.health <= card.attack){
+                        if (ncard && ncard.control && ncard.health == 1){
                            space = spaces[i];
                         }
                      }
