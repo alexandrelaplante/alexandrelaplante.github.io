@@ -210,17 +210,21 @@
          }
 
          var cards = [
-            new_card(-1.6,-3.5, false, 1,2),
+            new_card(-2.4,-3.5, false, 1,2),
+            new_card(-1.6,-3.5, false, 2,2),
             new_card(-0.8,-3.5, false, 2,2),
-            new_card(0,   -3.5, false, 3,3),
-            new_card(0.8, -3.5, false, 1,4),
-            new_card(1.6, -3.5, false, 4,1),
+            new_card(0,   -3.5, false, 2,2),
+            new_card(0.8, -3.5, false, 3,3),
+            new_card(1.6, -3.5, false, 1,4),
+            new_card(2.4, -3.5, false, 4,1),
 
-            new_card(-1.6, 3.5,  true, 1,2),
-            new_card(-0.8, 3.5,  true, 2,2),
-            new_card(0,    3.5,  true, 3,3),
-            new_card(0.8,  3.5,  true, 1,4),
-            new_card(1.6,  3.5,  true, 4,1),
+            new_card(-2.4, 3.5, true,  1,2),
+            new_card(-1.6, 3.5, true,  2,2),
+            new_card(-0.8, 3.5, true,  2,2),
+            new_card(0,    3.5, true,  2,2),
+            new_card(0.8,  3.5, true,  3,3),
+            new_card(1.6,  3.5, true,  1,4),
+            new_card(2.4,  3.5, true,  4,1),
          ];
 
          camera.position.set(0,-9,5);
@@ -336,10 +340,7 @@
                   if (ncard.health<=1 && ncard.health-card.attack <= 0){
                      // this card is dead
                      ncard.x = Math.pow(-1, ncard.control)*2.9;
-                     ncard.y = -3+1*window.kills[ncard.control];
-                     console.log(window.kills);
-                     console.log(card.control);
-                     console.log(window.kills[ncard.control]);
+                     ncard.y = Math.pow(-1, ncard.control)*(-2.2+0.7*window.kills[ncard.control]);
                      ncard.facing = -0.5*3.14;
                      ncard.space.basecolor = ncard.space.bluecolor;
                      ncard.space.card = undefined;
@@ -402,6 +403,7 @@
                }
                if (hand.length == 0){
                   winner();
+                  return;
                }
                var choice = Math.round((hand.length-1)*Math.random());
                var card = hand[choice]; // choose a random card
