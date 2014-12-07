@@ -24,12 +24,19 @@
       <script>
       function start_game(computer){
          $('#container').hide();
+         window.myAudio = new Audio('loop.mp3?'); 
+         window.myAudio.addEventListener('ended', function() {
+             this.currentTime = 0;
+             this.play();
+         }, false);
+         window.myAudio.play();
+
          var scene = new THREE.Scene();
          var camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0.1, 1000 );
          var renderer = new THREE.WebGLRenderer();
          camera.aspect = window.innerWidth / window.innerHeight;
-         camera.fov = 30;
-         if (camera.aspect < 1){ camera.fov = 30/camera.aspect; }
+         camera.fov = 40;
+         if (camera.aspect < 1){ camera.fov = 40/camera.aspect; }
          camera.updateProjectionMatrix();
          renderer.setSize( window.innerWidth, window.innerHeight );
          renderer.setSize( window.innerWidth, window.innerHeight );
@@ -386,6 +393,7 @@
                scene = undefined;
                camera = undefined;
                renderer = undefined;
+               window.myAudio.pause();
                $('#container').show();
             }, 1000);
          }
