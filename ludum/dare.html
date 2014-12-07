@@ -81,12 +81,12 @@
          var table = new THREE.Mesh( table_geo, table_mat );
          scene.add( table );
 
-         var pointLight = new THREE.PointLight( 0xffffff,1.5 );
-         pointLight.position.set(0,-3,3);
+         var pointLight = new THREE.PointLight( 0xffffff,0.5 );
+         pointLight.position.set(0,-15,6);
          scene.add( pointLight );
 
          // add subtle blue ambient lighting
-         var ambientLight = new THREE.AmbientLight(0x111111);
+         var ambientLight = new THREE.AmbientLight(0x666666);
          scene.add(ambientLight);
 
          var loader = new THREE.JSONLoader();
@@ -94,6 +94,8 @@
             var robot = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xaaaaaa } ) );
             robot.position.set(0,6,0);
             scene.add(robot);
+            // doing this here so that it doesn't start until we're loaded.
+            camera.tween.start();
          });
 
          var plane_geo  = new THREE.BoxGeometry( 12, 12, 0 );
@@ -188,12 +190,12 @@
          var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
          var num_geo = new THREE.BoxGeometry( 0.2, 0.2, 0 );
 
-         function new_card(x,y, facing, attack, health){
+         function new_card(x,y, facing, attack, health, name){
             var card_mat = new THREE.MeshBasicMaterial({
                color: 0xffffff,
                transparent: true,
                opacity: 1,
-               map: THREE.ImageUtils.loadTexture('pokemon3.png'),
+               map: THREE.ImageUtils.loadTexture('card_'+name+'.png'),
             });
             var card = new THREE.Mesh( card_geo, card_mat );
             card.attack = attack;
@@ -223,10 +225,15 @@
             scene.add(card.num1);
             scene.add(card.num2);
 
-            loader.load( 'robot.json', function(geometry){
-               card.art = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial( { color: 0xaaaaaa } ) );
-               card.art.scale.set(0.1,0.1,0.1);
-               scene.add(card.art);
+            loader.load( name+".json", function(geometry, materials){
+               var material = new THREE.MeshFaceMaterial(materials);
+               card.art = new THREE.Mesh(geometry, material);
+               scale = 0.05
+               card.art.scale.set(scale,scale,scale);
+               var above = new THREE.Vector3(0,0,1).applyEuler(card.rotation).multiplyScalar(0.1);
+               card.art.position.add(above.multiplyScalar(2));
+               card.art.position.y += 0.1;
+               card.add(card.art);
             });
 
             card.update = function(){
@@ -236,21 +243,14 @@
                // update num1
                card.num1.position.copy(card.position).add(above);
                card.num1.position.x -= 0.17;
-               card.num1.position.y -= 0.4;
+               card.num1.position.y -= 0.46;
                card.num1.rotation.copy(camera.rotation);
 
                // update num2
                card.num2.position.copy(card.position).add(above);
                card.num2.position.x += 0.17;
-               card.num2.position.y -= 0.4;
+               card.num2.position.y -= 0.46;
                card.num2.rotation.copy(camera.rotation);
-
-               // update art
-               if (card.art){
-                  card.art.position.copy(card.position).add(above);
-                  card.art.position.y += 0.1;
-                  card.art.rotation.copy(card.rotation);
-               }
             }
 
             card.moveTo = function(position,rotation){
@@ -267,15 +267,29 @@
                card.tween.start();
             }
 
+            card.rotate_art = function(rotation){
+               card.art.trot = {rx:card.rotation.x, ry:card.rotation.y, rz:card.rotation.z};
+               card.art.targ = {rx:rotation.x, ry:rotation.y, rz:rotation.z};
+               card.art.tween = new TWEEN.Tween(card.art.trot).to(card.art.targ,300);
+               card.art.tween.onUpdate(function(){
+                  card.art.rotation.set(card.art.trot.rx, card.art.trot.ry, card.art.trot.rz);
+               });
+               card.art.tween.easing(TWEEN.Easing.Circular.Out);
+               card.art.tween.start();
+            }
+
             card.showcase = function(){
                if (card.showcased){
+                  // move back to regular position
                   card.showcased = false;
                   card.return();
                   card.set_visible(card.basevisibility);
+                  card.rotate_art(new THREE.Euler(0,0,0));
                } else {
                   // move to the showcase position
                   card.showcased = true;
                   card.set_visible(true);
+                  card.rotate_art(new THREE.Euler(-1.57,0,0));
                   // The new position will be right in front of the camera
                   var new_pos = window.center.clone().sub(camera.position).normalize().multiplyScalar(75/camera.fov).add(camera.position);
                   card.moveTo(new_pos, camera.rotation);
@@ -304,25 +318,34 @@
          }
 
          var cards = [
-            new_card(-2.4,-3.5, false, 1,2),
-            new_card(-1.6,-3.5, false, 2,2),
-            new_card(-0.8,-3.5, false, 2,2),
-            new_card(0,   -3.5, false, 2,2),
-            new_card(0.8, -3.5, false, 3,3),
-            new_card(1.6, -3.5, false, 1,4),
-            new_card(2.4, -3.5, false, 4,1),
+            new_card(-2.4,-3.5, false, 4,2, 'dynamite'),
+            new_card(-1.6,-3.5, false, 4,2, 'dynamite'),
+            new_card(-0.8,-3.5, false, 4,2, 'dynamite'),
+            new_card(0,   -3.5, false, 2,2, 'grenade'),
+            new_card(0.8, -3.5, false, 3,3, 'bomb'),
+            new_card(1.6, -3.5, false, 1,4, 'missile'),
+            new_card(2.4, -3.5, false, 1,4, 'missile'),
 
-            new_card(-2.4, 3.5, true,  1,2),
-            new_card(-1.6, 3.5, true,  2,2),
-            new_card(-0.8, 3.5, true,  2,2),
-            new_card(0,    3.5, true,  2,2),
-            new_card(0.8,  3.5, true,  3,3),
-            new_card(1.6,  3.5, true,  1,4),
-            new_card(2.4,  3.5, true,  4,1),
+            new_card(-2.4, 3.5, true,  4,2, 'dynamite'),
+            new_card(-1.6, 3.5, true,  4,2, 'dynamite'),
+            new_card(-0.8, 3.5, true,  4,2, 'dynamite'),
+            new_card(0,    3.5, true,  2,2, 'grenade'),
+            new_card(0.8,  3.5, true,  3,3, 'bomb'),
+            new_card(1.6,  3.5, true,  1,4, 'missile'),
+            new_card(2.4,  3.5, true,  1,4, 'missile'),
          ];
 
-         camera.position.set(0,-9,5);
+         camera.tpos = {x:0, y:-9, z:10};
+         camera.targ = {x:0, y:-9, z:5};
+         camera.tween = new TWEEN.Tween(camera.tpos).to(camera.targ,2500);
+         camera.tween.onUpdate(function(){
+            camera.position.set(camera.tpos.x,camera.tpos.y,camera.tpos.z);
+            camera.lookAt( window.center );
+         });
+         camera.tween.easing(TWEEN.Easing.Circular.Out);
+         camera.position.set(camera.tpos.x,camera.tpos.y,camera.tpos.z);
          camera.lookAt( window.center );
+         
 
          var raycaster = new THREE.Raycaster();
 
