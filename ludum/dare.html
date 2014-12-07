@@ -7,9 +7,23 @@
       </style>
    </head>
    <body>
+
+      <div id="container">
+         <button onclick="start_game(true)">Play VS Computer</button>
+         <button onclick="start_game(false)">Play VS Human</button>
+         <div id="rules">
+            <p>Take turns placing cards on the board. Cards have 2 numbers, attack and health.</p>
+            <p>When a card is put into play, it deals its attack to all neighbors, including your own. If the attack would reduce the neighboring card to 0 health, it is instead returned to its owner's hand. The only way to permanently kill a card is to attack it while it has 1 health.</p>
+            <p>The person with the most cards on the board when someone can no longer make a move wins.</p>
+         </div>
+      </div>
+
       <script src="three.min.js"></script>
       <script src="tween.min.js"></script>
+      <script src="jquery-1.9.1.min.js"></script>
       <script>
+      function start_game(computer){
+         $('#container').hide();
          var scene = new THREE.Scene();
          var camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0.1, 1000 );
          var renderer = new THREE.WebGLRenderer();
@@ -46,8 +60,8 @@
          }
 
          var spaces = [];
-         for (i=-2; i<=2; i++){
-            for (j=-2; j<=2; j++){
+         for (i=-1.5; i<=1.5; i++){
+            for (j=-1.5; j<=1.5; j++){
                var shade = Math.abs((i+j)%2);
                space = new_space(i*space_w,j*space_h );
                space.bluecolor = {r:0.2+0.1*shade,g:0.1+0.1*shade,b:0.8};
@@ -75,7 +89,8 @@
 
          window.center = new THREE.Vector3( 0, -1, 0 );
 
-         num_mats = [];
+         num_attack_mats = [];
+         num_health_mats = [];
          for (i=0; i<=9; i++){
             //create image
             var bitmap = document.createElement('canvas');
@@ -92,12 +107,20 @@
             // canvas contents will be used for a texture
             var texture = new THREE.Texture(bitmap) 
             texture.needsUpdate = true;
-            var num_mat = new THREE.MeshBasicMaterial({
+            var num_attack_mat = new THREE.MeshBasicMaterial({
                color: 0xffffff,
                transparent: true,
                map: texture,
             });
-            num_mats.push(num_mat);
+            var color = 0x77dd77;
+            if (i<=1){ color = 0xff1111}
+            var num_health_mat = new THREE.MeshBasicMaterial({
+               color: color,
+               transparent: true,
+               map: texture,
+            });
+            num_attack_mats.push(num_attack_mat);
+            num_health_mats.push(num_health_mat);
          }
 
          var card_geo = new THREE.BoxGeometry( 0.71, 1, 0 );
@@ -107,21 +130,32 @@
          });
          var num_geo = new THREE.BoxGeometry( 0.2, 0.2, 0 );
 
-         function new_card(x,y, facing, attack, defence){
+         function new_card(x,y, facing, attack, health){
             var card = new THREE.Mesh( card_geo, card_mat );
             card.attack = attack;
-            card.defence = defence;
+            card.health = health;
             card.x = x;
             card.y = y;
             card.facing = 3.14*facing;
             card.control = !facing;
-            card.permission = true;//card.control;
+            if (computer){
+               card.permission = card.control;
+            } else {
+               card.permission = true;
+            }
             card.position.set(card.x,card.y,0.1);
             card.rotation.set(0,0,card.facing);
             scene.add(card);
 
-            card.num1 = new THREE.Mesh( num_geo, num_mats[attack] );
-            card.num2 = new THREE.Mesh( num_geo, num_mats[defence] );
+            card.initx = card.x;
+            card.inity = card.y;
+            card.initfacing = card.facing;
+            card.initattack = card.attack;
+            card.inithealth = card.health;
+            card.initpermission = card.permission;
+
+            card.num1 = new THREE.Mesh( num_geo, num_attack_mats[attack] );
+            card.num2 = new THREE.Mesh( num_geo, num_health_mats[health] );
             scene.add(card.num1);
             scene.add(card.num2);
 
@@ -176,7 +210,7 @@
          }
 
          var cards = [
-            new_card(-1.6,-4, false, 1,1),
+            new_card(-1.6,-4, false, 1,2),
             new_card(-0.8,-4, false, 2,2),
             new_card(0,   -4, false, 3,3),
             new_card(0.8, -4, false, 1,4),
@@ -270,7 +304,9 @@
             }
             if (window.space && !window.space.card){
                place(card, window.space);
-               computer_turn();
+               if (computer) {
+                  computer_turn();
+               }
             }
             for (i in spaces){
                spaces[i].material.opacity = 0.15;
@@ -294,25 +330,67 @@
             neighbors = neighbors_of(space);
             for (i in neighbors){
                var ncard = neighbors[i].card;
-               if (ncard && ncard.control !== card.control){
-                  ncard.defence = Math.max(0, ncard.defence-card.attack);
-                  scene.remove(ncard.num2);
-                  ncard.num2 = new THREE.Mesh( num_geo, num_mats[ncard.defence] );
-                  scene.add(ncard.num2);
-                  if (ncard.defence == 0){
+               if (ncard){
+                  if (ncard.health<=1 && ncard.health-card.attack <= 0){
+                     // this card is dead
                      ncard.x = 3.2;
                      ncard.y = 0;
                      ncard.facing = -0.5*3.14;
-                     ncard.return();
                      ncard.space.basecolor = ncard.space.bluecolor;
                      ncard.space.card = undefined;
                      ncard.space = undefined;
                      ncard.dead = true;
+                     ncard.health = 0;
+                     ncard.return();
+                  } else if (ncard.health > 1 && ncard.health-card.attack > 0) {
+                     // this card took damage
+                     ncard.health = ncard.health-card.attack;
+                  } else if (ncard.health > 1 && ncard.health-card.attack <= 0){
+                     // back to the hand
+                     ncard.x=ncard.initx;
+                     ncard.y=ncard.inity;
+                     ncard.facing = ncard.initfacing;
+                     ncard.permission = ncard.initpermission;
+                     ncard.attack = ncard.initattack;
+                     ncard.space.basecolor = ncard.space.bluecolor;
+                     ncard.space.card = undefined;
+                     ncard.space = undefined;
+                     ncard.return();
                   }
+                  scene.remove(ncard.num2);
+                  ncard.num2 = new THREE.Mesh( num_geo, num_health_mats[ncard.health] );
+                  scene.add(ncard.num2);
                }
             }
             card.permission = false;
             card.return();
+         }
+
+         function winner(){
+            var count = 0;
+            for (i in spaces){
+               if (spaces[i].card){
+                  if (spaces[i].card.control){
+                     count++;
+                  } else {
+                     count--;
+                  }
+               }
+            }
+            var message = "TIE GAME!";
+            if (count > 0){
+               message = 'YOU WIN!';
+            } else if (count < 0){
+               message = 'YOU LOSE!';
+            }
+            setTimeout(function(){
+               alert(message);
+               $('canvas').remove();
+               scene = undefined;
+               camera = undefined;
+               renderer = undefined;
+               $('#container').show();
+            }, 1000);
          }
 
          function computer_turn(){
@@ -326,20 +404,47 @@
                      hand.push(cards[i]);
                   }
                }
+               if (hand.length == 0){
+                  winner();
+               }
                var choice = Math.round((hand.length-1)*Math.random());
-               var card = hand[choice];
+               var card = hand[choice]; // choose a random card
+               var space;
 
+               // choose any open space
                for (i in spaces){
                   if (! spaces[i].card){
-                     choice = i;
+                     space = spaces[i];
+                  }
+               }
+               // choose a space that kills a card if possible
+               for (i in spaces){
+                  if (! spaces[i].card){
+                     var ns = neighbors_of(spaces[i]);
+                     for (j in ns){
+                        ncard = ns[j].card;
+                        if (ncard && ncard.control && ncard.health <= card.attack){
+                           space = spaces[i];
+                        }
+                     }
                   }
                }
 
-               place(card, spaces[choice]);
+               place(card, space);
 
                for (i in spaces){
                   spaces[i].material.opacity = 0.15;
                   spaces[i].material.color = spaces[i].basecolor;
+               }
+
+               var hand = [];
+               for (i in cards){
+                  if (cards[i].control === true && !cards[i].space && !cards[i].dead){
+                     hand.push(cards[i]);
+                  }
+               }
+               if (hand.length == 0){
+                  winner();
                }
 
             });
@@ -378,6 +483,7 @@
             renderer.render(scene, camera);
          };
          render();
+      }
       </script>
    </body>
 </html>
