@@ -399,6 +399,15 @@
 
          function onDocumentMouseDown( event ) {
             event.preventDefault();
+
+            // If a card is showcased, any click just puts it back.
+            for (i in cards){
+               if (cards[i].showcased){
+                  cards[i].showcase();
+                  return;
+               }
+            }
+
             var inter = intersection(event, cards);
             if (inter){
                var card = inter.object;
