@@ -268,7 +268,7 @@
             } else if (window.moved) {
                card.return();
             }
-            if (window.space){
+            if (window.space && !window.space.card){
                place(card, window.space);
                computer_turn();
             }
