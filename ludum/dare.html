@@ -48,12 +48,12 @@
       window.mute = function(){
          if (window.muted){
             window.muted = false;
-            if (window.myAudio) { window.myAudio.play(); }
-            window.myAudio.play();
+            if (window.music) { window.music.play(); }
+            window.music.play();
             $('#mute').text("Mute");
          } else {
             window.muted = true;
-            if (window.myAudio) { window.myAudio.pause(); }
+            if (window.music) { window.music.pause(); }
             $('#mute').text("Unmute");
          }
       }
@@ -61,15 +61,16 @@
 
       function start_game(computer){
          $('#container').hide();
-         if (!window.myAudio){
-            window.myAudio = new Audio('loop.mp3'); 
-            window.myAudio.addEventListener('ended', function() {
+         if (!window.music){
+            window.music = new Audio('loop.mp3'); 
+            window.sound = new Audio('sound.mp3'); 
+            window.music.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
             }, false);
          }
          if (! window.muted){
-            window.myAudio.play();
+            window.music.play();
          }
 
          var scene = new THREE.Scene();
@@ -80,7 +81,9 @@
          document.body.appendChild( renderer.domElement );
 
          var table_geo = new THREE.BoxGeometry( 10, 10, 0.01 );
-         var table_mat = new THREE.MeshLambertMaterial( { color: 0xffffff } );
+         var table_mat = new THREE.MeshLambertMaterial( {
+            color: 0xffffff,
+         } );
          var table = new THREE.Mesh( table_geo, table_mat );
          scene.add( table );
 
@@ -470,6 +473,7 @@
          window.kills = {true:0,false:0};
 
          function place(card, space){
+            window.sound.play();
             card.x = space.position.x;
             card.y = space.position.y;
             card.space = space;
@@ -544,7 +548,7 @@
             scene = undefined;
             camera = undefined;
             renderer = undefined;
-            window.myAudio.pause();
+            window.music.pause();
             $('#container').show();
          }
 
