@@ -40,8 +40,9 @@
       </div>
 
       <script src="jquery-1.9.1.min.js"></script>
-      <script src="three.min.js"></script>
       <script src="tween.min.js"></script>
+      <script src="three.min.js"></script>
+
       <script>
 
       window.mute = function(){
@@ -60,11 +61,13 @@
 
       function start_game(computer){
          $('#container').hide();
-         window.myAudio = new Audio('loop.mp3?'); 
-         window.myAudio.addEventListener('ended', function() {
-             this.currentTime = 0;
-             this.play();
-         }, false);
+         if (!window.myAudio){
+            window.myAudio = new Audio('loop.mp3'); 
+            window.myAudio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+         }
          if (! window.muted){
             window.myAudio.play();
          }
