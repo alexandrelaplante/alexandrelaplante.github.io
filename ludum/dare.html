@@ -43,6 +43,97 @@
       <script src="tween.min.js"></script>
       <script src="three.min.js"></script>
 
+      <script id="fragment_shader_red" type="x-shader/x-fragment">
+
+         uniform float time;
+         uniform vec2 resolution;
+
+         uniform sampler2D tex;
+         uniform float r;
+         uniform float g;
+
+         varying vec2 vUv;
+
+         void main( void ) {
+
+            vec2 position = -1.0 + 2.0 * vUv;
+
+            float red = abs( sin( position.x * position.y + time / 5.0 ) );
+            float green = abs( sin( position.x * position.y + time / 4.0 ) );
+            float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+            vec3 shade = 0.2*vec3(red+green+blue, green, blue);
+            vec4 Ca = texture2D(tex, vUv);
+            gl_FragColor = vec4( shade+Ca.rgb, 1.0 );
+
+         }
+
+      </script>
+
+      <script id="fragment_shader_green" type="x-shader/x-fragment">
+
+         uniform float time;
+         uniform vec2 resolution;
+
+         uniform sampler2D tex;
+         uniform float r;
+         uniform float g;
+
+         varying vec2 vUv;
+
+         void main( void ) {
+
+            vec2 position = -1.0 + 2.0 * vUv;
+
+            float red = abs( sin( position.x * position.y + time / 5.0 ) );
+            float green = abs( sin( position.x * position.y + time / 4.0 ) );
+            float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+            vec3 shade = 0.2*vec3(red, red+green+blue, blue);
+            vec4 Ca = texture2D(tex, vUv);
+            gl_FragColor = vec4( shade+Ca.rgb, 1.0 );
+
+         }
+
+      </script>
+
+      <script id="fragment_shader_blue" type="x-shader/x-fragment">
+
+         uniform float time;
+         uniform vec2 resolution;
+
+         uniform sampler2D tex;
+         uniform float r;
+         uniform float g;
+
+         varying vec2 vUv;
+
+         void main( void ) {
+
+            vec2 position = -1.0 + 2.0 * vUv;
+
+            float red = abs( sin( position.x * position.y + time / 5.0 ) );
+            float green = abs( sin( position.x * position.y + time / 4.0 ) );
+            float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+            vec3 shade = 0.3*vec3(red, green, red+green+blue);
+            vec4 Ca = texture2D(tex, vUv);
+            gl_FragColor = vec4( shade+Ca.rgb, 1.0 );
+
+         }
+
+      </script>
+
+      <script id="vertexShader" type="x-shader/x-vertex">
+
+         varying vec2 vUv;
+
+         void main()
+         {
+            vUv = uv;
+            vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+            gl_Position = projectionMatrix * mvPosition;
+         }
+
+      </script>
+
       <script>
 
       window.mute = function(){
@@ -81,9 +172,10 @@
          document.body.appendChild( renderer.domElement );
 
          var table_geo = new THREE.BoxGeometry( 10, 10, 0.01 );
-         var table_mat = new THREE.MeshLambertMaterial( {
+         var table_mat = new THREE.MeshLambertMaterial({
             color: 0xffffff,
-         } );
+            map: THREE.ImageUtils.loadTexture('table.jpg'),
+         });
          var table = new THREE.Mesh( table_geo, table_mat );
          scene.add( table );
 
@@ -96,14 +188,14 @@
          scene.add(ambientLight);
 
          var loader = new THREE.JSONLoader();
-         loader.load( 'robot.json', function(geometry){
-            var robot = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( { color: 0xaaaaaa } ) );
+         loader.load( 'robot.json', function(geometry, materials){
+            var material = new THREE.MeshFaceMaterial(materials);
+            var robot = new THREE.Mesh(geometry, material );
             robot.position.set(0,6,0);
             scene.add(robot);
             // doing this here so that it doesn't start until we're loaded.
             camera.tween.start();
          });
-
          var plane_geo  = new THREE.BoxGeometry( 12, 12, 0 );
          var card_plane = new THREE.Mesh( plane_geo, table_mat );
          card_plane.position.z = 0.1;
@@ -112,14 +204,40 @@
          var space_h = 1.3;
          var space_w = 1.01;
 
+         var space_geo = new THREE.BoxGeometry( 1.01, 1.3, 0 );
+         var space_mat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            opacity:1,
+            transparent:true,
+            map: THREE.ImageUtils.loadTexture('space.jpg'),
+         });
+
+         var uniforms = {
+            time: { type: "f", value: 10.0 },
+            resolution: { type: "v2", value: new THREE.Vector2() },
+            tex: { type: "t", value: THREE.ImageUtils.loadTexture( "space.jpg" ) },
+         };
+         var space_mat_red = new THREE.ShaderMaterial( {
+            uniforms: uniforms,
+            vertexShader: document.getElementById( 'vertexShader' ).textContent,
+            fragmentShader: document.getElementById( 'fragment_shader_red' ).textContent,
+            map: THREE.ImageUtils.loadTexture('space.jpg'),
+         } );
+         var space_mat_green = new THREE.ShaderMaterial( {
+            uniforms: uniforms,
+            vertexShader: document.getElementById( 'vertexShader' ).textContent,
+            fragmentShader: document.getElementById( 'fragment_shader_green' ).textContent,
+            map: THREE.ImageUtils.loadTexture('space.jpg'),
+         } );
+         var space_mat_blue = new THREE.ShaderMaterial( {
+            uniforms: uniforms,
+            vertexShader: document.getElementById( 'vertexShader' ).textContent,
+            fragmentShader: document.getElementById( 'fragment_shader_blue' ).textContent,
+            map: THREE.ImageUtils.loadTexture('space.jpg'),
+         } );
+
          function new_space(x,y){
-            var space_geo = new THREE.BoxGeometry( 1.01, 1.3, 0 );
-            var space_mat = new THREE.MeshBasicMaterial({
-               color: 0xffffff,
-               opacity:1,
-               transparent:true,
-               map: THREE.ImageUtils.loadTexture('space.jpg'),
-            });
+            
             var space = new THREE.Mesh( space_geo, space_mat );
             space.position.set(x,y,0.05);
             scene.add(space);
@@ -135,8 +253,8 @@
          for (i=-1.5; i<=1.5; i++){
             for (j=-1.5; j<=1.5; j++){
                space = new_space(i*space_w,j*space_h );
-               space.basecolor = nocolor;
-               space.material.color = space.basecolor;
+               space.basemat = space_mat;
+               space.material = space.basemat;
                space.i = i;
                space.j = j;
                spaces.push(space);
@@ -432,7 +550,7 @@
                window.moved = true;
 
                for (i in spaces){
-                  spaces[i].material.color = spaces[i].basecolor;
+                  spaces[i].material = spaces[i].basemat;
                }
 
                var inter = intersection(event, spaces);
@@ -440,7 +558,7 @@
                   window.space = inter.object;
                   ns = neighbors_of(window.space);
                   for (i in ns){
-                     ns[i].material.color = highlightcolor;
+                     ns[i].material = space_mat_blue;
                   }
                } else {
                   window.space = undefined;
@@ -463,7 +581,7 @@
                }
             }
             for (i in spaces){
-               spaces[i].material.color = spaces[i].basecolor;
+               spaces[i].material = spaces[i].basemat;
             }
             window.space = undefined;
             window.card = undefined;
@@ -483,9 +601,9 @@
             card.set_visible(false);
             card.basevisibility = false;
             if (card.control){
-               space.basecolor = mycolor;
+               space.basemat = space_mat_green;
             } else {
-               space.basecolor = hiscolor;
+               space.basemat = space_mat_red;
             }
             neighbors = neighbors_of(space);
             for (i in neighbors){
@@ -496,7 +614,7 @@
                      ncard.x = Math.pow(-1, ncard.control)*2.9;
                      ncard.y = Math.pow(-1, ncard.control)*(-2.2+0.7*window.kills[ncard.control]);
                      ncard.facing = -0.5*3.14;
-                     ncard.space.basecolor = nocolor;
+                     ncard.space.basemat = space_mat;
                      ncard.space.card = undefined;
                      ncard.space = undefined;
                      ncard.dead = true;
@@ -515,7 +633,7 @@
                      ncard.facing = ncard.initfacing;
                      ncard.permission = ncard.initpermission;
                      ncard.attack = ncard.initattack;
-                     ncard.space.basecolor = nocolor;
+                     ncard.space.basemat = space_mat;
                      ncard.set_visible(true);
                      card.basevisibility = true;
                      ncard.space.card = undefined;
@@ -607,7 +725,7 @@
                place(card, space);
 
                for (i in spaces){
-                  spaces[i].material.color = spaces[i].basecolor;
+                  spaces[i].material = spaces[i].basemat;
                }
 
                var hand = [];
@@ -647,6 +765,8 @@
 
 
          var render = function () {
+            uniforms.time.value += 0.1;
+
             for (i in cards){
                cards[i].update();
             }
