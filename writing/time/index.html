@@ -26,6 +26,8 @@ To learn more about this effect, see here the Wikipedia article on <a href="http
 }
 </style>
 
+<script type='application/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.js'></script>
+
 <script>
 
 $(function(){
@@ -76,7 +78,9 @@ $(function(){
             nextcat();
         }
         e.preventDefault()
-    });  
+    });
+
+    FastClick.attach(document.body);
 
 });
 </script>
