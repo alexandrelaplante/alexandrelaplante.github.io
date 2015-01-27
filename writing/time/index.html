@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<title>Time Perception</title>
+<content>
+
+# Time Perception
+
+**Quickly** press space to flip through pictures of cats. It may sometimes seem as though the picture changes slightly before you pressed the button!
+
+<div class="text-center">
+    <button id="next" class="btn btn-large btn-primary">Press Space For Another Cat!</button>
+
+    <div id="cats">
+        <img src="http://thecatapi.com/api/images/get?size=med" width='500px' class='cat'>
+    </div>
+</div>
+
+To learn more about this effect, see here the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Time_perception#Reversal_of_temporal_order_judgment">reversal of temporal order judgment</a>.
+
+<style>
+.othercat{
+    display:none;
+}
+.cat{
+    margin:10px;
+}
+</style>
+
+<script>
+
+$(function(){
+
+    var time = 220;
+    var interval = 12;
+
+    for (i=0;i<20;i++){
+        img = $("<img src=\"http://thecatapi.com/api/images/get?size=med&"+i+"\" width='500px' class='othercat'>");
+        $('#cats').append(img);
+        window.count = 0;
+        window.countdown = interval;
+    }
+
+    nextcat = function(){
+        
+        if (window.count<20){
+            if (window.countdown <= 0){
+                //instantly
+                $('.cat').removeClass('cat').addClass('othercat').next().removeClass('othercat').addClass('cat');
+                window.countdown = interval;
+            } else {
+                //delayed
+                setTimeout(function(){ 
+                    $('.cat').removeClass('cat').addClass('othercat').next().removeClass('othercat').addClass('cat');
+                }, time);
+                window.countdown -= 1;
+            }
+            window.count += 1;
+        } else {
+            //delayed
+            setTimeout(function(){ 
+                $('.cat').removeClass('cat').addClass('othercat');
+                $('.othercat').first().removeClass('othercat').addClass('cat')
+            }, time);
+            window.count = 0;
+            window.countdown -= 1;
+        }
+        
+    }
+
+    $('#next').click(function() {
+        nextcat();
+    });
+
+    $("body").on('keydown', function(e){
+        if (e.keyCode == 32) {
+            nextcat();
+        }
+    });  
+
+});
+</script>
+
+</content>
+<script src="/webfolder.js"></script>
+</html>
