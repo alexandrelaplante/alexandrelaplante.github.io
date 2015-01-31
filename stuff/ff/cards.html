@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FF Board Game</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='fonts/stylesheet.css' rel='stylesheet' type='text/css'>
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+</head>
+<body>
+         
+ 
+<style>
+
+.indicator {
+  color:white;
+  width: 50px;
+  height: 50px;
+  background: url("box.png");
+  background-size: 100% 100%;
+  float:left;
+  font-family: 'FF', cursive;
+  font-size: 25px;
+  line-height: 0.3em;
+}
+.card {
+  padding:10px 20px 10px 20px;
+  color:white;
+  width: 250px;
+  height: 350px;
+  float:left;
+  font-family: 'FF';
+  font-size: 25px;
+  line-height: 0.3em;
+}
+.card .fg {
+  height:130px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  display:block
+}
+.card .name, .indicator .name {
+  font-size: 1.1em;
+  /*font-weight: bold;*/
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+}
+.card .desc, .indicator .desc {
+  margin-left: 5px;
+  margin-right: 5px;
+  top:175px;
+  position:absolute;
+  font-family: 'FF';
+  font-size: 25px;
+  line-height:0.6em;
+}
+.card .corner1 {
+  position: absolute;
+  left:10px;
+  top:5px;
+  height:30px;
+}
+.card .corner4 {
+  position: absolute;
+  right:20px;
+  bottom:10px;
+  height:30px;
+}
+span.n, span.t {
+  font-weight: bold;
+  color: red;
+}
+</style>
+
+<script>
+$(function() {
+
+
+    /* CARD STUFF */
+  function get_num(){
+    var number = $('.number').val();
+    var pad = "0000";
+    return (pad+number).slice(-pad.length);
+  }
+  function add_card(name, file, desc, back){
+    $("body").append(
+      '<div class="card draggable" style="background: url(\''+back+'\');background-size: 100% 100%;" >'+
+        '<div class="name">'+name+'</div>'+
+        '<img class="corner1" src="'+file+'">'+
+        '<img class="corner4" src="'+file+'">'+
+        '<div class="fg" style="background-image:url('+file+')"></div>'+
+        '<div class="desc">'+desc+'</div>'+
+      '</div>'
+    );
+    $(".draggable").draggable();
+  }
+  var items = [
+    {
+      file: 'D1.png',
+      name: 'Green Dragon',
+      back: 'back3.png',
+      desc: '<b>1</b> Deals <span class="n">3</span> damage to <span class="t">1 target</span>.<br>             <b>2</b> Deals <span class="n">1</span> damage to <span class="t">all targets</span>.',
+    },
+    {
+      file: 'D2.png',
+      name: 'Yellow Dragon',
+      back: 'back2.png',
+      desc: '<b>1</b> Deals <span class="n">2</span> damage to <span class="t">2 targets</span>.<br>             <b>2</b> Heals <span class="n">4</span> health.',
+    },
+    {
+      file: 'D3.png',
+      name: 'Red Dragon',
+      back: 'back2.png',
+      desc: '<b>1</b> Deals <span class="n">2</span> damage to <span class="t">2 targets</span>.<br>             <b>2</b> Heals <span class="n">4</span> health.',
+    },
+    {
+      file: 'D4.png',
+      name: 'Burvorarth',
+      back: 'back2.png',
+      desc: '<b>1</b> Deals <span class="n">2</span> damage to <span class="t">2 targets</span>.<br>             <b>2</b> Heals <span class="n">4</span> health.',
+    },
+    {
+      file: 'D5.png',
+      name: 'Burvoling',
+      back: 'back2.png',
+      desc: '<b>1</b> Deals <span class="n">2</span> damage to <span class="t">2 targets</span>.<br>             <b>2</b> Heals <span class="n">4</span> health.',
+    },
+    {
+      file: 'D6.png',
+      name: 'Blue Drake',
+      back: 'back3.png',
+      desc: '<b>1</b> Deals <span class="n">2</span> damage to <span class="t">2 targets</span>.<br>             <b>2</b> Heals <span class="n">4</span> health.',
+    },
+    {
+      file: 'Ranger.png',
+      name: 'Ranger',
+      back: 'back2.png',
+      desc: '<b>Hero Power:</b> Once per fight, re-roll a dice.',
+    },
+    {
+      file: 'DarkKnight.png',
+      name: 'Dark Knight',
+      back: 'back2.png',
+      desc: '<b>Hero Power:</b> Restore <span class="n">1</span> health every time you deal damage.',
+    },
+    {
+      file: 'Ranger_Face.png',
+      name: 'Ranger',
+      back: 'back2.png',
+      desc: '',
+    },
+    {
+      file: 'DarkKnight_Face.png',
+      name: 'Dark Knight',
+      back: 'back2.png',
+      desc: '',
+    },
+  ];
+
+  for (i in items){
+    var item = items[i];
+    add_card(item.name, "16bit/"+item.file, item.desc, item.back);
+  }
+  for (i=1; i<=6; i++){
+    $("body").append(
+      '<div class="indicator draggable">'+
+        '<div class="name">'+i+'</div>'+
+        //'<div class="desc">Use this card when you roll a '+i+'.</div>'+
+      '</div>'
+    );
+  }
+  $(".draggable").draggable();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Rename all to numbers
+a=1
+for i in *.PNG; do
+  new=$(printf "num/%04d.png" ${a}) #04 pad to length of 4
+  mv ${i} ${new}
+  let a=a+1
+done
+
+
+# scale up without smoothing
+mogrify -scale 400% *.PNG
+
+# hot pink to alpha
+mogrify *.PNG -type Palette -channel Index -transparent '#FF00FF' *.PNG
