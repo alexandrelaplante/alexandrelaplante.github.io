@@ -16,6 +16,19 @@
  
 <style>
 
+.hero {
+  color:white;
+  box-sizing: border-box;
+  padding:25px;
+  width: 350px;
+  height: 250px;
+  background: url("box.png");
+  background-size: 100% 100%;
+  float:left;
+  font-family: 'FF', cursive;
+  font-size: 25px;
+  line-height: 0.3em;
+}
 .indicator {
   color:white;
   width: 50px;
@@ -48,7 +61,6 @@
 }
 .card .name, .indicator .name {
   font-size: 1.1em;
-  /*font-weight: bold;*/
   text-align: center;
   padding: 0px 20px 20px 20px;
 }
@@ -73,6 +85,33 @@
   bottom:10px;
   height:30px;
 }
+
+.hero .fg {
+  position:absolute;
+  height:80px;
+  width:80px;
+  top:45px;
+  left:15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.hero .name {
+  font-size: 1.1em;
+  position: absolute;
+  top: 125px;
+}
+.hero .desc {
+  margin-left: 5px;
+  margin-right: 5px;
+  top:100px;
+  position:absolute;
+  font-family: 'FF';
+  font-size: 25px;
+  line-height:0.6em;
+}
+.hero .corner1, .hero .corner4 {
+  display:none;
+}
 span.n, span.t {
   font-weight: bold;
   color: red;
@@ -83,24 +122,6 @@ span.n, span.t {
 $(function() {
 
 
-    /* CARD STUFF */
-  function get_num(){
-    var number = $('.number').val();
-    var pad = "0000";
-    return (pad+number).slice(-pad.length);
-  }
-  function add_card(name, file, desc, back){
-    $("body").append(
-      '<div class="card draggable" style="background: url(\''+back+'\');background-size: 100% 100%;" >'+
-        '<div class="name">'+name+'</div>'+
-        '<img class="corner1" src="'+file+'">'+
-        '<img class="corner4" src="'+file+'">'+
-        '<div class="fg" style="background-image:url('+file+')"></div>'+
-        '<div class="desc">'+desc+'</div>'+
-      '</div>'
-    );
-    $(".draggable").draggable();
-  }
   var items = [
     {
       file: 'D1.png',
@@ -153,16 +174,31 @@ $(function() {
     {
       file: 'Ranger_Face.png',
       name: 'Ranger',
-      back: 'back2.png',
+      back: 'hero.png',
       desc: '',
     },
     {
       file: 'DarkKnight_Face.png',
       name: 'Dark Knight',
-      back: 'back2.png',
+      back: 'hero.png',
       desc: '',
     },
   ];
+
+  function add_card(name, file, desc, back){
+    var type = 'card';
+    if (back == "hero.png"){type='hero';}
+    $("body").append(
+      '<div class="'+type+' draggable" style="background: url(\''+back+'\');background-size: 100% 100%;" >'+
+        '<div class="name">'+name+'</div>'+
+        '<img class="corner1" src="'+file+'">'+
+        '<img class="corner4" src="'+file+'">'+
+        '<div class="fg" style="background-image:url('+file+')"></div>'+
+        '<div class="desc">'+desc+'</div>'+
+      '</div>'
+    );
+    $(".draggable").draggable();
+  }
 
   for (i in items){
     var item = items[i];
