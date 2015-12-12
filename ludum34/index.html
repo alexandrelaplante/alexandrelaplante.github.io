@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>pixi.js example 1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+    </style>
+    <script src="pixi.js"></script>
+</head>
+<body>
+    <script>
+
+var renderer = PIXI.autoDetectRenderer(800, 600);
+document.body.appendChild(renderer.view);
+
+// create the root of the scene graph
+var stage = new PIXI.Container();
+
+var notes = [];
+
+var totalnotes = 20;
+var key_pressed = false;
+
+
+// Setup keys
+var key = PIXI.Sprite.fromImage('f.svg');
+
+// set the anchor point so the texture is centerd on the sprite
+key.anchor.set(0.5);
+key.scale.set(0.2);
+key.position.x = renderer.width / 2;
+key.position.y = 2 * renderer.height / 3;
+key.tint = 0xFFFFFF;
+stage.addChild(key);
+
+for (var i = 0; i < totalnotes; i++)
+{
+    // create a new Sprite that uses the image name that we just generated as its source
+    var note = PIXI.Sprite.fromImage('f.svg');
+
+    // set the anchor point so the texture is centerd on the sprite
+    note.anchor.set(0.5);
+    note.scale.set(0.2);
+    note.position.x = renderer.width / 2;
+    note.position.y = - Math.random() * 10 * renderer.height;
+    note.tint = Math.random() * 0xFFFFFF;
+    note.direction = Math.PI * 2;
+    note.speed = 4;
+    notes.push(note);
+    stage.addChild(note);
+}
+
+// create a bounding box for the little notes
+var noteBoundsPadding = 100;
+var noteBounds = new PIXI.Rectangle(-noteBoundsPadding,
+                                    -noteBoundsPadding,
+                                    renderer.width + noteBoundsPadding * 2,
+                                    renderer.height + noteBoundsPadding * 2);
+
+var tick = 0;
+
+requestAnimationFrame(animate);
+
+function animate() {
+
+    // iterate through the notes and update their position
+    for (var i = 0; i < notes.length; i++) {
+        var note = notes[i];
+        note.position.x += Math.sin(note.direction) * note.speed;
+        note.position.y += Math.cos(note.direction) * note.speed;
+        note.rotation = -note.direction;
+
+        if (key_pressed && Math.abs(note.position.y - key.position.y) < renderer.height/20) {
+            console.log(Math.abs(note.position.y - key.position.y));
+            note.speed = 0;
+        }
+
+        if (note.position.y > noteBounds.y + noteBounds.height) {
+            var index = notes.indexOf(note);
+            notes.splice(index, 1);
+            // note.destroy();
+        }
+    }
+
+    key_pressed = false;
+    tick += 0.1;
+    renderer.render(stage);
+    requestAnimationFrame(animate);
+}
+
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 70) {
+        key_pressed = true;
+    }
+});
+
+    </script>
+
+    </body>
+</html>
+
