@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<title>Time Perception</title>
+<content>
+
+<div data-bind="foreach: words" class="container">
+    <div class="box text mui-btn mui-btn--large" data-bind="css: current_colour, click: choose, text: word"></div>
+</div>
+
+<div data-bind="click: showall" class="eye mui-btn mui-btn--large mui-btn--fab"><i class="fa fa-lg fa-eye" aria-hidden="true"></i></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+<link href="//cdn.muicss.com/mui-0.5.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<script src="//cdn.muicss.com/mui-0.5.3/js/mui.min.js"></script>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="seedrandom.js"></script>
+<script type="text/javascript">
+window.onload = function () { 
+    function manager() {
+        var self = this;
+        
+        var seed = window.location.hash;
+        Math.seedrandom(seed);
+        data = shuffle(data).slice(0,25);
+
+        self.words = ko.observableArray();
+
+        data.forEach(function(word){
+            var colour = ['mui-btn--primary', 'mui-btn--danger', 'neutral'][Math.floor(Math.random()*3)]
+            var chosen = ko.observable(false);
+            var current_colour = ko.pureComputed(function() {
+                if (chosen()){
+                    return colour;
+                } else {
+                    return 'mui-btn--raised gray'
+                }
+            }, this);
+            self.words.push({
+                word: word,
+                colour: colour,
+                chosen: chosen,
+                current_colour: current_colour,
+                choose: function(){
+                    chosen(!chosen());
+                }
+            });
+        })
+
+        self.showall = function(){
+            self.words().forEach(function(v){
+                if (!v.chosen()){
+                    v.choose();
+                }
+            });
+        }
+
+    }
+    ko.applyBindings(new manager());
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+</script>
+
+<style type="text/css">
+html, body, .container { height: 100%; width: 100%; margin: 0; }
+
+.eye {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.box {
+    height: 18%;
+    width: 18%;
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0;
+    font-size: 2.1vw;
+}
+.text {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+}
+.neutral {
+    background-color: #FFCE57
+}
+.neutral:hover {
+    background-color: #FFCE57
+}
+
+</style>
+
+</content>
+</html>
