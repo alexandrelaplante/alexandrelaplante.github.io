@@ -5,7 +5,7 @@
 
 <div data-bind="foreach: words" class="container">
     <div class="box mui-btn mui-btn--large" data-bind="css: current_colour, click: choose">
-        <div class="text" data-bind="text: word"></div>
+        <div class="text" data-bind="css: $parent.textcss, text: word"></div>
     </div>
 </div>
 
@@ -32,22 +32,28 @@
 window.onload = function () {
     function manager() {
         var self = this;
-        
-        var seed = window.location.hash.split('#')[1];
-        Math.seedrandom(seed);
-        data = shuffle(data).slice(0,25);
 
         self.words = ko.observableArray();
         self.spin = ko.observable('');
         self.eye = ko.observable('fa-eye');
+        self.textcss = ko.observable('');
+        self.peeked = ko.observable(false);
         var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
+        var seed = window.location.hash.split('#')[1];
+        if (seed.indexOf('cah') > -1){
+            data = shuffle(cah_data).slice(0,25);
+        } else {
+            data = shuffle(data).slice(0,25);
+            self.textcss('big_text');
+        }
+        Math.seedrandom(seed);
+        data = shuffle(data).slice(0,25);
         data.forEach(function(word, i){
             var colour = ['assassin', 'neutral', 'mui-btn--primary', 'mui-btn--danger'][colours[i]]
             var chosen = ko.observable(false);
-            var peeked = ko.observable(false);
             var current_colour = ko.pureComputed(function() {
-                if (chosen() != peeked()){
+                if (chosen() != self.peeked()){
                     return colour;
                 } else {
                     return 'mui-btn--raised gray'
@@ -57,7 +63,6 @@ window.onload = function () {
                 word: word,
                 colour: colour,
                 chosen: chosen,
-                peeked: peeked,
                 current_colour: current_colour,
                 choose: function(refresh){
                     chosen(!chosen());
@@ -67,9 +72,7 @@ window.onload = function () {
         })
 
         self.showall = function(){
-            self.words().forEach(function(v){
-                v.peeked(!v.peeked());
-            });
+            self.peeked(!self.peeked());
             if (self.eye() == 'fa-eye'){
                 self.eye('fa-eye-slash');
             } else {
@@ -78,7 +81,7 @@ window.onload = function () {
         }
         self.close = function(){
             self.words().forEach(function(v){
-                v.peeked(false);
+                self.peeked(false);
                 v.chosen(false);
             });
             $.ajax({
@@ -98,7 +101,7 @@ window.onload = function () {
                     self.spin('');
                     message = data.split('');
                     message.pop(); message.shift();
-                    if (message.length != 25){
+                    if (message.length != 25) {
                         message = '0000000000000000000000000'.split('');
                     }
                     self.words().forEach(function(v, i){
@@ -126,21 +129,14 @@ window.onload = function () {
 }
 
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
   return array;
 }
 </script>
@@ -159,13 +155,17 @@ html, body, .container { height: 100%; width: 100%; margin: 0; }
     display: inline-block;
     margin: 0 !important;
     padding: 0;
-    font-size: 0.8vw;
 }
 .text {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
     white-space: normal;
+    line-height: normal;
+    font-size: 0.8vw;
+}
+.big_text {
+    font-size: 2vw;
 }
 .assassin {
     background-color: black;
