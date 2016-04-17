@@ -43,6 +43,12 @@ window.onload = function () {
         var seed = window.location.hash.split('#')[1];
         if (seed.indexOf('cah') > -1){
             data = shuffle(cah_data).slice(0,25);
+        } else if (seed.indexOf('ff7') > -1) {
+            data = shuffle(ff_data).slice(0,25);
+            self.textcss('big_text');
+        } else if (seed.indexOf('poke') > -1) {
+            data = shuffle(poke_data).slice(0,25);
+            self.textcss('big_text');
         } else {
             data = shuffle(data).slice(0,25);
             self.textcss('big_text');
