@@ -17,7 +17,7 @@
         <i class="fa fa-lg fa-eye" aria-hidden="true"></i>
     </div>
     <div data-bind="click: refresh" class="refresh mui-btn mui-btn--large mui-btn--fab">
-        <i class="fa fa-lg fa-refresh" aria-hidden="true"></i>
+        <i class="fa fa-lg fa-refresh" data-bind="css: spin" aria-hidden="true"></i>
     </div>
 </div>
 
@@ -38,6 +38,7 @@ window.onload = function () {
         data = shuffle(data).slice(0,25);
 
         self.words = ko.observableArray();
+        self.spin = ko.observable('');
         var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
         data.forEach(function(word, i){
@@ -58,8 +59,8 @@ window.onload = function () {
                 peeked: peeked,
                 current_colour: current_colour,
                 choose: function(refresh){
-                    self.refresh()
                     chosen(!chosen());
+                    self.spin('fa-spin');
                 }
             });
         })
@@ -88,6 +89,7 @@ window.onload = function () {
                 method: 'GET',
                 success: function(data){
                     console.log(data);
+                    self.spin('');
                     message = data.split('');
                     message.pop(); message.shift();
                     if (message.length != 25){
@@ -111,9 +113,8 @@ window.onload = function () {
                     });
                 }
             });
-
         }
-
+        self.refresh();
     }
     ko.applyBindings(new manager());
 }
