@@ -38,10 +38,10 @@ window.onload = function () {
         self.eye = ko.observable('fa-eye');
         self.textcss = ko.observable('');
         self.peeked = ko.observable(false);
-        var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
         var seed = window.location.hash.split('#')[1];
         Math.seedrandom(seed);
+        var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
         if (seed.indexOf('cah') > -1){
             data = cah_data;
