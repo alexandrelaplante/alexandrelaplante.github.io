@@ -41,19 +41,20 @@ window.onload = function () {
         var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
         var seed = window.location.hash.split('#')[1];
+        Math.seedrandom(seed);
+
         if (seed.indexOf('cah') > -1){
-            data = shuffle(cah_data).slice(0,25);
+            data = cah_data;
         } else if (seed.indexOf('ff7') > -1) {
-            data = shuffle(ff_data).slice(0,25);
+            data = ff_data;
             self.textcss('big_text');
         } else if (seed.indexOf('poke') > -1) {
-            data = shuffle(poke_data).slice(0,25);
+            data = poke_data;
             self.textcss('big_text');
         } else {
-            data = shuffle(data).slice(0,25);
+            data = data;
             self.textcss('big_text');
         }
-        Math.seedrandom(seed);
         data = shuffle(data).slice(0,25);
         data.forEach(function(word, i){
             var colour = ['assassin', 'neutral', 'mui-btn--primary', 'mui-btn--danger'][colours[i]]
