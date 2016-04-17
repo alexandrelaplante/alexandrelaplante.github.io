@@ -27,9 +27,10 @@ window.onload = function () {
         data = shuffle(data).slice(0,25);
 
         self.words = ko.observableArray();
+        var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
-        data.forEach(function(word){
-            var colour = ['mui-btn--primary', 'mui-btn--danger', 'neutral'][Math.floor(Math.random()*3)]
+        data.forEach(function(word, i){
+            var colour = ['assassin', 'neutral', 'mui-btn--primary', 'mui-btn--danger'][colours[i]]
             var chosen = ko.observable(false);
             var current_colour = ko.pureComputed(function() {
                 if (chosen()){
@@ -103,6 +104,15 @@ html, body, .container { height: 100%; width: 100%; margin: 0; }
     transform: translateY(-50%);
     display: block;
     vertical-align: middle;
+}
+.assassin {
+    background-color: black;
+}
+.assassin span {
+    color: white;
+}
+.assassin:hover {
+    background-color: black;
 }
 .neutral {
     background-color: #FFCE57
