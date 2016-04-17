@@ -87,8 +87,10 @@ window.onload = function () {
             }
         }
         self.close = function(){
+            self.peeked(false);
+            self.spin('fa-spin');
+            self.eye('fa-eye');
             self.words().forEach(function(v){
-                self.peeked(false);
                 v.chosen(false);
             });
             $.ajax({
