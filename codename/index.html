@@ -5,7 +5,7 @@
 
 <div data-bind="foreach: words" class="container">
     <div class="box mui-btn mui-btn--large" data-bind="css: current_colour, click: choose">
-        <span class="text" data-bind="text: word"></span>
+        <div class="text" data-bind="text: word"></div>
     </div>
 </div>
 
@@ -159,19 +159,18 @@ html, body, .container { height: 100%; width: 100%; margin: 0; }
     display: inline-block;
     margin: 0 !important;
     padding: 0;
-    font-size: 2.1vw;
+    font-size: 0.8vw;
 }
 .text {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    display: block;
-    vertical-align: middle;
+    white-space: normal;
 }
 .assassin {
     background-color: black;
 }
-.assassin span {
+.assassin {
     color: white;
 }
 .assassin:hover {
