@@ -14,7 +14,7 @@
         <i class="fa fa-lg fa-times" aria-hidden="true"></i>
     </div>
     <div data-bind="click: showall" class="eye mui-btn mui-btn--large mui-btn--fab">
-        <i class="fa fa-lg fa-eye" aria-hidden="true"></i>
+        <i class="fa fa-lg" data-bind="css: eye" aria-hidden="true"></i>
     </div>
     <div data-bind="click: refresh" class="refresh mui-btn mui-btn--large mui-btn--fab">
         <i class="fa fa-lg fa-refresh" data-bind="css: spin" aria-hidden="true"></i>
@@ -39,6 +39,7 @@ window.onload = function () {
 
         self.words = ko.observableArray();
         self.spin = ko.observable('');
+        self.eye = ko.observable('fa-eye');
         var colours = shuffle([0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]);
 
         data.forEach(function(word, i){
@@ -69,6 +70,11 @@ window.onload = function () {
             self.words().forEach(function(v){
                 v.peeked(!v.peeked());
             });
+            if (self.eye() == 'fa-eye'){
+                self.eye('fa-eye-slash');
+            } else {
+                self.eye('fa-eye');
+            }
         }
         self.close = function(){
             self.words().forEach(function(v){
