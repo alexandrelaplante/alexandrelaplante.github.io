@@ -10,7 +10,7 @@
 </div>
 
 <div class="corner">
-    <div data-bind="click: hideall" class="eye mui-btn mui-btn--large mui-btn--fab">
+    <div data-bind="click: close" class="eye mui-btn mui-btn--large mui-btn--fab">
         <i class="fa fa-lg fa-times" aria-hidden="true"></i>
     </div>
     <div data-bind="click: showall" class="eye mui-btn mui-btn--large mui-btn--fab">
@@ -33,7 +33,7 @@ window.onload = function () {
     function manager() {
         var self = this;
         
-        var seed = window.location.hash;
+        var seed = window.location.hash.split('#')[1];
         Math.seedrandom(seed);
         data = shuffle(data).slice(0,25);
 
@@ -66,16 +66,16 @@ window.onload = function () {
 
         self.showall = function(){
             self.words().forEach(function(v){
-                v.peeked(true);
+                v.peeked(!v.peeked());
             });
         }
-        self.hideall = function(){
+        self.close = function(){
             self.words().forEach(function(v){
                 v.peeked(false);
                 v.chosen(false);
             });
             $.ajax({
-                url: '//hook.io/datastore/set?key=test12345',
+                url: '//hook.io/datastore/set?key=codename'+seed,
                 data: {
                     value: '0000000000000000000000000'
                 },
@@ -84,7 +84,7 @@ window.onload = function () {
         }
         self.refresh = function(){
             $.ajax({
-                url: '//hook.io/datastore/get?key=test12345',
+                url: '//hook.io/datastore/get?key=codename'+seed,
                 method: 'GET',
                 success: function(data){
                     console.log(data);
@@ -103,7 +103,7 @@ window.onload = function () {
                     });
                     console.log(message.join(''));
                     $.ajax({
-                        url: '//hook.io/datastore/set?key=test12345',
+                        url: '//hook.io/datastore/set?key=codename'+seed,
                         data: {
                             value: message.join('')
                         },
