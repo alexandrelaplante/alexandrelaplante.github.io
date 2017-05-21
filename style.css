@@ -33,3 +33,12 @@ p, li {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2em;
 }
+
+
+.card > ul {
+  padding: 0;
+}
+.card > ul > li {
+  list-style: none;
+  text-align: right;
+}
