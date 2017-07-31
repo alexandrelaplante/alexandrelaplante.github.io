@@ -1,0 +1,536 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>phaser - hello world</title>
+    </head>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <button id="chargingState" onclick="onClick()"></button>
+    <script src="phaser.js"></script>
+    <script>
+
+        function updateText() {
+            var chargingStateEl = document.getElementById('chargingState');
+            chargingStateEl.textContent = 'Charging: ' + window.battery.charging;
+        }
+
+        function onClick() {
+            window.battery = {charging: !window.battery.charging};
+            updateText();
+        }
+
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(function(battery) {
+                window.battery = battery;
+                updateText();
+            });
+        } else {
+            alert(
+                'The Battery Status API is not supported on ' +
+                'this platform.'
+            );
+            window.battery = {charging: true};
+            updateText();
+        }
+
+        var TILE_WIDTH = 16;
+        var SCALE = 3.5
+
+        // Accomodate for sprite offset
+        var X_OFFSET = 2;
+
+        var game = new Phaser.Game(
+            200,
+            150,
+            Phaser.AUTO,
+            'ludum39',
+            { preload: preload, create: create, update: update, render: render }
+        );
+
+        function preload() {
+            game.load.tilemap('map', 'maps/map1.json', null, Phaser.Tilemap.TILED_JSON);
+            game.load.tilemap('map2', 'maps/map2.json', null, Phaser.Tilemap.TILED_JSON);
+
+            game.load.image('dungeon_sheet', 'dungeon_sheet.png');
+            game.load.spritesheet('knight', 'knightanimation.png', 12, 16);
+            game.load.spritesheet('powered_door', 'force_field.png', 48, 32);
+            game.load.spritesheet('wooden_door', 'wooden_door.png', 16, 16);
+
+            game.load.audio('dungeon', ['Overworld.mp3']);
+        }
+
+        var map1;
+        var map2;
+        var marker;
+        var oldBatteryState;
+
+        var knight;
+        var cursors;
+        var currentDataString;
+        var currentMap;
+
+        var luminosity = {x: 0};
+
+        var line = [];
+
+        var wordIndex = 0;
+        var lineIndex = 0;
+
+        var wordDelay = 120;
+        var lineDelay = 400;
+
+        function nextLine(dialog, text) {
+
+            if (lineIndex === dialog.length) {
+                return;
+            }
+
+            line = dialog[lineIndex].split(' ');
+            wordIndex = 0;
+            function nextWordDialog() {
+                return nextWord(dialog, text);
+            }
+            game.time.events.repeat(wordDelay, line.length, nextWordDialog, this);
+            lineIndex++;
+
+        }
+
+        function nextWord(dialog, text) {
+
+            text.text = text.text.concat(line[wordIndex] + " ");
+            wordIndex++;
+
+            if (wordIndex === line.length)
+            {
+                text.text = text.text.concat("\n");
+                function nextLineDialog() {
+                    return nextLine(dialog, text);
+                }
+                game.time.events.add(lineDelay, nextLineDialog, this);
+            }
+
+        }
+
+        function createKnight(x, y) {
+            knight = game.add.sprite(x*TILE_WIDTH+X_OFFSET, y*TILE_WIDTH, 'knight');
+            game.physics.arcade.enable(knight);
+            game.camera.follow(knight, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+            knight.targetX = knight.body.x;
+            knight.targetY = knight.body.y;
+
+            knight.frame = 0;
+            knight.animations.add('up', [0, 1, 2], 8, true);
+            knight.animations.add('down', [12, 13, 14], 8, true);
+            knight.animations.add('left', [18, 19, 20], 8, true);
+            knight.animations.add('right', [6, 7, 8], 8, true);
+            return knight;
+        }
+
+        function renderMap(map) {
+            map.floorLayer = map.createLayer('Floor');
+            map.wallLayer = map.createLayer('Walls');
+            map.forgroundLayer = map.createLayer('Forground');
+            map.animatedLayer = map.createLayer('Animated');
+            map.textLayer = map.createLayer('TextTriggers');
+            map.animatedLayer.visible = false;
+            map.textLayer.visible = false;
+
+            map.floorLayer.resizeWorld();
+            map.wallLayer.resizeWorld();
+            map.forgroundLayer.resizeWorld();
+
+            //  Our painting marker
+            if (marker) {
+                marker.destroy();
+            }
+            marker = game.add.graphics();
+            marker.lineStyle(2, 0xffffff, 1);
+            marker.drawRect(0, 0, TILE_WIDTH, TILE_WIDTH);
+
+            currentMap = map;
+        }
+
+        function move(targetX, targetY, animation) {
+
+            if (isMoving()) {
+                return;
+            }
+
+            knight.animations.play(animation);
+
+            if (!isWall(targetX, targetY)) {
+                knight.targetX = targetX;
+                knight.targetY = targetY;
+                s = game.add.tween(knight.body);
+                s.to({x: targetX, y:targetY}, 400, Phaser.Easing.Linear.None);
+                s.onComplete.addOnce(function(){
+                    knight.animations.stop();
+                    if (cursors.left.isDown) {
+                        moveLeft();
+                    } else if (cursors.right.isDown) {
+                        moveRight();
+                    } else if (cursors.up.isDown) {
+                        moveUp();
+                    } else if (cursors.down.isDown) {
+                        moveDown();
+                    }
+                }, this);
+                s.start();
+
+                d = getText(targetX, targetY);
+                if (d) {
+                    lineIndex = 0;
+                    text = game.add.text(
+                        d.x * TILE_WIDTH,
+                        d.y * TILE_WIDTH,
+                        '',
+                        textStyle
+                    );
+                    nextLine(d.dialog, text);
+                }
+            }
+        }
+
+        function moveLeft() {
+            var targetX = knight.targetX - TILE_WIDTH;
+            var targetY = knight.targetY;
+            return move(targetX, targetY, 'left');
+        }
+        function moveRight() {
+            var targetX = knight.targetX + TILE_WIDTH;
+            var targetY = knight.targetY;
+            return move(targetX, targetY, 'right');
+        }
+        function moveUp() {
+            var targetX = knight.targetX;
+            var targetY = knight.targetY - TILE_WIDTH;
+            return move(targetX, targetY, 'up');
+        }
+        function moveDown() {
+            var targetX = knight.targetX;
+            var targetY = knight.targetY + TILE_WIDTH;
+            return move(targetX, targetY, 'down');
+        }
+
+        function create() {
+
+            Phaser.Canvas.setImageRenderingCrisp(game.canvas)
+            PIXI.scaleModes.DEFAULT = PIXI.scaleModes.NEAREST
+
+            // scale the game 4x
+            game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+            game.scale.setUserScale(SCALE, SCALE);
+
+            // enable crisp rendering
+            game.renderer.renderSession.roundPixels = true;
+            Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
+
+            game.world.setBounds(-200, -200, 500, 500);
+            game.physics.startSystem(Phaser.Physics.ARCADE);
+
+            map1 = game.add.tilemap('map');
+            map2 = game.add.tilemap('map2');
+            map1.addTilesetImage('dungeon_sheet');
+            map2.addTilesetImage('dungeon_sheet');
+
+            renderMap(map1);
+
+            map1.nextMap = map2;
+            map1.goalX = 3*TILE_WIDTH + X_OFFSET;
+            map1.goalY = 0;
+
+            map2.goalX = 2*TILE_WIDTH + X_OFFSET;
+            map2.goalY = TILE_WIDTH;
+
+            game.input.mouse.capture = true;
+
+            game.input.addMoveCallback(updateMarker, this);
+            game.input.onDown.add(getTilePropertiesFromPointer, this);
+
+            knight = createKnight(14, 10);
+
+            cursors = game.input.keyboard.createCursorKeys();
+
+            cursors.left.onDown.add(moveLeft, this);
+            cursors.right.onDown.add(moveRight, this);
+            cursors.up.onDown.add(moveUp, this);
+            cursors.down.onDown.add(moveDown, this);
+
+            music = game.add.audio('dungeon');
+            music.play();
+
+            fragmentSrc = [
+                'precision lowp float;',
+                'varying vec2 vTextureCoord;',
+                'varying vec4 vColor;',
+                'uniform sampler2D uSampler;',
+                'uniform float time;',
+                'uniform vec2 mouse;',
+
+                'void main() {',
+                    'vec4 sum = vec4(0);',
+                    'vec2 texcoord = vTextureCoord;',
+                    'for(int xx = -4; xx <= 4; xx++) {',
+                        'for(int yy = -3; yy <= 3; yy++) {',
+                            'float dist = sqrt(float(xx*xx) + float(yy*yy));',
+                            'float factor = 0.0;',
+                            'if (dist == 0.0) {',
+                                'factor = 2.0;',
+                            '} else {',
+                                'factor = 2.0/abs(float(dist));',
+                            '}',
+                            'sum += texture2D(uSampler, texcoord + vec2(xx, yy) * 0.002) * factor;',
+                        '}',
+                    '}',
+                    'float luminosity = mouse.x;',
+                    'gl_FragColor = sum * luminosity * 0.0002 + texture2D(uSampler, texcoord);',
+                '}'
+            ];
+
+            filter = new Phaser.Filter(game, null, fragmentSrc);
+            game.world.filters = [filter];
+
+            textStyle = { font: 'Ariel', fill: '#ffffff', fontSize: 16}
+
+        }
+
+        function isMoving() {
+            return (
+                knight.body.x != knight.targetX
+                || knight.body.y != knight.targetY
+            );
+        }
+
+        function getTileProperties(x, y) {
+
+            var x = currentMap.forgroundLayer.getTileX(x);
+            var y = currentMap.forgroundLayer.getTileY(y);
+
+            var tile = currentMap.getTile(x, y, currentMap.forgroundLayer) ||
+              currentMap.getTile(x, y, currentMap.wallLayer) ||
+              currentMap.getTile(x, y, currentMap.floorLayer);
+
+            currentKnightX = knight.body.x/TILE_WIDTH;
+            currentKnightY = knight.body.y/TILE_WIDTH;
+
+            // selected axis stays the same for control
+            if (tile.y == currentKnightY) {
+                if (tile.x > knight.body.x/TILE_WIDTH) {
+                    moveRight();
+                }
+                if (tile.x < knight.body.x/TILE_WIDTH) {
+                    moveLeft();
+                }
+            } else {
+                if (tile.y > knight.body.y/TILE_WIDTH) {
+                    moveDown();
+                }
+                if (tile.y < knight.body.y/TILE_WIDTH) {
+                    moveUp();
+                }
+            }
+        }
+
+        function isWall(x, y) {
+
+            var x = currentMap.wallLayer.getTileX(x);
+            var y = currentMap.wallLayer.getTileY(y);
+
+            var tile = currentMap.getTile(x, y, currentMap.wallLayer);
+
+            var closedDoor = false;
+            if (currentMap.door) {
+                var closedDoor = currentMap.getTile(x, y, currentMap.animatedLayer) && !currentMap.door.isOpen;
+            }
+
+            return tile != null || closedDoor;
+        }
+
+        function getText(x, y) {
+
+            var x = currentMap.textLayer.getTileX(x);
+            var y = currentMap.textLayer.getTileY(y);
+
+            var tile = currentMap.getTile(x, y, currentMap.textLayer);
+
+            if (!tile) {
+                return;
+            }
+
+            dialogNumber = tile.properties['text'];
+            if (dialogNumber == 10) {
+                return {
+                    x: 6,
+                    y: 17,
+                    dialog: [
+                        "The great mechanical palace.",
+                    ]
+                };
+            } else if (dialogNumber == 20) {
+                return {
+                    x: 0,
+                    y: 11,
+                    dialog: [
+                        "It's source is exchausted.",
+                        "The people are all gone.",
+                    ]
+                };
+            } else if (dialogNumber == 30) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "Power is running out.",
+                        "I need to conserve mine.",
+                    ]
+                };
+            } else if (dialogNumber == 40) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "Conservation is insufficient.",
+                        "I must master power.",
+                    ]
+                };
+            } else if (dialogNumber == 50) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "There must be a way to control",
+                        "the flow of power.",
+                    ]
+                };
+            } else if (dialogNumber == 60) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "Perhaps if I were outside.",
+                        "Outside this game.",
+                    ]
+                };
+            } else if (dialogNumber == 70) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "If only...",
+                        "I could simply unplug the power.",
+                    ]
+                };
+            } else if (dialogNumber == 80) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "Unplug your device.",
+                    ]
+                };
+            } else if (dialogNumber == 90) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "No literally.",
+                        "Try unplugging and plugging your device.",
+                        "Like in the real world.",
+                    ]
+                };
+            } else if (dialogNumber == 100) {
+                return {
+                    x: 0,
+                    y: 2,
+                    dialog: [
+                        "If you're on a desktop,",
+                        "Switch to a laptop or phone.",
+                    ]
+                };
+            }
+
+            return dialog;
+        }
+
+        function getTilePropertiesFromPointer() {
+
+            var x = (game.input.activePointer.worldX);
+            var y = (game.input.activePointer.worldY);
+
+            return getTileProperties(x, y);
+        }
+
+        function updateMarker() {
+
+            marker.x = currentMap.forgroundLayer.getTileX(game.input.activePointer.worldX) * TILE_WIDTH;
+            marker.y = currentMap.forgroundLayer.getTileY(game.input.activePointer.worldY) * TILE_WIDTH;
+
+        }
+
+        function renderNextMap() {
+            currentMap.floorLayer.destroy();
+            currentMap.wallLayer.destroy();
+            currentMap.forgroundLayer.destroy();
+            currentMap.animatedLayer.destroy()
+            currentMap.textLayer.destroy()
+            knight.destroy();
+
+            nextMap = currentMap.nextMap;
+            if (nextMap == undefined) {
+                alert("WOOHOO");
+            }
+            renderMap(nextMap);
+            text.text = '';
+
+            nextMap.door = game.add.sprite(1*TILE_WIDTH, 7*TILE_WIDTH, 'powered_door');
+            nextMap.door.frame = 0;
+            nextMap.door.animations.add('close', [0, 1, 2, 3, 4], 8, false);
+            nextMap.door.animations.add('open', [4, 3, 2, 1, 0], 8, false);
+            nextMap.door.animations.play('close');
+
+            createKnight(2, 11);
+        };
+
+        function update() {
+            if (knight.body.x == currentMap.goalX && knight.body.y == currentMap.goalY) {
+                renderNextMap();
+            }
+            if (!isMoving()){
+                knight.animations.stop()
+            }
+
+            newBatteryState = window.battery.charging;
+
+            if (oldBatteryState != newBatteryState) {
+                oldBatteryState = newBatteryState;
+
+                if (newBatteryState) {
+                    game.add.tween(luminosity).to({x: 5000}, 1000, Phaser.Easing.Quadratic.In, true);
+                    if (currentMap.door) {
+                        currentMap.door.animations.play('close');
+                        currentMap.door.isOpen = false;
+                    }
+                } else {
+                    game.add.tween(luminosity).to({x: -5000}, 1000, Phaser.Easing.Quadratic.Out, true);
+                    if (currentMap.door) {
+                        currentMap.door.animations.play('open');
+                        currentMap.door.isOpen = true;
+                    }
+                }
+            }
+
+            // What a hack.
+            // The filter wants to know the mouse position,
+            // so I fake a mouse in order to pass in a variable.
+            pointer = game.input.activePointer;
+            pointer.x = luminosity.x;
+
+            filter.update(pointer);
+
+        }
+
+        function render() {
+
+        }
+
+    </script>
+</html>
