@@ -52,7 +52,8 @@
 
             game.load.image('dungeon_sheet', 'dungeon_sheet.png');
             game.load.spritesheet('knight', 'knightanimation.png', 12, 16);
-            game.load.spritesheet('powered_door', 'force_field.png', 48, 32);
+            game.load.spritesheet('force_field', 'force_field.png', 48, 32);
+            game.load.spritesheet('powered_door', 'powered_door.png', 48, 32);
             game.load.spritesheet('wooden_door', 'wooden_door.png', 16, 16);
 
             game.load.audio('dungeon', ['Overworld.mp3']);
@@ -339,7 +340,12 @@
 
             var closedDoor = false;
             if (currentMap.door) {
-                var closedDoor = currentMap.getTile(x, y, currentMap.animatedLayer) && !currentMap.door.isOpen;
+                
+                if (y > 4) {
+                    var closedDoor = currentMap.getTile(x, y, currentMap.animatedLayer) && !currentMap.door.isOpen;
+                } else {
+                    var closedDoor = currentMap.getTile(x, y, currentMap.animatedLayer) && !currentMap.door2.isOpen;
+                }
             }
 
             return tile != null || closedDoor;
@@ -481,11 +487,17 @@
             renderMap(nextMap);
             text.text = '';
 
-            nextMap.door = game.add.sprite(1*TILE_WIDTH, 7*TILE_WIDTH, 'powered_door');
+            nextMap.door = game.add.sprite(1*TILE_WIDTH, 7*TILE_WIDTH, 'force_field');
             nextMap.door.frame = 0;
             nextMap.door.animations.add('close', [0, 1, 2, 3, 4], 8, false);
             nextMap.door.animations.add('open', [4, 3, 2, 1, 0], 8, false);
             nextMap.door.animations.play('close');
+            
+            nextMap.door2 = game.add.sprite(0, 1*TILE_WIDTH, 'powered_door');
+            nextMap.door2.frame = 0;
+            nextMap.door2.animations.add('close', [0, 1, 2, 3, 4], 8, false);
+            nextMap.door2.animations.add('open', [4, 3, 2, 1, 0], 8, false);
+            nextMap.door2.animations.play('close');
 
             createKnight(2, 11);
         };
@@ -509,11 +521,19 @@
                         currentMap.door.animations.play('close');
                         currentMap.door.isOpen = false;
                     }
+                    if (currentMap.door2) {
+                        currentMap.door2.animations.play('open');
+                        currentMap.door2.isOpen = true;
+                    }
                 } else {
                     game.add.tween(luminosity).to({x: -5000}, 1000, Phaser.Easing.Quadratic.Out, true);
                     if (currentMap.door) {
                         currentMap.door.animations.play('open');
                         currentMap.door.isOpen = true;
+                    }
+                    if (currentMap.door2) {
+                        currentMap.door2.animations.play('close');
+                        currentMap.door2.isOpen = false;
                     }
                 }
             }
