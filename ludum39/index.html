@@ -493,10 +493,10 @@
             nextMap.door.animations.add('open', [4, 3, 2, 1, 0], 8, false);
             nextMap.door.animations.play('close');
             
-            nextMap.door2 = game.add.sprite(0, 1*TILE_WIDTH, 'powered_door');
+            nextMap.door2 = game.add.sprite(1*TILE_WIDTH, 1*TILE_WIDTH, 'powered_door');
             nextMap.door2.frame = 0;
-            nextMap.door2.animations.add('close', [0, 1, 2, 3, 4], 8, false);
-            nextMap.door2.animations.add('open', [4, 3, 2, 1, 0], 8, false);
+            nextMap.door2.animations.add('close', [4, 3, 2, 1, 0], 8, false);
+            nextMap.door2.animations.add('open', [0, 1, 2, 3, 4], 8, false);
             nextMap.door2.animations.play('close');
 
             createKnight(2, 11);
