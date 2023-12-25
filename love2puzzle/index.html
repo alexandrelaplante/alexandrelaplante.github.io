@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+ 
+    <script type="text/babel">
+      function encode(obj) {
+        return btoa(JSON.stringify(obj))
+      }
+ 
+      function decode(s) {
+        try {
+            return JSON.parse(atob(s))
+        } catch {
+            return Array(16).fill("");
+        }
+      }
+ 
+      function isValid(puzzle) {
+        return puzzle && puzzle.length === 16 && [...new Set(puzzle)].length === 16;
+      }
+ 
+    //   file:///C:/Users/alexa/love2puzzle/index.html?puzzle=WyJQRVRFUiBESU5LTEFHRSIsIlJBQ0NPT04iLCJTTkFQIiwiQVNTRU1CTEUiLCJGQVRIRVIiLCJTUEFDRSIsIkxVS0UiLCJGT1JDRSIsIldJTEwiLCJNVVJERVIiLCJNWVNURVJZIiwiREFOSUVMIENSQUlHIiwiRUxWRVMiLCJDTEFSSUNFIiwiU1RPUC1NT1RJT04iLCJDVVRFIl0
+ 
+ 
+      Array.prototype.pySlice = function(b,e,s=1) {
+        var n=[];
+        for (var i=b; i<e; i+=s) {
+            n.push(this[i]);
+        }
+        return n;
+      }
+ 
+      function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+ 
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+ 
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+ 
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+ 
+        return array;
+       }
+ 
+       function shuffleUntilNoSolutions(puzzle, array) {
+        let result = [];
+        let i = 0;
+        while(i < 1000) {
+            result = shuffle(array);
+            const hasSolution = evaluate(puzzle, result)
+                               .some(x => (x.colors.length > 0));
+            if (!hasSolution) {
+                return result;
+            }
+            i++;
+        }
+       }
+ 
+      function getRow(i, grid) {
+        if (i < 4) {
+            return grid.pySlice(0, 4);
+        } else if (i < 8) {
+            return grid.pySlice(4, 8);
+        } else if (i < 12) {
+            return grid.pySlice(8, 12);
+        } else if (i < 16) {
+            return grid.pySlice(12, 16);
+        }
+      }
+ 
+      function getColumn(i, grid) {
+        return grid.pySlice(i % 4, 16, 4);
+      }
+ 
+      function evaluate(puzzle, grid) {
+        const group1 = puzzle.pySlice(0, 4);
+        const group2 = puzzle.pySlice(4, 8);
+        const group3 = puzzle.pySlice(8, 12);
+        const group4 = puzzle.pySlice(12, 16);
+        const group5 = puzzle.pySlice(0, 16, 4);
+ 
+        const results = [];
+        let i = 0;
+        for (const entry of grid) {
+            const row = getRow(i, grid).map(x => x.text);
+            const col = getColumn(i, grid).map(x => x.text);
+ 
+            const partialInRow = [
+                group1.includes(entry.text) && (row.filter(x => group1.includes(x)).length == 3),
+                group2.includes(entry.text) && (row.filter(x => group2.includes(x)).length == 3),
+                group3.includes(entry.text) && (row.filter(x => group3.includes(x)).length == 3),
+                group4.includes(entry.text) && (row.filter(x => group4.includes(x)).length == 3),
+                group5.includes(entry.text) && (row.filter(x => group5.includes(x)).length == 3),
+            ].some(x => x);
+ 
+            const partialInCol = [
+                group1.includes(entry.text) && (col.filter(x => group1.includes(x)).length == 3),
+                group2.includes(entry.text) && (col.filter(x => group2.includes(x)).length == 3),
+                group3.includes(entry.text) && (col.filter(x => group3.includes(x)).length == 3),
+                group4.includes(entry.text) && (col.filter(x => group4.includes(x)).length == 3),
+                group5.includes(entry.text) && (col.filter(x => group5.includes(x)).length == 3),
+            ].some(x => x);
+ 
+            const color1 = (
+                col.filter(x => group1.includes(x)).length == 4
+                || row.filter(x => group1.includes(x)).length == 4
+            )
+ 
+            const color2 = (
+                col.filter(x => group2.includes(x)).length == 4
+                || row.filter(x => group2.includes(x)).length == 4
+            )
+ 
+            const color3 = (
+                col.filter(x => group3.includes(x)).length == 4
+                || row.filter(x => group3.includes(x)).length == 4
+            )
+ 
+            const color4 = (
+                col.filter(x => group4.includes(x)).length == 4
+                || row.filter(x => group4.includes(x)).length == 4
+            )
+ 
+            const color5 = (
+                col.filter(x => group5.includes(x)).length == 4
+                || row.filter(x => group5.includes(x)).length == 4
+            )
+ 
+            const colors = [
+                color5 ? 'var(--group5)' : null,    
+                color1 ? 'var(--group1)' : null,
+                color2 ? 'var(--group2)' : null,
+                color3 ? 'var(--group3)' : null,
+                color4 ? 'var(--group4)' : null,
+            ].filter(x => x !== null);
+ 
+            if (partialInCol || partialInRow) {
+                colors.push('var(--partial)');
+            }
+ 
+            results.push({id: entry.id, colors});
+ 
+            i++;
+        }
+        return results;
+      }
+ 
+      function Tile({name, onDragStart, onDrop, isDragged, colors, x, y}) {
+        const [isDragging, setIsDragging] = React.useState(false);
+        function onDragOver(e) {
+            e.preventDefault();
+        }
+        function handleDrop(e) {
+            setIsDragging(false);
+            onDrop(e);
+        }
+ 
+        return (
+            <React.Fragment>
+                <div
+                    className={`tile ${isDragged ? 'dragging' : ''}`}
+                    style={{
+                        backgroundColor: colors[0],
+                        outline: isDragging ? '4px solid var(--selected)' : '',
+                    }}
+                    onDragStart={onDragStart}
+                    onDragOver={onDragOver}
+                    onDragEnter={() => {setIsDragging(true);}}
+                    onDragLeave={() => {setIsDragging(false);}}
+                    onDrop={handleDrop}
+                    draggable
+                >
+                    {name}
+                    <div
+                        className="tileShadow"
+                        style={{backgroundColor: colors[1]}}
+                    >
+                    </div>
+                </div>
+            </React.Fragment>
+        );
+      }
+ 
+      function Board({puzzle}) {
+        const solved = puzzle.map((text, i) => ({id: i+1, text}));
+        const initialGrid = shuffleUntilNoSolutions(puzzle, solved);
+        // const initialGrid = solved;
+        const [grid, setGrid] = React.useState(initialGrid);
+        const [dragging, setDragging] = React.useState(null);
+        const [x, setX] = React.useState(0);
+        const [y, setY] = React.useState(0);
+        const [xOffset, setXOffset] = React.useState(0);
+        const [yOffset, setYOffset] = React.useState(0);
+ 
+        const evaluation = evaluate(puzzle, grid);
+ 
+        const i = 0;
+        const colors = {};
+ 
+        for (const result of evaluation) {
+            colors[result.id] = result.colors;
+        }
+ 
+        function handleDragStart(e, sourceId) {
+            var rect = e.target.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            setXOffset(x);
+            setYOffset(y);
+            setDragging(sourceId);
+        }
+ 
+        function handleDrop(targetId) {
+            setDragging(null);
+            setX(0);
+            setY(0);
+            setXOffset(0);
+            setYOffset(0);
+            if (dragging === null || targetId === null) {
+                return;
+            }
+ 
+            const sourceIndex = grid.findIndex(x => x.id === dragging);
+            const targetIndex = grid.findIndex(x => x.id === targetId);
+ 
+            const newGrid = [...grid];
+ 
+            newGrid[sourceIndex] = grid[targetIndex];
+            newGrid[targetIndex] = grid[sourceIndex];
+ 
+            setGrid(newGrid);
+        }
+ 
+        return (
+            <div className="board">
+                {grid.map(entry => (
+                    <Tile
+                        key={entry.id}
+                        name={entry.text}
+                        colors={colors[entry.id]}
+                        isDragged={dragging === entry.id}
+                        onDragStart={(e) => {handleDragStart(e, entry.id);}}
+                        onDrop={() => {handleDrop(entry.id);}}
+                    />
+                ))}
+            </div>
+        );
+      }
+ 
+      function EditorTile({text, colors, setText}) {
+        return (
+            <div
+                className="tile"
+                style={{backgroundColor: colors[0]}}
+            >
+                <input
+                    type="text"
+                    name="text"
+                    value={text}
+                    onChange={e => {setText(e.target.value);}}
+                />
+                <div
+                    className="tileShadow"
+                    style={{backgroundColor: colors[1]}}
+                >
+                </div>
+            </div>
+        );
+      }
+ 
+      function Editor({puzzle, setPuzzle}) {
+        const colors = [
+            ['var(--group5)', 'var(--group1)'],
+            ['var(--group1)'],
+            ['var(--group1)'],
+            ['var(--group1)'],
+            ['var(--group5)', 'var(--group2)'],
+            ['var(--group2)'],
+            ['var(--group2)'],
+            ['var(--group2)'],
+            ['var(--group5)', 'var(--group3)'],
+            ['var(--group3)'],
+            ['var(--group3)'],
+            ['var(--group3)'],
+            ['var(--group5)', 'var(--group4)'],
+            ['var(--group4)'],
+            ['var(--group4)'],
+            ['var(--group4)'],
+        ];
+ 
+        function onChange(i, text) {
+            const newPuzzle = [...puzzle]
+            newPuzzle.splice(i, 1, text);
+            setPuzzle(newPuzzle);
+        }
+        return (
+            <div className="board">
+                {puzzle.map((text, i) => (
+                    <EditorTile
+                        text={text}
+                        setText={(text) => {onChange(i, text);}}
+                        key={i}
+                        colors={colors[i]}
+                    />
+                ))}
+            </div>
+        );
+      }
+ 
+      function Page() {
+        const defaultPuzzle = Array(16).fill("");
+        const [page, setPage] = React.useState('puzzle');
+        const [puzzle, setPuzzle] = React.useState(defaultPuzzle);
+        const [copyText, setCopyText] = React.useState('Copy URL');
+ 
+        React.useEffect(() => {
+            const searchParams = new URLSearchParams(window.location.search);
+            const encodedPuzzle = searchParams.get('puzzle');
+            setPuzzle(decode(encodedPuzzle));
+        }, []);
+ 
+        function handlePuzzleChange(p) {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("puzzle", encode(p));
+            const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+            history.pushState(null, '', newRelativePathQuery);
+            setPuzzle(p);
+        }
+ 
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href);
+            setCopyText('Copied to clipboard!');
+            setTimeout(() => {
+                setCopyText('Copy URL');
+            }, 3000)
+        }
+ 
+        function getConfirm() {
+            if (isValid(puzzle)) {
+                return window.confirm('This will show you the solution. Are you sure?')
+            }
+            return true;
+        }
+ 
+        function goToEditor() {
+            const really = getConfirm();
+            if (really) {
+                setPage('editor');
+            }
+        }
+ 
+        if (page === 'puzzle') {
+            return (
+                <div className="page">
+                    <button onClick={goToEditor}>Edit</button>
+                    <button onClick={() => {copyURL()}}>{copyText}</button>
+                    {isValid(puzzle) ? (
+                        <Board puzzle={puzzle} />
+                    ) : (
+                        <div>Invalid puzzle</div>
+                    )}
+ 
+                </div>
+            );
+        } else if (page === 'editor') {
+            return (
+                <div className="page">
+                    <button onClick={() => {setPage('puzzle')}}>Play</button>
+                    <button onClick={() => {copyURL()}}>{copyText}</button>
+                    <Editor puzzle={puzzle} setPuzzle={(p) => {handlePuzzleChange(p);}} />
+                </div>
+            );
+        }
+ 
+      }
+ 
+      const container = document.getElementById('app');
+      const root = ReactDOM.createRoot(container);
+      root.render(<Page />)
+    </script>
+ 
+    <style>
+        :root {
+            --group5:#01befe;
+            --group1:#8f00ff;
+            --group2:#ff7d00;
+            --group3:#ff006d;
+            --group4:#adff02;
+            --partial:#ffdd00;
+            --empty: #cbd4d4;
+            --background: #1c1c1c;
+            --selected: #0fff02;
+        }
+ 
+        body, button, input {
+            font-family: Tahoma, sans-serif;
+            font-weight: 700;
+            color: var(--empty);
+        }
+ 
+        body {
+            background-color: var(--background);
+        }
+ 
+        .page {
+            padding: 10px 30px;
+        }
+ 
+        .board {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            gap: 10px;
+            max-width: 800px;
+        }
+ 
+        .tile {
+            color: var(--background);
+            background-color: var(--empty);
+            border-radius: 20px;
+            height: 10rem;
+            width: 12rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            position: relative;
+        }
+ 
+        .tileShadow {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: -10;
+            transform: translate(10px, 10px);
+            border-radius: inherit;
+        }
+ 
+        .dragging {
+            background-color: var(--background) !important;
+            color: var(--empty) !important;
+            outline: 4px solid var(--empty);
+        }
+ 
+        input {
+            height: 4em;
+            width: 100%;
+            color: var(--background);
+        }
+ 
+        button {
+            height: 2em;
+            min-width: 100px;
+            margin: 0 10px 20px 0;
+            background-color: var(--empty);
+            border: none;
+            border-radius: 10px;
+            color: var(--background);
+            cursor: pointer;
+        }
+        button:hover {
+            /* background-color: var(--group5); */
+            /* color: var(--selected); */
+        }
+    </style>
+ 
+  </body>
+</html>
