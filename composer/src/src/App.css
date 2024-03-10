@@ -1,0 +1,21 @@
+#root {
+  width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  text-align: center;
+}
+
+.error {
+  color: rgba(255, 45, 45, 0.703);
+  white-space: pre;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+}
+
+textarea {
+  width: 100%;
+}
+
+svg {
+  max-height: 200px;
+}

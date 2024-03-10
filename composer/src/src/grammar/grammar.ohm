@@ -1,0 +1,10 @@
+Music {
+    Piece = (Note | Rest)*
+    Note = (sharpable sharp | note "") duration? octave?
+    Rest = "r" duration?
+    note = "a" .. "g"
+    sharpable = "a" | "c" | "d" | "f" | "g"
+    sharp = "#"
+    duration = "2." | "4." | "8." | "1" | "2" | "4" | "8"
+    octave = "\'" | ","
+}
