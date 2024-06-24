@@ -6,5 +6,5 @@ Music {
     sharpable = "a" | "c" | "d" | "f" | "g"
     sharp = "#"
     duration = "2." | "4." | "8." | "1" | "2" | "4" | "8"
-    octave = "\'" | ","
+    octave = "\'" | ",," | ","
 }
