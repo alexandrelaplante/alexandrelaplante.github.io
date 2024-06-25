@@ -7,6 +7,7 @@ import { HalfNote } from "./half_note";
 import { Dot } from "./dot";
 import { Sharp } from "./sharp";
 import { Line } from "./line";
+import { Finger } from "./finger";
 
 export type NoteProps = {
   note: GNote | GRest;
@@ -75,6 +76,15 @@ function getLineHeights(notePosition: number) {
   return linePositions.map((pos) => -NOTE_HEIGHT * (pos + A_OFFSET));
 }
 
+function getFinger(notePosition: number): String | number {
+  if (notePosition > 9) {
+    return "?";
+  } else if (notePosition > 7) {
+    return 4;
+  }
+  return (notePosition + 16) % 4;
+}
+
 export function Note({ note, index, isCurrent }: NoteProps) {
   if (note.type === "Rest") {
     return (
@@ -90,15 +100,18 @@ export function Note({ note, index, isCurrent }: NoteProps) {
   const NoteComponent = getNoteComponent(note);
   const dotted = isDotted(note.duration);
   const lineHeights = getLineHeights(notePosition);
+  const dotOffset = notePosition % 2 === 0 ? 0 : NOTE_HEIGHT;
+  const finger = getFinger(notePosition);
 
   return (
     <g fill={isCurrent ? CURRENT_COLOR : undefined}>
       <NoteComponent x={x} y={height} />
       {note.sharp ? <Sharp x={x} y={height} /> : null}
-      {dotted ? <Dot x={x} y={height} /> : null}
+      {dotted ? <Dot x={x} y={height - dotOffset} /> : null}
       {lineHeights.map((height) => (
-        <Line x={x} y={height} />
+        <Line x={x} y={height} key={`${x}-${height}`} />
       ))}
+      <Finger x={x} y={300} num={finger} />
     </g>
   );
 }

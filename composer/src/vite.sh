@@ -1,9 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 
-npm run build
+sigint_handler()
+{
+  npx kill-port 5173
+  exit
+}
+
+trap sigint_handler SIGINT
+
 while true; do
-
-inotifywait -e modify,create,delete -r ./ && \
-npm run build
-
+  npm run dev &
+  sleep 2
+  inotifywait -e modify,create,delete -r ./
+  npx kill-port 5173
 done
