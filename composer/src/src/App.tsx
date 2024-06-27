@@ -1,8 +1,23 @@
 import { useContext, useState } from "react";
 import "./App.css";
-import { Grammar } from "./grammar/grammar.ts";
+import { Grammar, AST } from "./grammar/grammar.ts";
 import { Visualizer } from "./visualizer.tsx";
 import { ViolinContext } from "./audio/provider.tsx";
+
+const ALL_NOTES: [string, boolean][] = [
+  ["a", false],
+  ["a", true],
+  ["b", false],
+  ["c", false],
+  ["c", true],
+  ["d", false],
+  ["d", true],
+  ["e", false],
+  ["f", false],
+  ["f", true],
+  ["g", false],
+  ["g", true],
+];
 
 function App() {
   const [text, setText] = useState("");
@@ -29,7 +44,64 @@ function App() {
     }
   }
 
-  console.log(result?.ast);
+  function transposeUp() {
+    if (result?.ast === undefined) {
+      console.log("can't transpose");
+      return;
+    }
+
+    const notes: AST = [];
+    for (const note of result.ast) {
+      if (note.type === "Rest") {
+        notes.push(note);
+      } else {
+        const newNote = Object.assign({}, note);
+        const index = ALL_NOTES.findIndex(
+          ([letter, sharp]) => note.letter === letter && note.sharp === sharp,
+        );
+        const newIndex = (index + 1) % ALL_NOTES.length;
+        newNote.letter = ALL_NOTES[newIndex][0];
+        newNote.sharp = ALL_NOTES[newIndex][1];
+        if (newIndex < index) {
+          newNote.octave += 1;
+        }
+        notes.push(newNote);
+      }
+    }
+    setText(g.toString(notes));
+  }
+
+  function transposeDown() {
+    if (result?.ast === undefined) {
+      console.log("can't transpose");
+      return;
+    }
+
+    const notes: AST = [];
+    for (const note of result.ast) {
+      if (note.type === "Rest") {
+        notes.push(note);
+      } else {
+        const newNote = Object.assign({}, note);
+        const index = ALL_NOTES.findIndex(
+          ([letter, sharp]) => note.letter === letter && note.sharp === sharp,
+        );
+        const newIndex = (ALL_NOTES.length + index - 1) % ALL_NOTES.length;
+        newNote.letter = ALL_NOTES[newIndex][0];
+        newNote.sharp = ALL_NOTES[newIndex][1];
+        if (newIndex > index) {
+          newNote.octave -= 1;
+        }
+        notes.push(newNote);
+      }
+    }
+    setText(g.toString(notes));
+  }
+
+  /* console.log(result?.ast);
+   * if (result?.ast !== undefined) {
+   *   console.log(g.toString(result.ast));
+   * } */
 
   return (
     <>
@@ -46,6 +118,8 @@ function App() {
         >
           Farewell
         </button>
+        <button onClick={transposeUp}>Up</button>
+        <button onClick={transposeDown}>Down</button>
         <p className="error">{result.error}</p>
       </div>
     </>

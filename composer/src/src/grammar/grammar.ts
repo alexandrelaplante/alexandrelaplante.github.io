@@ -50,6 +50,20 @@ function mapOctave(s: string | null) {
   }
 }
 
+function unmapOctave(octave: number): string {
+  switch (octave) {
+    case 1:
+      return "'";
+    case 0:
+      return "";
+    case -1:
+      return ",";
+    case -2:
+      return ",,";
+  }
+  return "";
+}
+
 function mapDuration(s: string | null) {
   switch (s) {
     case "1":
@@ -67,6 +81,25 @@ function mapDuration(s: string | null) {
       return Duration.Eighth;
     case "8.":
       return Duration.DottedEighth;
+  }
+}
+
+function unmapDuration(s: string | null) {
+  switch (s) {
+    case Duration.Whole:
+      return "1";
+    case Duration.Half:
+      return "2";
+    case Duration.DottedHalf:
+      return "2.";
+    case Duration.Quarter:
+      return "4";
+    case Duration.DottedQuarter:
+      return "4.";
+    case Duration.Eighth:
+      return "8";
+    case Duration.DottedEighth:
+      return "8.";
   }
 }
 
@@ -101,5 +134,20 @@ export class Grammar {
       error,
       ast: ast as AST,
     };
+  }
+
+  public toString(ast: AST): string {
+    const result = [];
+    for (const note of ast) {
+      const duration = unmapDuration(note.duration);
+      if (note.type === "Note") {
+        const sharp = note.sharp ? "#" : "";
+        const octave = unmapOctave(note.octave);
+        result.push(`${note.letter}${sharp}${duration}${octave}`);
+      } else {
+        result.push(`r${duration}`);
+      }
+    }
+    return result.join(" ");
   }
 }
