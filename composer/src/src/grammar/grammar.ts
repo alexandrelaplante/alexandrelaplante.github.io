@@ -18,11 +18,13 @@ export type Note = {
   sharp: boolean;
   duration: Duration;
   octave: number;
+  range: [number, number];
 };
 
 export type Rest = {
   type: "Rest";
   duration: Duration;
+  range: [number, number];
 };
 
 export type AST = (Note | Rest)[];
@@ -103,15 +105,24 @@ function unmapDuration(s: string | null) {
   }
 }
 
+function mapRange(children: any[]) {
+  return [
+    children[0].source.startIdx,
+    children[children.length - 1].source.endIdx,
+  ];
+}
+
 const mapping = {
   Note: {
     letter: 0,
     sharp: map(1, (s: string | null) => s === "#"),
     duration: map(2, mapDuration),
     octave: map(3, mapOctave),
+    range: mapRange,
   },
   Rest: {
     duration: map(1, mapDuration),
+    range: mapRange,
   },
 };
 

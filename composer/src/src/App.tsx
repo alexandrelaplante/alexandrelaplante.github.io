@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import "./App.css";
-import { Grammar, AST } from "./grammar/grammar.ts";
+import { Grammar, AST, Note, Rest } from "./grammar/grammar.ts";
 import { Visualizer } from "./visualizer.tsx";
 import { ViolinContext } from "./audio/provider.tsx";
 
@@ -22,10 +22,35 @@ const ALL_NOTES: [string, boolean][] = [
 function App() {
   const [text, setText] = useState("");
   const [current, setCurrent] = useState<number | undefined>();
+  const [selected, setSelected] = useState<boolean[]>();
   const violin = useContext(ViolinContext);
 
   const g = new Grammar();
   const result = g.match(text);
+
+  function isSelected(
+    start: number | null,
+    end: number | null,
+    note: Note | Rest,
+  ) {
+    if (start === null || end === null) {
+      return false;
+    }
+    const s0: number = start;
+    const s1: number = end;
+
+    return (
+      // note          -------
+      // selection -------
+      (s0 <= note.range[0] && s1 >= note.range[0]) ||
+      // note          -------
+      // selection         -------
+      (s0 <= note.range[1] && s1 >= note.range[1]) ||
+      // note          -------
+      // selection         -
+      (s0 >= note.range[0] && s1 <= note.range[1])
+    );
+  }
 
   function onChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText(e.target.value);
@@ -51,8 +76,10 @@ function App() {
     }
 
     const notes: AST = [];
-    for (const note of result.ast) {
+    for (const [i, note] of result.ast.entries()) {
       if (note.type === "Rest") {
+        notes.push(note);
+      } else if (!selected?.[i]) {
         notes.push(note);
       } else {
         const newNote = Object.assign({}, note);
@@ -78,8 +105,10 @@ function App() {
     }
 
     const notes: AST = [];
-    for (const note of result.ast) {
+    for (const [i, note] of result.ast.entries()) {
       if (note.type === "Rest") {
+        notes.push(note);
+      } else if (!selected?.[i]) {
         notes.push(note);
       } else {
         const newNote = Object.assign({}, note);
@@ -98,16 +127,25 @@ function App() {
     setText(g.toString(notes));
   }
 
-  /* console.log(result?.ast);
-   * if (result?.ast !== undefined) {
-   *   console.log(g.toString(result.ast));
-   * } */
-
   return (
     <>
-      <Visualizer ast={result.ast} current={current} />
+      <Visualizer ast={result.ast} current={current} selected={selected} />
       <div className="card">
-        <textarea value={text} onChange={onChange} />
+        <textarea
+          value={text}
+          onChange={onChange}
+          onBlur={(e) => {
+            if (e.relatedTarget?.localName !== "button") {
+              setSelected(undefined);
+            }
+          }}
+          onSelect={(e) => {
+            const target = e.target as HTMLInputElement;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            setSelected(result?.ast?.map((n) => isSelected(start, end, n)));
+          }}
+        />
         <button onClick={play}>Play</button>
         <button
           onClick={() => {

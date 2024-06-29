@@ -13,6 +13,7 @@ export type NoteProps = {
   note: GNote | GRest;
   index: number;
   isCurrent: boolean;
+  isSelected: boolean;
 };
 
 export type RestProps = {
@@ -25,6 +26,7 @@ const ASCII_A = 97;
 const A_OFFSET = -2.2;
 const HORIZONTAL_SPACE = 60;
 const CURRENT_COLOR = "#8fff3d";
+const SELECTED_COLOR = "#70a2de";
 
 function Rest({ duration, index }: RestProps) {
   const x = index * HORIZONTAL_SPACE;
@@ -85,10 +87,17 @@ function getFinger(notePosition: number): String | number {
   return (notePosition + 16) % 4;
 }
 
-export function Note({ note, index, isCurrent }: NoteProps) {
+export function Note({ note, index, isCurrent, isSelected }: NoteProps) {
+  let color = "";
+  if (isCurrent) {
+    color = CURRENT_COLOR;
+  } else if (isSelected) {
+    color = SELECTED_COLOR;
+  }
+
   if (note.type === "Rest") {
     return (
-      <g fill={isCurrent ? CURRENT_COLOR : undefined}>
+      <g fill={color}>
         <Rest duration={note.duration} index={index} />
       </g>
     );
@@ -104,7 +113,7 @@ export function Note({ note, index, isCurrent }: NoteProps) {
   const finger = getFinger(notePosition);
 
   return (
-    <g fill={isCurrent ? CURRENT_COLOR : undefined}>
+    <g fill={color}>
       <NoteComponent x={x} y={height} />
       {note.sharp ? <Sharp x={x} y={height} /> : null}
       {dotted ? <Dot x={x} y={height - dotOffset} /> : null}
