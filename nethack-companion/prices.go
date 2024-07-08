@@ -50,7 +50,7 @@ func GetBuyPrice(base int, charisma int) BuyPrice {
 
 func GetSellPrice(base int) SellPrice {
 	return SellPrice{
-		int(float64(base/2) + .5),
-		int(float64(base*3/8) + .5),
+		int(float64(base)/2 + .5),
+		int(float64(base)*3/8 + .5),
 	}
 }

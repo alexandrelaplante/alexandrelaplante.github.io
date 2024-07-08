@@ -24,6 +24,22 @@ type data struct {
 	text string
 }
 
+var border = lipgloss.Border{
+	Top:          "█",
+	Bottom:       "─",
+	Left:         "│",
+	Right:        "│",
+	TopLeft:      "█",
+	TopRight:     "█",
+	BottomLeft:   "╰",
+	BottomRight:  "╯",
+	MiddleLeft:   "├",
+	MiddleRight:  "┤",
+	Middle:       "█",
+	MiddleTop:    "█",
+	MiddleBottom: "┴",
+}
+
 var scrolls = []data{
 	{20, "identify"},
 	{50, "light"},
