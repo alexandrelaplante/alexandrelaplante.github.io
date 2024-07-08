@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"os"
 	"strconv"
@@ -113,18 +114,16 @@ func (m model) View() string {
 	)
 }
 
-func setupUi() {
-
-}
-
-const (
-	host = "localhost"
-	port = "23234"
-)
-
 func main() {
+	var host string
+	var port int
+	flag.StringVar(&host, "host", "127.0.0.1", "Host address for SSH server to listen")
+	flag.IntVar(&port, "port", 22, "Port for SSH server to listen")
+
+	flag.Parse()
+
 	s, err := wish.NewServer(
-		wish.WithAddress(net.JoinHostPort(host, port)),
+		wish.WithAddress(net.JoinHostPort(host, strconv.Itoa(port))),
 		wish.WithHostKeyPath(".ssh/id_ed25519"),
 		wish.WithMiddleware(
 			bubbletea.Middleware(teaHandler),
