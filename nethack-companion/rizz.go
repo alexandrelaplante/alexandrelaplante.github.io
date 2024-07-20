@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/charmbracelet/lipgloss"
 )
 
@@ -58,17 +59,17 @@ func RizzValue(s SelectedCharisma) int {
 	return 0
 }
 
-var rizzStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
-var numStyle = lipgloss.NewStyle().
-	Background(lipgloss.Color("3")).
-	Foreground(lipgloss.Color("0")).
-	Width(6)
-var arrowStyle = lipgloss.NewStyle().
-	Background(lipgloss.Color("3")).
-	Foreground(lipgloss.Color("0")).
-	Width(1)
+func RenderCharisma(renderer *lipgloss.Renderer, selected SelectedCharisma) string {
+	var rizzStyle = renderer.NewStyle().Foreground(lipgloss.Color("3"))
+	var numStyle = renderer.NewStyle().
+		Background(lipgloss.Color("3")).
+		Foreground(lipgloss.Color("0")).
+		Width(6)
+	var arrowStyle = renderer.NewStyle().
+		Background(lipgloss.Color("3")).
+		Foreground(lipgloss.Color("0")).
+		Width(1)
 
-func RenderCharisma(selected SelectedCharisma) string {
 	return fmt.Sprintf("%s %s%s",
 		rizzStyle.Render("Charisma:"),
 		numStyle.Render(RizzName(selected)),

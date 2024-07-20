@@ -24,10 +24,6 @@ import (
 	"github.com/charmbracelet/wish/logging"
 )
 
-var baseStyle = lipgloss.NewStyle().
-	BorderStyle(lipgloss.NormalBorder()).
-	BorderForeground(lipgloss.Color("40"))
-
 type model struct {
 	// data
 	selectedCharisma SelectedCharisma
@@ -39,6 +35,7 @@ type model struct {
 	width     int
 	height    int
 	bg        string
+	renderer  *lipgloss.Renderer
 	txtStyle  lipgloss.Style
 	quitStyle lipgloss.Style
 }
@@ -97,7 +94,7 @@ func (m model) View() string {
 	if priceErr != nil {
 		price = -1
 	}
-	table = RenderTable(rizz, price, int(m.selectedTable))
+	table = RenderTable(m.renderer, m.width, rizz, price, int(m.selectedTable))
 
 	return fmt.Sprintf(`%s   %s
 
@@ -106,11 +103,11 @@ func (m model) View() string {
 
 %s
 `,
-		RenderCharisma(m.selectedCharisma),
+		RenderCharisma(m.renderer, m.selectedCharisma),
 		m.price.View(),
-		RenderTabs(m.selectedTable),
+		RenderTabs(m.renderer, m.selectedTable),
 		table,
-		RenderHelp(),
+		RenderHelp(m.renderer),
 	)
 }
 
@@ -186,9 +183,7 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 	price.CharLimit = 4
 	price.Width = 4
 	price.Prompt = "Price: "
-	price.PromptStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
-	// price.TextStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
-	// price.Validate = expValidator
+	price.PromptStyle = renderer.NewStyle().Foreground(lipgloss.Color("3"))
 
 	m := model{
 		selectedCharisma: CH_UNDER_10,
@@ -198,6 +193,7 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 		width:            pty.Window.Width,
 		height:           pty.Window.Height,
 		bg:               bg,
+		renderer:         renderer,
 		txtStyle:         txtStyle,
 		quitStyle:        quitStyle,
 	}

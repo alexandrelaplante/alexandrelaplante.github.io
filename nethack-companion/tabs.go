@@ -23,16 +23,15 @@ func TableName(s SelectedTable) string {
 	return ""
 }
 
-var style = lipgloss.NewStyle().
-	Width(16).
-	Align(lipgloss.Center).
-	Foreground(lipgloss.Color("8"))
-var selectedStyle = style.Copy().
-	Foreground(lipgloss.Color("0")).
-	Background(lipgloss.Color("3"))
-var tabBar = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
+func RenderTabs(renderer *lipgloss.Renderer, selected SelectedTable) string {
+	var style = renderer.NewStyle().
+		Width(16).
+		Align(lipgloss.Center).
+		Foreground(lipgloss.Color("8"))
+	var selectedStyle = style.Copy().
+		Foreground(lipgloss.Color("0")).
+		Background(lipgloss.Color("3"))
 
-func RenderTabs(selected SelectedTable) string {
 	var tabs = []string{}
 	for i := range NUM_TABLE {
 		tab := TableName(SelectedTable(i))

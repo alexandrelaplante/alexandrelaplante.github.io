@@ -85,7 +85,8 @@ var spellbooks = []data{
 	{700, "Level 7 books: finger of death, cancellation"},
 }
 
-func RenderTable(charisma int, price int, tableType int) string {
+func RenderTable(renderer *lipgloss.Renderer, width int, charisma int, price int, tableType int) string {
+	uwidth := uint(min(0, width))
 	var selection []data
 	switch tableType {
 	case TABLE_SCROLLS:
@@ -105,16 +106,27 @@ func RenderTable(charisma int, price int, tableType int) string {
 
 	var highlighted = [][2]int{}
 	t := table.New().
+		Width(width).
 		Border(lipgloss.RoundedBorder()).
-		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("3"))).
+		BorderStyle(renderer.NewStyle().Foreground(lipgloss.Color("3"))).
 		StyleFunc(func(row, col int) lipgloss.Style {
-			style := lipgloss.NewStyle()
+			style := renderer.NewStyle()
+
+			switch col {
+			case 0:
+				style = style.Width(5)
+			case 1:
+				style = style.Width(17)
+			case 2:
+				style = style.Width(13)
+			case 3:
+				style = style.Width(width - 50)
+			}
+
 			if row%2 == 0 {
 				style = style.Foreground(lipgloss.Color("11"))
 			}
-			if col == 3 {
-				style = style.MaxWidth(80)
-			}
+
 			if row != len(selection) {
 				style = style.MarginBottom(1)
 			}
@@ -133,9 +145,6 @@ func RenderTable(charisma int, price int, tableType int) string {
 		buyPrice := GetBuyPrice(d.base, charisma)
 		sellPrice := GetSellPrice(d.base)
 
-		newCol2Style := lipgloss.NewStyle().Width(17)
-		newCol3Style := lipgloss.NewStyle().Width(13)
-
 		if buyPrice.main == price || buyPrice.sucker == price || buyPrice.suckest == price {
 			highlighted = append(highlighted, [2]int{i + 1, 1})
 		}
@@ -145,10 +154,15 @@ func RenderTable(charisma int, price int, tableType int) string {
 
 		t.Row(
 			strconv.Itoa(d.base),
-			newCol2Style.Render(buyPrice.String()),
-			newCol3Style.Render(sellPrice.String()),
-			wordwrap.WrapString(d.text, 80),
+			buyPrice.String(),
+			sellPrice.String(),
+			wordwrap.WrapString(d.text, uwidth-50),
 		)
 	}
-	return t.Render() + "\nAn asterisk (*) indicates that this ring is generated cursed 90% of the time."
+
+	extra := ""
+	if tableType == TABLE_RINGS {
+		extra = "\nAn asterisk (*) indicates that this ring is generated cursed 90% of the time."
+	}
+	return t.Render() + extra
 }
