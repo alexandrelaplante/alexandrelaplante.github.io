@@ -184,6 +184,8 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 	price.Width = 4
 	price.Prompt = "Price: "
 	price.PromptStyle = renderer.NewStyle().Foreground(lipgloss.Color("3"))
+	price.PlaceholderStyle = renderer.NewStyle().Foreground(lipgloss.Color("240"))
+	price.TextStyle = renderer.NewStyle()
 	price.Cursor.Style = renderer.NewStyle()
 
 	m := model{
