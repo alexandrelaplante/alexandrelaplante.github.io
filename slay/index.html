@@ -1,0 +1,319 @@
+<html>
+    <head>
+        <title>Slay</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <div>
+            <canvas id="canvas" width="550" height="1000"></canvas>
+            <div class="stats">
+                <span id="hp">10/10</span>
+                <span id="relics">1</span>
+                <span id="cards">10</span>
+            </div>
+            <div class="stats stats-labels">
+                <span class="hp-label">HP</span>
+                <span class="relics-label">relics</span>
+                <span class="cards-label">cards</span>
+            </div>
+        </div>
+        <div id="logs"></div>
+        <img id="camp" src="campfire.png" style="display: none" />
+        <img id="skull" src="dread-skull.png" style="display: none" />
+        <img id="chest" src="locked-chest.png" style="display: none" />
+        <img id="swirl" src="ink-swirl.png" style="display: none" />
+        <img id="forest" src="forest-camp.png" style="display: none" />
+        <img id="backpack" src="backpack.png" style="display: none" />
+        <img id="elite" src="daemon-skull.png" style="display: none" />
+        <img id="boss" src="hydra.png" style="display: none" />
+    </body>
+    <script>
+        const c = document.getElementById("canvas");
+        const ctx = c.getContext("2d");
+
+        const state = {
+            rows: [],
+            hp: 70,
+            maxHp: 70,
+            relics: 1,
+            cards: 10,
+            logs: ["Choose..."],
+        };
+
+        let images = [];
+
+        function coords({ x, y }) {
+            return { x: 50 + x * 75, y: 50 + y * 80 };
+        }
+
+        function drawCircle(c) {
+            let { x, y } = coords(c);
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = "#cbb88e";
+            ctx.fill();
+            // ctx.stroke();
+            // ctx.globalCompositeOperation = "source-in";
+            ctx.drawImage(images[c.type], x - 20, y - 20, 40, 40);
+            if (c.disabled && !c.visited) {
+                ctx.fillStyle = "#cbb88ebb";
+                ctx.fill();
+            }
+            if (c.visited) {
+                ctx.drawImage(images[6], x - 35, y - 35, 70, 70);
+            }
+        }
+        function drawLine(c1, c2) {
+            cc1 = coords(c1);
+            cc2 = coords(c2);
+            ctx.beginPath();
+            ctx.moveTo(cc1.x, cc1.y);
+            ctx.setLineDash([10, 5]);
+            ctx.lineWidth = 1.5;
+            ctx.lineTo(cc2.x, cc2.y);
+            ctx.stroke();
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function generate() {
+            const rows = [
+                [
+                    {
+                        x: 3,
+                        y: 0,
+                        connections: [],
+                        type: 5,
+                        disabled: true,
+                        visited: false,
+                    },
+                ],
+            ];
+            for (let i = 1; i < 12; i += 1) {
+                const row = [];
+                const s = new Set();
+                for (let j = 0; j < 3; j += 1) {
+                    s.add(getRandomInt(7));
+                }
+                for (const num of [...s].sort()) {
+                    row.push({
+                        x: num,
+                        y: i,
+                        connections: [],
+                        type: getRandomInt(5),
+                        disabled: true,
+                        visited: false,
+                    });
+                }
+                rows.push(row);
+            }
+
+            // add connections backwards
+            for (let i = 0; i < rows.length - 1; i += 1) {
+                const row = rows[i];
+                for (let j = 0; j < rows[i].length; j += 1) {
+                    const circle = row[j];
+
+                    circle.connections = [
+                        rows[i + 1][Math.min(j, rows[i + 1].length - 1)],
+                    ];
+                }
+                for (
+                    let k = rows[i + 1].length - 1;
+                    k > row.length - 1;
+                    k -= 1
+                ) {
+                    row[row.length - 1].connections.push(rows[i + 1][k]);
+                }
+            }
+
+            for (let c of rows[rows.length - 1]) {
+                c.disabled = false;
+            }
+
+            return rows;
+        }
+
+        function handleClick(event) {
+            const x = event.offsetX;
+            const y = event.offsetY;
+
+            const rows = state.rows;
+
+            for (let row of rows) {
+                for (let c of row) {
+                    let [cx, cy] = [coords(c).x, coords(c).y];
+                    if (
+                        !c.disabled &&
+                        cx - 20 <= x &&
+                        x <= cx + 20 &&
+                        cy - 20 <= y &&
+                        y <= cy + 20
+                    ) {
+                        c.visited = true;
+
+                        defence = state.cards * state.relics;
+                        if (c.type === 0) {
+                            // campfire
+                            state.hp = state.maxHp;
+                            state.logs.push("Healed to full HP at a Campfire.");
+                        } else if (c.type === 1) {
+                            // skull
+                            state.cards += 1;
+                            damage = Math.max(0, 50 - defence);
+                            state.hp -= damage;
+                            state.logs.push(
+                                `Took 50-${defence}=${damage} damage in an Encounter.`,
+                            );
+                        } else if (c.type === 2) {
+                            // chest
+                            state.relics += 1;
+                            state.logs.push("Obtained a relic from a Chest.");
+                        } else if (c.type === 3) {
+                            // forest
+                            state.cards += 1;
+                            state.logs.push("Found a card in a Forest.");
+                        } else if (c.type === 4) {
+                            // elite
+                            state.relics += 1;
+                            damage = Math.max(0, 70 - defence);
+                            state.hp -= damage;
+                            state.logs.push(
+                                `Took 70-${defence}=${damage} damage fighting an Elite.`,
+                            );
+                        } else if (c.type === 5) {
+                            // boss
+                            damage = Math.max(0, 100 - defence);
+                            state.hp -= damage;
+                            state.logs.push(
+                                `Took 100-${defence}=${damage} damage fighting the Boss.`,
+                            );
+                            if (state.hp > 0) {
+                                alert("It has been done...");
+                                alert(" The spire sleeps...");
+                                alert("and so shall I...");
+                            }
+                        }
+
+                        if (state.hp <= 0) {
+                            alert("Defeat...");
+                            window.location.reload();
+                        }
+
+                        for (row of state.rows) {
+                            for (t of row) {
+                                t.disabled = true;
+                                if (t.connections.find((conn) => conn === c)) {
+                                    t.disabled = false;
+                                }
+                            }
+                        }
+                        render();
+                        return;
+                    }
+                }
+            }
+        }
+
+        function render() {
+            const rows = state.rows;
+            console.log(rows);
+            for (let i = 0; i < rows.length; i += 1) {
+                const row = rows[i];
+                for (const circle of row) {
+                    for (const target of circle.connections) {
+                        drawLine(circle, target);
+                    }
+                }
+            }
+            for (let i = 0; i < rows.length; i += 1) {
+                const row = rows[i];
+                for (const circle of row) {
+                    drawCircle(circle);
+                }
+            }
+            document.getElementById("hp").classList.remove("red");
+            document.getElementById("hp").classList.remove("green");
+
+            if (state.hp / state.maxHp < 0.5) {
+                document.getElementById("hp").classList.add("red");
+            } else {
+                document.getElementById("hp").classList.add("green");
+            }
+
+            document.getElementById("hp").innerHTML =
+                `${state.hp}/${state.maxHp}`;
+            document.getElementById("relics").innerHTML = state.relics;
+            document.getElementById("cards").innerHTML = state.cards;
+
+            let logs = "";
+            for (const log of state.logs) {
+                logs += `<p>${log}</p>`;
+            }
+            console.log({ logs });
+            document.getElementById("logs").innerHTML = logs;
+        }
+
+        function main() {
+            images = [
+                document.getElementById("camp"),
+                document.getElementById("skull"),
+                document.getElementById("chest"),
+                document.getElementById("forest"),
+                document.getElementById("elite"),
+                document.getElementById("boss"),
+                document.getElementById("swirl"),
+            ];
+            state.rows = generate();
+            render();
+            canvas.addEventListener("click", handleClick);
+        }
+
+        window.onload = () => {
+            main();
+        };
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            font-family: sans-serif;
+        }
+        canvas {
+            border: 2px solid black;
+            background-color: #cbb88e;
+        }
+        #logs {
+            padding: 10px;
+        }
+        .stats {
+            width: 550px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 3em;
+        }
+        .stats-labels {
+            width: 550px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 2em;
+        }
+        .red {
+            color: red;
+        }
+        .green {
+            color: green;
+        }
+        /*#hp {
+            color: red;
+        }*/
+        #relics {
+            color: blue;
+        }
+        #cards {
+            color: #a59939;
+        }
+    </style>
+</html>
